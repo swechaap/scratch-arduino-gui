@@ -4,9 +4,12 @@ import defaultsDeep from 'lodash.defaultsdeep';
 import log from '../../log';
 
 import arduinoBaseToolBox from './baseToolbox/arduino';
-import microbitBaseToolBox from './baseToolbox/microbit';
 
 import unselectDeviceIconURL from './unselectDevice/unselectDevice.png';
+
+import ottoRobotBasicIconURL from './ottoRobotBasic/ottorobotbasic.png';
+import ottoRobotBasicConnectionIconURLL from './ottoRobotBasic/ottorobotbasic-illustration.svg';
+import ottoRobotBasicConnectionSmallIconURL from './ottoRobotBasic/ottorobotbasic-small.svg';
 
 import arduinoUnoIconURL from './arduinoUno/arduinoUno.png';
 import arduinoUnoConnectionIconURLL from './arduinoUno/arduinoUno-illustration.svg';
@@ -15,38 +18,6 @@ import arduinoUnoConnectionSmallIconURL from './arduinoUno/arduinoUno-small.svg'
 import arduinoNanoIconURL from './arduinoNano/arduinoNano.png';
 import arduinoNanoConnectionIconURLL from './arduinoNano/arduinoNano-illustration.svg';
 import arduinoNanoConnectionSmallIconURL from './arduinoNano/arduinoNano-small.svg';
-
-import arduinoMiniIconURL from './arduinoMini/arduinoMini.png';
-import arduinoMiniConnectionIconURLL from './arduinoMini/arduinoMini-illustration.svg';
-import arduinoMiniConnectionSmallIconURL from './arduinoMini/arduinoMini-small.svg';
-
-import arduinoLeonardoIconURL from './arduinoLeonardo/arduinoLeonardo.png';
-import arduinoLeonardoConnectionIconURLL from './arduinoLeonardo/arduinoLeonardo-illustration.svg';
-import arduinoLeonardoConnectionSmallIconURL from './arduinoLeonardo/arduinoLeonardo-small.svg';
-
-import arduinoMega2560IconURL from './arduinoMega2560/arduinoMega2560.png';
-import arduinoMega2560ConnectionIconURLL from './arduinoMega2560/arduinoMega2560-illustration.svg';
-import arduinoMega2560ConnectionSmallIconURL from './arduinoMega2560/arduinoMega2560-small.svg';
-
-import microbitIconURL from './microbit/microbit.png';
-import microbitConnectionIconURLL from './microbit/microbit-illustration.svg';
-import microbitConnectionSmallIconURL from './microbit/microbit-small.svg';
-
-import microbitV2IconURL from './microbitV2/microbitV2.png';
-import microbitV2ConnectionIconURLL from './microbitV2/microbitV2-illustration.svg';
-import microbitV2ConnectionSmallIconURL from './microbitV2/microbitV2-small.svg';
-
-import esp32IconURL from './esp32/esp32.png';
-import esp32ConnectionIconURLL from './esp32/esp32-illustration.svg';
-import esp32ConnectionSmallIconURL from './esp32/esp32-small.svg';
-
-import esp8266IconURL from './esp8266/esp8266.png';
-import esp8266ConnectionIconURL from './esp8266/esp8266-illustration.svg';
-import esp8266ConnectionSmallIconURL from './esp8266/esp8266-small.svg';
-
-import makeymakeyIconURL from './makeymakey/makeymakey.png';
-import makeymakeyConnectionIconURL from './makeymakey/makeymakey-illustration.svg';
-import makeymakeyConnectionSmallIconURL from './makeymakey/makeymakey-small.svg';
 
 const deviceData = [
     /**
@@ -74,6 +45,43 @@ const deviceData = [
         programMode: ['realtime'],
         programLanguage: ['block'],
         tags: ['realtime']
+    },
+    {
+        name: 'Otto Robot - Basic',
+        deviceId: 'arduinoNano',
+        manufactor: 'arduino.cc',
+        leanMore: 'https://store.arduino.cc/usa/arduino-uno-rev3',
+        type: 'arduino',
+        iconURL: ottoRobotBasicIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="A great board to get started with electronics and coding."
+                description="Description for the Arduino Uno device"
+                id="gui.device.arduinoUno.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        bluetoothRequired: false,
+        serialportRequired: true,
+        defaultBaudRate: '9600',
+        internetConnectionRequired: false,
+        launchPeripheralConnectionFlow: true,
+        useAutoScan: false,
+        connectionIconURL: ottoRobotBasicConnectionIconURLL,
+        connectionSmallIconURL: ottoRobotBasicConnectionSmallIconURL,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their arduino."
+                id="gui.device.arduino.connectingMessage"
+            />
+        ),
+        baseToolBoxXml: arduinoBaseToolBox,
+        programMode: ['realtime', 'upload'],
+        programLanguage: ['block', 'c', 'cpp'],
+        tags: ['robots'],
+        helpLink: 'https://store.arduino.cc/usa/arduino-uno-rev3'
     },
     {
         name: 'Arduino Uno',
@@ -148,314 +156,6 @@ const deviceData = [
         programLanguage: ['block', 'c', 'cpp'],
         tags: ['arduino'],
         helpLink: 'https://store.arduino.cc/usa/arduino-nano'
-    },
-    {
-        name: 'Arduino Mini',
-        deviceId: 'arduinoMini',
-        manufactor: 'arduino.cc',
-        // Discontinued board
-        // leanMore: 'https://store.arduino.cc/usa/arduino/boards-modules',
-        type: 'arduino',
-        iconURL: arduinoMiniIconURL,
-        description: (
-            <FormattedMessage
-                defaultMessage="The Arduino Mini a classic smaller board to build your projects with."
-                description="Description for the Arduino Mini device"
-                id="gui.device.arduinoMini.description"
-            />
-        ),
-        featured: true,
-        disabled: false,
-        bluetoothRequired: false,
-        serialportRequired: true,
-        defaultBaudRate: '9600',
-        internetConnectionRequired: false,
-        launchPeripheralConnectionFlow: true,
-        useAutoScan: false,
-        connectionIconURL: arduinoMiniConnectionIconURLL,
-        connectionSmallIconURL: arduinoMiniConnectionSmallIconURL,
-        connectingMessage: (
-            <FormattedMessage
-                defaultMessage="Connecting"
-                description="Message to help people connect to their arduino."
-                id="gui.device.arduino.connectingMessage"
-            />
-        ),
-        baseToolBoxXml: arduinoBaseToolBox,
-        programMode: ['realtime', 'upload'],
-        programLanguage: ['block', 'c', 'cpp'],
-        tags: ['arduino']
-        // helpLink: 'https://store.arduino.cc/usa/arduino-nano'
-    },
-    {
-        name: 'Arduino Leonardo',
-        deviceId: 'arduinoLeonardo',
-        manufactor: 'arduino.cc',
-        leanMore: 'https://store.arduino.cc/usa/leonardo',
-        type: 'arduino',
-        iconURL: arduinoLeonardoIconURL,
-        description: (
-            <FormattedMessage
-                defaultMessage="The classic Arduino board that can act as a mouse or keyboard."
-                description="Description for the Arduino Leonardo device"
-                id="gui.device.arduinoLeonardo.description"
-            />
-        ),
-        featured: true,
-        disabled: false,
-        bluetoothRequired: false,
-        serialportRequired: true,
-        defaultBaudRate: '9600',
-        internetConnectionRequired: false,
-        launchPeripheralConnectionFlow: true,
-        useAutoScan: false,
-        connectionIconURL: arduinoLeonardoConnectionIconURLL,
-        connectionSmallIconURL: arduinoLeonardoConnectionSmallIconURL,
-        connectingMessage: (
-            <FormattedMessage
-                defaultMessage="Connecting"
-                description="Message to help people connect to their arduino."
-                id="gui.device.arduino.connectingMessage"
-            />
-        ),
-        baseToolBoxXml: arduinoBaseToolBox,
-        programMode: ['upload'], // due to the software serilport realtim mode is unstable
-        programLanguage: ['block', 'c', 'cpp'],
-        tags: ['arduino'],
-        helpLink: 'https://store.arduino.cc/usa/leonardo'
-    },
-    {
-        name: 'Arduino Mega 2560',
-        deviceId: 'arduinoMega2560',
-        manufactor: 'arduino.cc',
-        leanMore: 'https://store.arduino.cc/usa/mega-2560-r3',
-        type: 'arduino',
-        iconURL: arduinoMega2560IconURL,
-        description: (
-            <FormattedMessage
-                defaultMessage="The 8-bit board with 54 digital pins, 16 analog inputs, and 4 serial ports."
-                description="Description for the Arduino Mega 2560 device"
-                id="gui.device.arduinoMega2560.description"
-            />
-        ),
-        featured: true,
-        disabled: false,
-        bluetoothRequired: false,
-        serialportRequired: true,
-        defaultBaudRate: '9600',
-        internetConnectionRequired: false,
-        launchPeripheralConnectionFlow: true,
-        useAutoScan: false,
-        connectionIconURL: arduinoMega2560ConnectionIconURLL,
-        connectionSmallIconURL: arduinoMega2560ConnectionSmallIconURL,
-        connectingMessage: (
-            <FormattedMessage
-                defaultMessage="Connecting"
-                description="Message to help people connect to their arduino."
-                id="gui.device.arduino.connectingMessage"
-            />
-        ),
-        baseToolBoxXml: arduinoBaseToolBox,
-        programMode: ['realtime', 'upload'],
-        programLanguage: ['block', 'c', 'cpp'],
-        tags: ['arduino'],
-        helpLink: 'https://store.arduino.cc/usa/mega-2560-r3'
-    },
-    {
-        name: 'ESP32',
-        deviceId: 'arduinoEsp32',
-        manufactor: 'espressif',
-        leanMore: 'https://www.espressif.com/',
-        type: 'arduino',
-        iconURL: esp32IconURL,
-        description: (
-            <FormattedMessage
-                defaultMessage="Wi-Fi & Bluetooth control board with rich functions."
-                description="Description for the esp32 device"
-                id="gui.device.arduinoEsp32.description"
-            />
-        ),
-        featured: true,
-        disabled: false,
-        bluetoothRequired: false,
-        serialportRequired: true,
-        defaultBaudRate: '115200',
-        internetConnectionRequired: false,
-        launchPeripheralConnectionFlow: true,
-        useAutoScan: false,
-        connectionIconURL: esp32ConnectionIconURLL,
-        connectionSmallIconURL: esp32ConnectionSmallIconURL,
-        connectingMessage: (
-            <FormattedMessage
-                defaultMessage="Connecting"
-                description="Message to help people connect to their esp32."
-                id="gui.device.arduinoEsp32.connectingMessage"
-            />
-        ),
-        baseToolBoxXml: arduinoBaseToolBox,
-        programMode: ['upload'],
-        programLanguage: ['block', 'python'],
-        tags: ['arduino'],
-        helpLink: 'https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/hw-reference/esp32/get-started-devkitc.html'
-    },
-    {
-        name: 'ESP8266',
-        deviceId: 'arduinoEsp8266',
-        manufactor: 'espressif',
-        leanMore: 'https://www.espressif.com/',
-        type: 'arduino',
-        iconURL: esp8266IconURL,
-        description: (
-            <FormattedMessage
-                defaultMessage="Low-cost Wi-Fi SOC control board."
-                description="Description for the esp8266 device"
-                id="gui.device.arduinoEsp8266.description"
-            />
-        ),
-        featured: true,
-        disabled: false,
-        bluetoothRequired: false,
-        serialportRequired: true,
-        defaultBaudRate: '115200',
-        internetConnectionRequired: false,
-        launchPeripheralConnectionFlow: true,
-        useAutoScan: false,
-        connectionIconURL: esp8266ConnectionIconURL,
-        connectionSmallIconURL: esp8266ConnectionSmallIconURL,
-        connectingMessage: (
-            <FormattedMessage
-                defaultMessage="Connecting"
-                description="Message to help people connect to their esp8266."
-                id="gui.device.arduinoEsp8266.connectingMessage"
-            />
-        ),
-        baseToolBoxXml: arduinoBaseToolBox,
-        programMode: ['upload'],
-        programLanguage: ['block', 'python'],
-        tags: ['arduino'],
-        helpLink: 'https://arduino-esp8266.readthedocs.io/en/3.0.0/index.html'
-    },
-    {
-        name: 'Micro:bit',
-        deviceId: 'microbit',
-        manufactor: 'microbit.org',
-        leanMore: 'https://microbit.org/',
-        type: 'microbit',
-        iconURL: microbitIconURL,
-        description: (
-            <FormattedMessage
-                defaultMessage="The pocket-sized computer transforming digital skills learning."
-                description="Description for the 'micro:bit' device"
-                id="gui.device.microbit.description"
-            />
-        ),
-        featured: true,
-        disabled: false,
-        bluetoothRequired: false,
-        serialportRequired: true,
-        defaultBaudRate: '115200',
-        internetConnectionRequired: false,
-        launchPeripheralConnectionFlow: true,
-        useAutoScan: false,
-        connectionIconURL: microbitConnectionIconURLL,
-        connectionSmallIconURL: microbitConnectionSmallIconURL,
-        connectingMessage: (
-            <FormattedMessage
-                defaultMessage="Connecting"
-                description="Message to help people connect to their microbit."
-                id="gui.device.microbit.connectingMessage"
-            />
-        ),
-        baseToolBoxXml: microbitBaseToolBox,
-        programMode: ['upload'],
-        programLanguage: ['block', 'python'],
-        tags: ['microPython'],
-        helpLink: 'https://microbit.org/get-started/first-steps/introduction/'
-    },
-    {
-        name: 'Micro:bit V2',
-        deviceId: 'microbitV2',
-        manufactor: 'microbit.org',
-        leanMore: 'https://microbit.org/',
-        type: 'microbit',
-        iconURL: microbitV2IconURL,
-        description: (
-            <FormattedMessage
-                defaultMessage="Upgraded processor, built-In speaker and microphone, touch sensitive logo."
-                description="Description for the 'micro:bit V2' device"
-                id="gui.device.microbitV2.description"
-            />
-        ),
-        featured: true,
-        disabled: false,
-        bluetoothRequired: false,
-        serialportRequired: true,
-        defaultBaudRate: '115200',
-        internetConnectionRequired: false,
-        launchPeripheralConnectionFlow: true,
-        useAutoScan: false,
-        connectionIconURL: microbitV2ConnectionIconURLL,
-        connectionSmallIconURL: microbitV2ConnectionSmallIconURL,
-        connectingMessage: (
-            <FormattedMessage
-                defaultMessage="Connecting"
-                description="Message to help people connect to their microbit."
-                id="gui.device.microbit.connectingMessage"
-            />
-        ),
-        baseToolBoxXml: microbitBaseToolBox,
-        programMode: ['upload'],
-        programLanguage: ['block', 'python'],
-        tags: ['microPython'],
-        helpLink: 'https://microbit.org/get-started/first-steps/introduction/'
-    },
-    {
-        name: 'Makey Makey',
-        deviceId: 'makeyMakey',
-        manufactor: 'makeymakey.com',
-        leanMore: 'https://makeymakey.com/',
-        type: 'arduino',
-        iconURL: makeymakeyIconURL,
-        description: (
-            <FormattedMessage
-                defaultMessage="Make anything into a key."
-                description="Description for the Makey Makey device"
-                id="gui.device.makeymakey.description"
-            />
-        ),
-        featured: true,
-        disabled: false,
-        bluetoothRequired: false,
-        serialportRequired: true,
-        defaultBaudRate: '115200',
-        internetConnectionRequired: false,
-        launchPeripheralConnectionFlow: true,
-        useAutoScan: false,
-        connectionIconURL: makeymakeyConnectionIconURL,
-        connectionSmallIconURL: makeymakeyConnectionSmallIconURL,
-        connectingMessage: (
-            <FormattedMessage
-                defaultMessage="Connecting"
-                description="Message to help people connect to their arduino."
-                id="gui.device.arduino.connectingMessage"
-            />
-        ),
-        baseToolBoxXml: arduinoBaseToolBox,
-        programMode: ['upload'],
-        programLanguage: ['block', 'c', 'cpp'],
-        tags: ['arduino'],
-        helpLink: 'https://makeymakey.com'
-    },
-    /**
-     * For those parent devices that exist in VM but are not displayed in GUI
-     */
-    {
-        deviceId: 'arduinoUnoUltra',
-        type: 'arduino',
-        featured: true,
-        disabled: false,
-        hide: true,
-        baseToolBoxXml: arduinoBaseToolBox
     }
 ];
 

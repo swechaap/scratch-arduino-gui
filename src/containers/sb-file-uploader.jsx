@@ -62,7 +62,7 @@ class SBFileUploader extends React.Component {
             'resetFileInput'
         ]);
     }
-    componentWillMount () {
+    componentDidMount () {
         this.reader = new FileReader();
         this.reader.onload = this.onload;
         this.resetFileInput();
@@ -85,8 +85,8 @@ class SBFileUploader extends React.Component {
     getProjectTitleFromFilename (fileInputFilename) {
         if (!fileInputFilename) return '';
         // only parse title with valid openblock project extensions
-        // (.ob)
-        const matches = fileInputFilename.match(/^(.*)\.ob?$/);
+        // (.sba)
+        const matches = fileInputFilename.match(/^(.*)\.sba?$/);
         if (!matches) return '';
         return matches[1].substring(0, 100); // truncate project title to max 100 chars
     }
@@ -157,7 +157,7 @@ class SBFileUploader extends React.Component {
     renderFileInput () {
         return (
             <input
-                accept=".ob"
+                accept=".sba"
                 ref={this.setFileInput}
                 style={{display: 'none'}}
                 type="file"

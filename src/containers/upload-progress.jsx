@@ -7,7 +7,7 @@ import {compose} from 'redux';
 import {injectIntl, intlShape} from 'react-intl';
 import {defineMessages} from 'react-intl';
 
-import VM from 'openblock-vm';
+import VM from 'scratch-arduino-vm';
 import analytics from '../lib/analytics';
 import {closeUploadProgress} from '../reducers/modals';
 import {showAlertWithTimeout} from '../reducers/alerts';

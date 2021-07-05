@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import VM from 'openblock-vm';
+import VM from 'scratch-arduino-vm';
 
 import Box from '../box/box.jsx';
 import Alert from '../../containers/alert.jsx';

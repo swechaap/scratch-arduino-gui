@@ -21,10 +21,10 @@
   },
   "author": "Massachusetts Institute of Technology",
   "license": "BSD-3-Clause",
-  "homepage": "https://github.com/openblockcc/openblock-gui#readme",
+  "homepage": "https://github.com/ottawastem/openblock-gui#readme",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/openblockcc/openblock-gui.git"
+    "url": "git+ssh://git@github.com/ottawastem/openblock-gui.git"
   },
   "dependencies": {
     "@ramonak/react-progress-bar": "^3.1.0",
@@ -61,7 +61,7 @@
     "openblock-blocks": "0.1.0-prerelease.20210624162335",
     "openblock-l10n": "^3.10.20210629032256",
     "openblock-save-svg-as-png": "^1.4.18",
-    "openblock-vm": "^0.2.0-prerelease.20210629045432",
+    "scratch-arduino-vm": "^0.2.0-prerelease.20210626105301",
     "papaparse": "5.1.1",
     "postcss-import": "^12.0.0",
     "postcss-loader": "^3.0.0",

@@ -5,7 +5,7 @@ import bindAll from 'lodash.bindall';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {intlShape, injectIntl} from 'react-intl';
-import VM from 'openblock-vm';
+import VM from 'scratch-arduino-vm';
 
 import HardwareConsoleComponent from '../components/hardware-console/hardware-console.jsx';
 

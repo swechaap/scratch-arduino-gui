@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import MediaQuery from 'react-responsive';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import tabStyles from 'react-tabs/style/react-tabs.css';
-import VM from 'openblock-vm';
+import VM from 'scratch-arduino-vm';
 import Renderer from 'scratch-render';
 
 import Blocks from '../../containers/blocks.jsx';
@@ -107,6 +107,7 @@ const GUIComponent = props => {
         onActivateCostumesTab,
         onActivateSoundsTab,
         onActivateTab,
+        onClickArduinoAgentLogo,
         onClickLogo,
         onClickCheckUpdate,
         onClickUpgrade,
@@ -254,6 +255,7 @@ const GUIComponent = props => {
                     showComingSoon={showComingSoon}
                     onClickAbout={onClickAbout}
                     onClickAccountNav={onClickAccountNav}
+                    onClickArduinoAgentLogo={onClickArduinoAgentLogo}
                     onClickLogo={onClickLogo}
                     onCloseAccountNav={onCloseAccountNav}
                     onLogOut={onLogOut}
@@ -363,11 +365,9 @@ const GUIComponent = props => {
                                     {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                                 </TabPanel>
                             </Tabs>
-                            {/*
-                                    backpackVisible ? (
-                                        <Backpack host={backpackHost} />
-                                    ) : null
-                                */}
+                            {/* backpackVisible ? (
+                                <Backpack host={backpackHost} />
+                            ) : null */}
                         </Box>
 
                         {/* stageAndTargetWrapper should use css to control show or hidden,
@@ -446,6 +446,7 @@ GUIComponent.propTypes = {
     onActivateTab: PropTypes.func,
     onClickAbout: PropTypes.func,
     onClickAccountNav: PropTypes.func,
+    onClickArduinoAgentLogo: PropTypes.func,
     onClickLogo: PropTypes.func,
     onClickCheckUpdate: PropTypes.func,
     onClickUpgrade: PropTypes.func,
@@ -480,7 +481,7 @@ GUIComponent.defaultProps = {
     backpackHost: null,
     backpackVisible: false,
     basePath: './',
-    canChangeLanguage: true,
+    canChangeLanguage: false,
     canCreateNew: false,
     canEditTitle: false,
     canManageFiles: true,

@@ -198,6 +198,7 @@
 
 .file-icon {
     margin-right: 0.35rem;
+    height: 1.4rem;
 }
 
 .setting-icon {
@@ -304,4 +305,56 @@
   vertical-align: middle;
   padding-left: 2rem;
   white-space: nowrap;
+}
+
+.arduino-agent-tooltip {
+    background-color: $data-primary !important;
+    border: 1px solid $ui-black-transparent !important;
+    border-radius: $form-radius !important;
+    box-shadow: 0 0 .5rem $ui-black-transparent !important;
+    padding: .75rem 1rem !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-size: 1rem !important;
+    line-height: 1.25rem !important;
+    z-index: $z-index-tooltip !important;
+}
+
+.arduino-agent-tooltip:after {
+    content: "";
+    border-top: 1px solid $ui-black-transparent !important;
+    border-left: 0 !important;
+    border-bottom: 0 !important;
+    border-right: 1px solid $ui-black-transparent !important;
+    border-radius: $form-radius;
+    background-color: $data-primary !important;
+    height: 1rem !important;
+    width: 1rem !important;
+    margin-left: -.5rem !important;
+    top: -.5rem !important;
+    transform: rotate(-45deg) !important;
+}
+
+.arduino-agent-button {
+    padding: 0rem;
+}
+
+.arduino-agent-button-icon {
+    margin: 0rem !important;
+}
+
+.device-name {
+    padding-left: 0.5rem;
+    /* border: 1px;
+    background-color: $ui-white;
+    color: $text-primary;
+    border-radius: $form-radius;
+    margin-left: 0.4rem;
+    margin-right: 0.2rem;
+    padding: 0.55rem 0.5rem;
+    font-size: 0.8rem; */
+}
+
+.upload-firmware-button {
+    box-shadow: 0 0 0 1px $ui-black-transparent;
+    padding: 0.2rem 1rem;
 }

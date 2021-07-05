@@ -7,8 +7,12 @@ import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import log from '../lib/log.js';
 
+const onClickArduinoAgentLogo = () => {
+    window.open('https://create.arduino.cc/getting-started/plugin/welcome', '_blank');
+};
+
 const onClickLogo = () => {
-    window.location = 'https://openblockcc.github.io/wiki/';
+    window.location = 'https://ottawastem.com';
 };
 
 const onClickCheckUpdate = () => {
@@ -95,10 +99,11 @@ export default appTarget => {
             /> :
             <WrappedGui
                 canEditTitle
-                backpackVisible
+                // backpackVisible
                 showComingSoon
                 backpackHost={backpackHost}
                 canSave={false}
+                onClickArduinoAgentLogo={onClickArduinoAgentLogo}
                 onClickLogo={onClickLogo}
             />,
         appTarget);
