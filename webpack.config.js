@@ -205,7 +205,7 @@ module.exports = [
         defaultsDeep({}, base, {
             target: 'web',
             entry: {
-                'openblock-gui': './src/index.js'
+                'scratch-arduino-gui': './src/index.js'
             },
             output: {
                 libraryTarget: 'umd',

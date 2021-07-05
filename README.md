@@ -1,24 +1,24 @@
-# openblock-gui
+# scratch-arduino-gui
 
-![](https://img.shields.io/circleci/build/github/openblockcc/openblock-gui/develop) ![](https://img.shields.io/github/license/openblockcc/openblock-gui)  [![Gitter](https://badges.gitter.im/openblockcc/community.svg)](https://gitter.im/openblockcc/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+![](https://img.shields.io/circleci/build/github/ottawastem/scratch-arduino-gui/develop) ![](https://img.shields.io/github/license/ottawastem/scratch-arduino-gui)  [![Gitter](https://badges.gitter.im/ottawastem/community.svg)](https://gitter.im/ottawastem/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-**OpenBlock GUI is a set of React components that comprise the interface for creating and running OpenBlock projects**
+**Scratch Arduino GUI is a set of React components that comprise the interface for creating and running Scratch Arduino projects**
 
-## Try OpenBlock Online
+## Try Scratch Arduino Online
 
-OpenBlock Online: [https://openblockcc.github.io/openblock-gui/develop/](https://openblockcc.github.io/openblock-gui/develop/)
+Scratch Arduino Online: [https://ottawastem.github.io/scratch-arduino-gui/develop/](https://ottawastem.github.io/scratch-arduino-gui/develop/)
 
 <img src="docs\screenshoot.png"/>
 
 ## Getting Start
 
-Visit the wiki: [https://openblockcc.github.io/wiki/main](https://openblockcc.github.io/wiki/main)
+Visit the wiki: [https://ottawastem.github.io/wiki/main](https://ottawastem.github.io/wiki/main)
 
-Visit the wiki on gitee (mirror): [https://openblockcc.gitee.io/wiki/main](https://openblockcc.gitee.io/wiki/main)
+Visit the wiki on gitee (mirror): [https://ottawastem.gitee.io/wiki/main](https://ottawastem.gitee.io/wiki/main)
 
 ## Join chat
 
-- Gitter: [https://gitter.im/openblockcc/community](https://gitter.im/openblockcc/community?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
+- Gitter: [https://gitter.im/ottawastem/community](https://gitter.im/ottawastem/community?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 
 - Chinese QQ group: 933484739
 

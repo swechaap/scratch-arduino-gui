@@ -1,7 +1,7 @@
 {
-  "name": "openblock-gui",
+  "name": "scratch-arduino-gui",
   "version": "0.1.0",
-  "description": "GraphicaL User Interface for creating and running OpenBlock projects",
+  "description": "GraphicaL User Interface for creating and running Scratch Arduino projects",
   "main": "./desktop/main.js",
   "scripts": {
     "build": "npm run clean && webpack --colors --bail",
@@ -61,7 +61,6 @@
     "openblock-blocks": "0.1.0-prerelease.20210624162335",
     "openblock-l10n": "^3.10.20210629032256",
     "openblock-save-svg-as-png": "^1.4.18",
-    "scratch-arduino-vm": "^0.2.0-prerelease.20210626105301",
     "papaparse": "5.1.1",
     "postcss-import": "^12.0.0",
     "postcss-loader": "^3.0.0",
