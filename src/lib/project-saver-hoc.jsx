@@ -2,7 +2,7 @@ import bindAll from 'lodash.bindall';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import VM from 'openblock-vm';
+import VM from 'scratch-arduino-vm';
 
 import collectMetadata from '../lib/collect-metadata';
 import log from '../lib/log';
@@ -53,7 +53,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 'tryToAutoSave'
             ]);
         }
-        componentWillMount () {
+        componentDidMount () {
             if (typeof window === 'object') {
                 // Note: it might be better to use a listener instead of assigning onbeforeunload;
                 // but then it'd be hard to turn this listening off in our tests

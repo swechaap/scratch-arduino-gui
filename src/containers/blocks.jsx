@@ -5,7 +5,7 @@ import makeToolboxXML from '../lib/make-toolbox-xml';
 import PropTypes from 'prop-types';
 import React from 'react';
 import VMScratchBlocks from '../lib/blocks';
-import VM from 'openblock-vm';
+import VM from 'scratch-arduino-vm';
 
 import log from '../lib/log.js';
 import Prompt from './prompt.jsx';
@@ -82,6 +82,7 @@ class Blocks extends React.Component {
             'onProgramModeUpdate',
             'onTargetsUpdate',
             'onVisualReport',
+            'onActivateColorPicker',
             'onWorkspaceUpdate',
             'onWorkspaceMetricsChange',
             'setBlocks',
@@ -99,8 +100,7 @@ class Blocks extends React.Component {
         this.toolboxUpdateQueue = [];
     }
     componentDidMount () {
-
-        this.ScratchBlocks.FieldColourSlider.activateEyedropper_ = this.props.onActivateColorPicker;
+        this.ScratchBlocks.FieldColourSlider.activateEyedropper_ = this.onActivateColorPicker; // TODO 实时模式下在此处处理色彩捕捉器
         this.ScratchBlocks.Procedures.externalProcedureDefCallback = this.props.onActivateCustomProcedures;
         this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);
 
@@ -175,8 +175,10 @@ class Blocks extends React.Component {
 
         // If program mode changed, call functio to update the toolbox
         if (this.props.isRealtimeMode !== this._programMode) {
-            // Do not updatecode before toolbox is updated.
-            this.props.vm.removeListener('CODE_NEED_UPDATE', this.handleCodeNeedUpdate);
+            if (this.props.isRealtimeMode === false) {
+                // Do not update code before toolbox is updated.
+                this._toolboxUpdating = true;
+            }
             // Clear possible errors witch print in to code editor.
             this.props.onSetCodeEditorValue('');
             this.onProgramModeUpdate();
@@ -255,8 +257,7 @@ class Blocks extends React.Component {
         this.workspace.updateToolbox(this.props.toolboxXML);
         this._renderedToolboxXML = this.props.toolboxXML;
 
-        // Relisten the CODE_NEED_UPDATE event after the toolbox is updated.
-        this.props.vm.addListener('CODE_NEED_UPDATE', this.handleCodeNeedUpdate);
+        this._toolboxUpdating = false;
 
         // In order to catch any changes that mutate the toolbox during "normal runtime"
         // (variable changes/etc), re-enable toolbox refresh.
@@ -379,6 +380,11 @@ class Blocks extends React.Component {
     onVisualReport (data) {
         this.workspace.reportValue(data.id, data.value);
     }
+    onActivateColorPicker (callback) {
+        if (this.props.isRealtimeMode) {
+            this.props.onActivateColorPicker(callback);
+        }
+    }
     getToolboxXML () {
         // Use try/catch because this requires digging pretty deep into the VM
         // Code inside intentionally ignores several error situations (no stage, etc.)
@@ -478,7 +484,7 @@ class Blocks extends React.Component {
             }
         };
 
-        // openblock-blocks implements a menu or custom field as a special kind of block ("shadow" block)
+        // scratch-arduino-blocks implements a menu or custom field as a special kind of block ("shadow" block)
         // these actually define blocks and MUST run regardless of the UI state
         defineBlocks(
             Object.getOwnPropertyNames(categoryInfo.customFieldTypes)
@@ -496,62 +502,71 @@ class Blocks extends React.Component {
     handleDeviceAdded (info) {
         const {device, categoryInfoArray} = info;
 
-        const dev = this.props.deviceData.find(ext => ext.deviceId === device);
-        this.props.onDeviceSelected(dev.deviceId, dev.name, dev.type);
-        if (dev.defaultBaudRate) {
-            this.props.onSetBaudrate(dev.defaultBaudRate);
-        }
-
-        const supportUploadMode = dev.programMode.includes('upload');
-        const supportRealtimeMode = dev.programMode.includes('realtime');
-
-        // eslint-disable-next-line no-negated-condition
-        if (!(supportUploadMode && supportRealtimeMode)) {
-            if (supportUploadMode) {
-                this.props.vm.runtime.setRealtimeMode(false);
-            } else {
-                this.props.vm.runtime.setRealtimeMode(true);
+        if (device) {
+            const dev = this.props.deviceData.find(ext => ext.deviceId === device);
+            this.props.onDeviceSelected(dev.deviceId, dev.name, dev.type);
+            if (dev.defaultBaudRate) {
+                this.props.onSetBaudrate(dev.defaultBaudRate);
             }
-            this.props.onSetSupportSwitchMode(false);
-        } else {
-            this.props.onSetSupportSwitchMode(true);
-        }
 
-        categoryInfoArray.forEach(categoryInfo => {
-            const defineBlocks = blockInfoArray => {
-                if (blockInfoArray && blockInfoArray.length > 0) {
-                    const staticBlocksJson = [];
-                    const dynamicBlocksInfo = [];
-                    blockInfoArray.forEach(blockInfo => {
-                        if (blockInfo.info && blockInfo.info.isDynamic) {
-                            dynamicBlocksInfo.push(blockInfo);
-                        } else if (blockInfo.json) {
-                            staticBlocksJson.push(blockInfo.json);
-                        }
-                        // otherwise it's a non-block entry such as '---'
-                    });
+            const supportUploadMode = dev.programMode.includes('upload');
+            const supportRealtimeMode = dev.programMode.includes('realtime');
 
-                    this.ScratchBlocks.defineBlocksWithJsonArray(staticBlocksJson);
-                    dynamicBlocksInfo.forEach(blockInfo => {
-                        // This is creating the block factory / constructor -- NOT a specific instance of the block.
-                        // The factory should only know static info about the block: the category info and the opcode.
-                        // Anything else will be picked up from the XML attached to the block instance.
-                        const extendedOpcode = `${categoryInfo.id}_${blockInfo.info.opcode}`;
-                        const blockDefinition =
-                            defineDynamicBlock(this.ScratchBlocks, categoryInfo, blockInfo, extendedOpcode);
-                        this.ScratchBlocks.Blocks[extendedOpcode] = blockDefinition;
-                    });
+            // eslint-disable-next-line no-negated-condition
+            if (!(supportUploadMode && supportRealtimeMode)) {
+                if (supportUploadMode) {
+                    this.props.vm.runtime.setRealtimeMode(false);
+                } else {
+                    this.props.vm.runtime.setRealtimeMode(true);
                 }
-            };
+                this.props.onSetSupportSwitchMode(false);
+            } else {
+                this.props.onSetSupportSwitchMode(true);
+            }
 
-            // openblock-blocks implements a menu or custom field as a special kind of block ("shadow" block)
-            // these actually define blocks and MUST run regardless of the UI state
-            defineBlocks(
-                Object.getOwnPropertyNames(categoryInfo.customFieldTypes)
-                    .map(fieldTypeName => categoryInfo.customFieldTypes[fieldTypeName].scratchBlocksDefinition));
-            defineBlocks(categoryInfo.menus);
-            defineBlocks(categoryInfo.blocks);
-        });
+            categoryInfoArray.forEach(categoryInfo => {
+                const defineBlocks = blockInfoArray => {
+                    if (blockInfoArray && blockInfoArray.length > 0) {
+                        const staticBlocksJson = [];
+                        const dynamicBlocksInfo = [];
+                        blockInfoArray.forEach(blockInfo => {
+                            if (blockInfo.info && blockInfo.info.isDynamic) {
+                                dynamicBlocksInfo.push(blockInfo);
+                            } else if (blockInfo.json) {
+                                staticBlocksJson.push(blockInfo.json);
+                            }
+                            // otherwise it's a non-block entry such as '---'
+                        });
+
+                        this.ScratchBlocks.defineBlocksWithJsonArray(staticBlocksJson);
+                        dynamicBlocksInfo.forEach(blockInfo => {
+                            // This is creating the block factory / constructor -- NOT a specific instance of the
+                            // block.
+                            // The factory should only know static info about the block: the category info and the
+                            // opcode.
+                            // Anything else will be picked up from the XML attached to the block instance.
+                            const extendedOpcode = `${categoryInfo.id}_${blockInfo.info.opcode}`;
+                            const blockDefinition =
+                                defineDynamicBlock(this.ScratchBlocks, categoryInfo, blockInfo, extendedOpcode);
+                            this.ScratchBlocks.Blocks[extendedOpcode] = blockDefinition;
+                        });
+                    }
+                };
+
+                // scratch-arduino-blocks implements a menu or custom field as a special kind of block ("shadow" block)
+                // these actually define blocks and MUST run regardless of the UI state
+                defineBlocks(
+                    Object.getOwnPropertyNames(categoryInfo.customFieldTypes)
+                        .map(fieldTypeName => categoryInfo.customFieldTypes[fieldTypeName].scratchBlocksDefinition));
+                defineBlocks(categoryInfo.menus);
+                defineBlocks(categoryInfo.blocks);
+            });
+
+        } else {
+            this.props.onDeviceSelected(null, null, null);
+            this.props.vm.runtime.setRealtimeMode(true);
+            this.props.onSetSupportSwitchMode(false);
+        }
 
         // Update the toolbox with new blocks if possible, use timeout to let props update first
         this.requestGetXMLAndUpdateToolbox();
@@ -656,8 +671,10 @@ class Blocks extends React.Component {
     handleToolboxUploadFinish () {
         this.props.onToolboxDidUpdate();
     }
-    handleCodeNeedUpdate (){
-        this.props.onSetCodeEditorValue(this.workspaceToCode());
+    handleCodeNeedUpdate () {
+        if (this._toolboxUpdating !== true && this.props.isRealtimeMode === false) {
+            this.props.onSetCodeEditorValue(this.workspaceToCode());
+        }
     }
     handleOpenSoundRecorder () {
         this.props.onOpenSoundRecorder();
@@ -666,7 +683,7 @@ class Blocks extends React.Component {
     /*
      * Pass along information about proposed name and variable options (scope and isCloud)
      * and additional potentially conflicting variable names from the VM
-     * to the variable validation prompt callback used in openblock-blocks.
+     * to the variable validation prompt callback used in scratch-arduino-blocks.
      */
     handlePromptCallback (input, variableOptions) {
         this.state.prompt.callback(
@@ -699,8 +716,11 @@ class Blocks extends React.Component {
             anyModalVisible,
             canUseCloud,
             customProceduresVisible,
+            deviceData,
             deviceId,
             deviceLibraryVisible,
+            deviceType,
+            peripheralName,
             extensionLibraryVisible,
             options,
             stageSize,
@@ -721,6 +741,7 @@ class Blocks extends React.Component {
             onRequestCloseCustomProcedures,
             onSetCodeEditorValue,
             onSetSupportSwitchMode,
+            onSetBaudrate,
             toolboxXML,
             updateMetrics: updateMetricsProp,
             workspaceMetrics,

@@ -1,7 +1,7 @@
 {
-  "name": "openblock-gui",
+  "name": "scratch-arduino-gui",
   "version": "0.1.0",
-  "description": "GraphicaL User Interface for creating and running OpenBlock projects",
+  "description": "GraphicaL User Interface for creating and running Scratch Arduino projects",
   "main": "./desktop/main.js",
   "scripts": {
     "build": "npm run clean && webpack --colors --bail",
@@ -9,7 +9,7 @@
     "deploy": "touch build/.nojekyll && gh-pages -t -d build -m \"Build for $(git log --pretty=format:%H -n1) [skip ci]\"",
     "prune": "./prune-gh-pages.sh",
     "i18n:push": "tx-push-src openblock-editor interface translations/en.json",
-    "i18n:src": "rimraf ./translations/messages/src && babel src > tmp.js && rimraf tmp.js && build-i18n-src ./translations/messages/src ./translations/ && npm run i18n:push",
+    "i18n:src": "rimraf ./translations/messages/src && babel src > tmp.js && rimraf tmp.js && build-i18n-src ./translations/messages/src ./translations/",
     "start": "webpack-dev-server",
     "start-open": "webpack-dev-server --open --host 127.0.0.1",
     "test": "npm run test:lint && npm run test:unit && npm run build && npm run test:integration",
@@ -21,12 +21,13 @@
   },
   "author": "Massachusetts Institute of Technology",
   "license": "BSD-3-Clause",
-  "homepage": "https://github.com/openblockcc/openblock-gui#readme",
+  "homepage": "https://github.com/ottawastem/openblock-gui#readme",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/openblockcc/openblock-gui.git"
+    "url": "git+ssh://git@github.com/ottawastem/openblock-gui.git"
   },
   "dependencies": {
+    "@ramonak/react-progress-bar": "^3.1.0",
     "ansi-to-react": "^6.0.8",
     "arraybuffer-loader": "^1.0.6",
     "autoprefixer": "^9.0.1",
@@ -57,10 +58,7 @@
     "mkdirp": "^0.5.1",
     "monaco-editor": "^0.15.1",
     "omggif": "1.0.9",
-    "openblock-blocks": "0.1.0-prerelease.20210329023133",
-    "openblock-l10n": "^3.10.20210413104833",
     "openblock-save-svg-as-png": "^1.4.18",
-    "openblock-vm": "^0.2.0-prerelease.20210413111834",
     "papaparse": "5.1.1",
     "postcss-import": "^12.0.0",
     "postcss-loader": "^3.0.0",
@@ -87,6 +85,7 @@
     "react-virtualized": "9.20.1",
     "redux": "3.7.2",
     "redux-throttle": "0.1.1",
+    "scratch-arduino-l10n": "^3.10.0",
     "scratch-audio": "0.1.0-prerelease.20200528195344",
     "scratch-paint": "0.2.0-prerelease.20200831213104",
     "scratch-render": "0.1.0-prerelease.20200827214414",

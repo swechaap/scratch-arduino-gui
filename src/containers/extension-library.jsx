@@ -1,7 +1,9 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
-import VM from 'openblock-vm';
+import VM from 'scratch-arduino-vm';
+
+import analytics from '../lib/analytics';
 
 import {compose} from 'redux';
 import {connect} from 'react-redux';
@@ -67,7 +69,7 @@ class ExtensionLibrary extends React.PureComponent {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'updateDeviceExtensions',
+            // 'updateDeviceExtensions',
             'handleItemSelect'
         ]);
         this.state = {
@@ -75,20 +77,21 @@ class ExtensionLibrary extends React.PureComponent {
         };
     }
 
-    componentDidMount () {
-        if (this.props.isRealtimeMode === false) {
-            this.updateDeviceExtensions();
-        }
-    }
+    // Disable load device extensions from local host link
+    // componentDidMount () {
+    //     if (this.props.isRealtimeMode === false) {
+    //         this.updateDeviceExtensions();
+    //     }
+    // }
 
-    updateDeviceExtensions () {
-        this.props.vm.extensionManager.getDeviceExtensionsList()
-            .then(data => {
-                if (data) {
-                    this.setState({deviceExtensions: data});
-                }
-            });
-    }
+    // updateDeviceExtensions () {
+    //     this.props.vm.extensionManager.getDeviceExtensionsList()
+    //         .then(data => {
+    //             if (data) {
+    //                 this.setState({deviceExtensions: data});
+    //             }
+    //         });
+    // }
 
     handleItemSelect (item) {
         const id = item.extensionId;
@@ -105,23 +108,33 @@ class ExtensionLibrary extends React.PureComponent {
                 } else {
                     this.props.vm.extensionManager.loadExtensionURL(url).then(() => {
                         this.props.onCategorySelected(id);
+                        analytics.event({
+                            category: 'extensions',
+                            action: 'select extension',
+                            label: id
+                        });
                     });
                 }
             }
         } else if (id && !item.disabled) {
-            if (this.props.vm.extensionManager.isDeviceExtensionLoaded(id)) {
-                this.props.vm.extensionManager.unloadDeviceExtension(id).then(() => {
-                    this.updateDeviceExtensions();
-                });
-            } else {
-                this.props.vm.extensionManager.loadDeviceExtension(id).then(() => {
-                    this.updateDeviceExtensions();
-                })
-                    .catch(err => {
-                        // TODO add a alet device extension load failed. and change the state to bar to failed state
-                        console.error(`err = ${err}`); // eslint-disable-line no-console
-                    });
-            }
+            // if (this.props.vm.extensionManager.isDeviceExtensionLoaded(id)) {
+            //     this.props.vm.extensionManager.unloadDeviceExtension(id).then(() => {
+            //         this.updateDeviceExtensions();
+            //     });
+            // } else {
+            //     this.props.vm.extensionManager.loadDeviceExtension(id).then(() => {
+            //         this.updateDeviceExtensions();
+            //         analytics.event({
+            //             category: 'extensions',
+            //             action: 'select device extension',
+            //             label: id
+            //         });
+            //     })
+            //         .catch(err => {
+            //             // TODO add a alet device extension load failed. and change the state to bar to failed state
+            //             console.error(`err = ${err}`); // eslint-disable-line no-console
+            //         });
+            // }
         }
     }
     render () {

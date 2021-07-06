@@ -7,12 +7,20 @@ import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import log from '../lib/log.js';
 
-const onClickLogo = () => {
-    window.location = 'https://openblockcc.github.io/wiki/';
+const onClickArduinoAgentLogo = () => {
+    window.open('https://create.arduino.cc/getting-started/plugin/welcome', '_blank');
 };
 
-const onClickUpdate = () => {
-    log('User click update');
+const onClickLogo = () => {
+    window.location = 'https://ottawastem.com';
+};
+
+const onClickCheckUpdate = () => {
+    log('User click check update');
+};
+
+const onClickUpgrade = () => {
+    log('User click upgrade');
 };
 
 const onClickClearCache = () => {
@@ -84,16 +92,18 @@ export default appTarget => {
                 onTelemetryModalCancel={handleTelemetryModalCancel}
                 onTelemetryModalOptIn={handleTelemetryModalOptIn}
                 onTelemetryModalOptOut={handleTelemetryModalOptOut}
-                onClickUpdate={onClickUpdate}
+                onClickCheckUpdate={onClickCheckUpdate}
+                onClickUpgrade={onClickUpgrade}
                 onClickClearCache={onClickClearCache}
                 onClickInstallDriver={onClickInstallDriver}
             /> :
             <WrappedGui
                 canEditTitle
-                backpackVisible
+                // backpackVisible
                 showComingSoon
                 backpackHost={backpackHost}
                 canSave={false}
+                onClickArduinoAgentLogo={onClickArduinoAgentLogo}
                 onClickLogo={onClickLogo}
             />,
         appTarget);

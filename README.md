@@ -1,25 +1,27 @@
-# openblock-gui
+# scratch-arduino-gui
 
-![](https://img.shields.io/circleci/build/github/openblockcc/openblock-gui/develop) ![](https://img.shields.io/github/license/openblockcc/openblock-gui)
+![](https://img.shields.io/circleci/build/github/ottawastem/scratch-arduino-gui/develop) ![](https://img.shields.io/github/license/ottawastem/scratch-arduino-gui)  [![Gitter](https://badges.gitter.im/ottawastem/community.svg)](https://gitter.im/ottawastem/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-**OpenBlock GUI is a set of React components that comprise the interface for creating and running OpenBlock projects**
+**Scratch Arduino GUI is a set of React components that comprise the interface for creating and running Scratch Arduino projects**
 
-## Try OpenBlock Online
+## Try Scratch Arduino Online
 
-OpenBlock Online: [https://openblockcc.github.io/openblock-gui/develop/](https://openblockcc.github.io/openblock-gui/develop/)
+Scratch Arduino Online: [https://ottawastem.github.io/scratch-arduino-gui/develop/](https://ottawastem.github.io/scratch-arduino-gui/develop/)
 
-<img src="docs\screenshoot1.png"/>
+<img src="docs\screenshoot.png"/>
 
 ## Getting Start
 
-Visit the wiki: [https://openblockcc.github.io/wiki/](https://openblockcc.github.io/wiki/)
+Visit the wiki: [https://ottawastem.github.io/wiki/main](https://ottawastem.github.io/wiki/main)
 
-## Contact me
+Visit the wiki on gitee (mirror): [https://ottawastem.gitee.io/wiki/main](https://ottawastem.gitee.io/wiki/main)
 
-China QQ group number: 933484739
+## Join chat
 
-Email: arthurzheng150@gmail.com
+- Gitter: [https://gitter.im/ottawastem/community](https://gitter.im/ottawastem/community?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
+
+- Chinese QQ group: 933484739
 
 ## Bug Report
 
-You can submit the Bug log in Issues of this project.
+You can submit the bug log in issues of this project.

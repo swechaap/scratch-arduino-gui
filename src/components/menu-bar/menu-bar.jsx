@@ -6,8 +6,10 @@ import PropTypes from 'prop-types';
 import bindAll from 'lodash.bindall';
 import bowser from 'bowser';
 import React from 'react';
+import ReactTooltip from 'react-tooltip';
+// import Daemon from 'arduino-create-agent-js-client';
 
-import VM from 'openblock-vm';
+import VM from 'scratch-arduino-vm';
 
 import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
@@ -31,7 +33,7 @@ import TurboMode from '../../containers/turbo-mode.jsx'; // eslint-disable-line 
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 import {isScratchDesktop} from '../../lib/isScratchDesktop';
 
-import {openTipsLibrary, openUploadProgress} from '../../reducers/modals';
+import {openTipsLibrary, openUploadProgress, openUpdateModal} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
 import {
     autoUpdateProject,
@@ -76,7 +78,7 @@ import remixIcon from './icon--remix.svg';
 import dropdownCaret from './dropdown-caret.svg';
 import languageIcon from '../language-selector/language-icon.svg';
 import aboutIcon from './icon--about.svg';
-import linkSocketIcon from './icon--link-socket.svg';
+import linkSocketIcon from './icon--link-socket.svg'; // eslint-disable-line no-unused-vars
 
 import scratchLogo from './scratch-logo.svg';
 
@@ -86,6 +88,7 @@ import Switch from 'react-switch';
 import {setUploadMode, setRealtimeMode} from '../../reducers/program-mode';
 import {openConnectionModal, openDeviceLibrary} from '../../reducers/modals';
 import {setRealtimeConnection, clearConnectionModalPeripheralName} from '../../reducers/connection-modal';
+import {setUpdate} from '../../reducers/update';
 
 import deviceIcon from './icon--device.svg';
 import unconnectedIcon from './icon--unconnected.svg';
@@ -97,6 +100,13 @@ import settingIcon from './icon--setting.svg';
 import downloadFirmwareIcon from './icon--download-firmware.svg';
 import saveSvgAsPng from 'openblock-save-svg-as-png';
 import {showAlertWithTimeout} from '../../reducers/alerts';
+
+import arduinoAgentIconDisconnected from './icon--arduino-agent-disconnected.svg';
+import arduinoAgentIconConnected from './icon--arduino-agent-connected.svg';
+import arduinoBoardIcon from './icon--arduino-board.svg';
+import uploadFirmware from './icon--upload-firmware.svg';
+
+// const arduinoAgentDaemon = new Daemon('https://builder.arduino.cc/v3/boards');
 
 const ariaMessages = defineMessages({
     language: {
@@ -181,6 +191,13 @@ AboutButton.propTypes = {
 class MenuBar extends React.Component {
     constructor (props) {
         super(props);
+        this.state = {
+            debugInfo: 'Debug',
+            arduinoAgentStatus: false,
+            arduinoSerialDevices: [],
+            arduinoNetworkDevices: [],
+            // boardInformation: 'Select Board and Port'
+        };
         bindAll(this, [
             'handleClickNew',
             'handleClickRemix',
@@ -199,6 +216,7 @@ class MenuBar extends React.Component {
             'handleProgramModeSwitchOnChange',
             'handleProgramModeUpdate',
             'handleScreenshot',
+            'handleCheckUpdate',
             'handleClearCache'
         ]);
     }
@@ -206,11 +224,20 @@ class MenuBar extends React.Component {
         document.addEventListener('keydown', this.handleKeyPress);
         this.props.vm.on('PERIPHERAL_DISCONNECTED', this.props.onDisconnect);
         this.props.vm.on('PROGRAM_MODE_UPDATE', this.handleProgramModeUpdate);
-    }
-    componentWillUnmount () {
-        document.removeEventListener('keydown', this.handleKeyPress);
-        this.props.vm.removeListener('PERIPHERAL_DISCONNECTED', this.props.onDisconnect);
-        this.props.vm.removeListener('PROGRAM_MODE_UPDATE', this.handleProgramModeUpdate);
+            
+        // Check if Arduino Create Agent had been installed
+        // arduinoAgentDaemon.agentFound.subscribe(status => {
+        //     this.setState({
+        //         arduinoAgentStatus: status
+        //         // agentInfo: JSON.stringify(arduinoAgentDaemon.agentInfo, null, 2)
+        //     });
+        // });
+
+        // // List available devices (serial/network)
+        // arduinoAgentDaemon.devicesList.subscribe(({serial, network}) => this.setState({
+        //     arduinoSerialDevices: serial,
+        //     arduinoNetworkDevices: network
+        // }));  
     }
     handleClickNew () {
         // if the project is dirty, and user owns the project, we will autosave.
@@ -381,6 +408,10 @@ class MenuBar extends React.Component {
             });
         }
     }
+    handleCheckUpdate () {
+        this.props.onSetUpdate({phase: 'checking'});
+        this.props.onClickCheckUpdate();
+    }
     handleClearCache () {
         const readyClearCache = this.props.confirmClearCache(
             this.props.intl.formatMessage(sharedMessages.clearCacheWarning)
@@ -418,6 +449,13 @@ class MenuBar extends React.Component {
                 id="gui.menuBar.new"
             />
         );
+        const checkUpdate = (
+            <FormattedMessage
+                defaultMessage="Check update"
+                description="Menu bar item for check update"
+                id="gui.menuBar.checkUpdate"
+            />
+        );
         const installDriver = (
             <FormattedMessage
                 defaultMessage="Install driver"
@@ -448,6 +486,9 @@ class MenuBar extends React.Component {
         );
         // Show the About button only if we have a handler for it (like in the desktop app)
         const aboutButton = this.props.onClickAbout ? <AboutButton onClick={this.props.onClickAbout} /> : null;
+        const serialPort = this.state.arduinoSerialDevices.map((device, i) => (<React.Fragment key={i}>
+            {device.Name}
+        </React.Fragment>));
         return (
             <Box
                 className={classNames(
@@ -458,7 +499,7 @@ class MenuBar extends React.Component {
                 <div className={styles.mainMenu}>
                     <div className={classNames(styles.menuBarItem)}>
                         <img
-                            alt="OpenBlock"
+                            alt="Ottawa STEM Club"
                             className={classNames(styles.scratchLogo, {
                                 [styles.clickable]: typeof this.props.onClickLogo !== 'undefined'
                             })}
@@ -482,85 +523,6 @@ class MenuBar extends React.Component {
                         </div>
                         <LanguageSelector label={this.props.intl.formatMessage(ariaMessages.language)} />
                     </div>)}
-                    <Divider className={classNames(styles.divider)} />
-                    <div
-                        className={classNames(styles.menuBarItem, styles.hoverable)}
-                        onMouseUp={this.handleSelectDeviceMouseUp}
-                    >
-                        <img
-                            className={styles.deviceIcon}
-                            src={deviceIcon}
-                        />
-                        {
-                            this.props.deviceName ? (
-                                <div>
-                                    {this.props.deviceName}
-                                </div>
-                            ) : (
-                                <FormattedMessage
-                                    defaultMessage="No device selected"
-                                    description="Text for menubar no device select button"
-                                    id="gui.menuBar.noDeviceSelected"
-                                />
-                            )}
-                    </div>
-                    <Divider className={classNames(styles.divider)} />
-                    <div
-                        className={classNames(styles.menuBarItem, styles.hoverable)}
-                        onMouseUp={this.handleConnectionMouseUp}
-                    >
-                        {this.props.peripheralName ? (
-                            <React.Fragment>
-                                <img
-                                    className={styles.connectedIcon}
-                                    src={connectedIcon}
-                                />
-                                {this.props.peripheralName}
-                            </React.Fragment>
-                        ) : (
-                            <React.Fragment>
-                                <img
-                                    className={styles.unconnectedIcon}
-                                    src={unconnectedIcon}
-                                />
-                                <FormattedMessage
-                                    defaultMessage="Unconnected"
-                                    description="Text for menubar unconnected button"
-                                    id="gui.menuBar.noConnection"
-                                />
-                            </React.Fragment>
-                        )}
-                    </div>
-                    <div
-                        className={classNames(styles.menuBarItem)}
-                    >
-                        <img
-                            className={classNames(styles.linkSocketIcon)}
-                            src={linkSocketIcon}
-                        />
-                    </div>
-                </div>
-                <div className={styles.fileMenu}>
-                    {this.props.canEditTitle ? (
-                        <div className={classNames(styles.menuBarItem, styles.growable)}>
-                            <MenuBarItemTooltip
-                                enable
-                                id="title-field"
-                            >
-                                <ProjectTitleInput
-                                    className={classNames(styles.titleFieldGrowable)}
-                                />
-                            </MenuBarItemTooltip>
-                        </div>
-                    ) : ((this.props.authorUsername && this.props.authorUsername !== this.props.username) ? (
-                        <AuthorInfo
-                            className={styles.authorInfo}
-                            imageUrl={this.props.authorThumbnailUrl}
-                            projectTitle={this.props.projectTitle}
-                            userId={this.props.authorId}
-                            username={this.props.authorUsername}
-                        />
-                    ) : null)}
                     {(this.props.canManageFiles) && (
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {
@@ -643,7 +605,148 @@ class MenuBar extends React.Component {
                             </MenuBarMenu>
                         </div>
                     )}
+                    <Divider className={classNames(styles.divider)} />
+                    <div
+                        aria-label={this.props.intl.formatMessage(ariaMessages.tutorials)}
+                        className={classNames(styles.menuBarItem, styles.hoverable)}
+                        onClick={this.props.onOpenTipLibrary}
+                    >
+                        <img
+                            className={styles.helpIcon}
+                            src={helpIcon}
+                        />
+                        <FormattedMessage {...ariaMessages.tutorials} />
+                    </div>
+                    <Divider className={classNames(styles.divider)} />
+                    {this.props.canEditTitle ? (
+                        <div className={classNames(styles.menuBarItem, styles.growable)}>
+                            <MenuBarItemTooltip
+                                enable
+                                id="title-field"
+                            >
+                                <ProjectTitleInput
+                                    className={classNames(styles.titleFieldGrowable)}
+                                />
+                            </MenuBarItemTooltip>
+                        </div>
+                    ) : ((this.props.authorUsername && this.props.authorUsername !== this.props.username) ? (
+                        <AuthorInfo
+                            className={styles.authorInfo}
+                            imageUrl={this.props.authorThumbnailUrl}
+                            projectTitle={this.props.projectTitle}
+                            userId={this.props.authorId}
+                            username={this.props.authorUsername}
+                        />
+                    ) : null)}
+                    <Divider className={classNames(styles.divider)} />  {/* Arduino Create Agent Button */}
+                    {this.state.arduinoAgentStatus ? (
+                        <div className={classNames(styles.menuBarItem)}>
+                            <Button
+                                className={styles.arduinoAgentButton}
+                                iconClassName={styles.arduinoAgentButtonIcon}
+                                iconSrc={arduinoAgentIconConnected}
+                                data-tip="tooltip"
+                                data-for="arduinoAgentTip"
+                            />
+                            <ReactTooltip
+                                className={styles.arduinoAgentTooltip}
+                                id="arduinoAgentTip"
+                                place="bottom"
+                                effect="solid"
+                            >
+                                <FormattedMessage
+                                    defaultMessage="Arduino Create Agent connected."
+                                    description="Arduino Create Agent status: Connected"
+                                    id="gui.menuBar.arduinoAgentConnected"
+                                />
+                            </ReactTooltip>
+                        </div>
+                    ) : (
+                        <div className={classNames(styles.menuBarItem)}>
+                            <Button
+                                className={styles.arduinoAgentButton}
+                                iconClassName={styles.arduinoAgentButtonIcon}
+                                iconSrc={arduinoAgentIconDisconnected}
+                                onClick={this.props.onClickArduinoAgentLogo}
+                                data-tip="tooltip"
+                                data-for="arduinoAgentTip"
+                            />
+                            <ReactTooltip
+                                className={styles.arduinoAgentTooltip}
+                                id="arduinoAgentTip"
+                                place="bottom"
+                                effect="solid"
+                            >
+                                <FormattedMessage
+                                    defaultMessage="Arduino Create Agent disconnected! Please Install Arduino Create Agent, or launch it."
+                                    description="Arduino Create Agent status: Disconnected"
+                                    id="gui.menuBar.arduinoAgentDisconnected"
+                                />
+                            </ReactTooltip>
+                        </div>
+                    )}
+                    <Divider className={classNames(styles.divider)} />  {/* Select Device Button */}
+                    <div className={classNames(styles.menuBarItem)}>
+                        <Button
+                            className={styles.arduinoAgentButton}
+                            iconClassName={styles.arduinoAgentButtonIcon}
+                            onClick={this.handleSelectDeviceMouseUp}
+                            iconSrc={arduinoBoardIcon}
+                            data-tip="tooltip"
+                            data-for="selectDeviceTip"
+                        />
+                        <ReactTooltip
+                            className={styles.arduinoAgentTooltip}
+                            id="selectDeviceTip"
+                            place="bottom"
+                            effect="solid"
+                        >
+                            <FormattedMessage
+                                defaultMessage="Select robot or device"
+                                description="Menu bar - Select device button"
+                                id="gui.menuBar.selectDevice"
+                            />
+                        </ReactTooltip>
+                        <span
+                            className={styles.deviceName}
+                        >
+                            {this.props.deviceName ? (
+                                <React.Fragment>{this.props.deviceName} - {serialPort}</React.Fragment>
+                            ) : (
+                                <FormattedMessage
+                                    defaultMessage="No robot or device selected"
+                                    description="Text for menubar no device select button"
+                                    id="gui.menuBar.noDeviceSelected"
+                                />
+                            )}
+                        </span>
+                        {/* {serialPort}
+                        Debug: {this.state.debugInfo} */}
+                    </div>
+                    <Divider className={classNames(styles.divider)} />
+                    <div className={classNames(styles.menuBarItem)}>    {/* Upload firmware Button */}
+                        <Button
+                            className={styles.uploadFirmwareButton}
+                            iconClassName={styles.arduinoAgentButtonIcon}
+                            iconSrc={uploadFirmware}
+                            data-tip="tooltip"
+                            data-for="uploadFirmwareTip"
+                        />
+                        <ReactTooltip
+                            className={styles.arduinoAgentTooltip}
+                            id="uploadFirmwareTip"
+                            place="bottom"
+                            effect="solid"
+                        >
+                            <FormattedMessage
+                                defaultMessage="Upload firmware"
+                                description="Upload firmware to device"
+                                id="gui.menuBar.uploadFirmware"
+                            />
+                        </ReactTooltip>
+                    </div>
                 </div>
+
                 <div className={styles.tailMenu}>
                     <div
                         className={classNames(styles.menuBarItem, styles.hoverable)}
@@ -674,18 +777,6 @@ class MenuBar extends React.Component {
                             description="Button to download the realtime firmware"
                             id="gui.menuBar.downloadFirmware"
                         />
-                    </div>
-                    <Divider className={classNames(styles.divider)} />
-                    <div
-                        aria-label={this.props.intl.formatMessage(ariaMessages.tutorials)}
-                        className={classNames(styles.menuBarItem, styles.hoverable)}
-                        onClick={this.props.onOpenTipLibrary}
-                    >
-                        <img
-                            className={styles.helpIcon}
-                            src={helpIcon}
-                        />
-                        <FormattedMessage {...ariaMessages.tutorials} />
                     </div>
                     <Divider className={classNames(styles.divider)} />
                     <div className={classNames(styles.menuBarItem, styles.programModeGroup)}>
@@ -740,17 +831,23 @@ class MenuBar extends React.Component {
                                 <MenuSection>
                                     <MenuItem
                                         isRtl={this.props.isRtl}
-                                        onClick={this.props.onClickInstallDriver}
+                                        onClick={this.handleCheckUpdate}
                                     >
-                                        {installDriver}
+                                        {checkUpdate}
                                     </MenuItem>
-                                </MenuSection>
-                                <MenuSection>
                                     <MenuItem
                                         isRtl={this.props.isRtl}
                                         onClick={this.handleClearCache}
                                     >
                                         {clearCache}
+                                    </MenuItem>
+                                </MenuSection>
+                                <MenuSection>
+                                    <MenuItem
+                                        isRtl={this.props.isRtl}
+                                        onClick={this.props.onClickInstallDriver}
+                                    >
+                                        {installDriver}
                                     </MenuItem>
                                 </MenuSection>
                             </MenuBarMenu>
@@ -798,6 +895,7 @@ MenuBar.propTypes = {
     logo: PropTypes.string,
     onClickAbout: PropTypes.func,
     onClickAccount: PropTypes.func,
+    onClickArduinoAgentLogo: PropTypes.func,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
     onClickSetting: PropTypes.func,
@@ -808,6 +906,7 @@ MenuBar.propTypes = {
     onClickRemix: PropTypes.func,
     onClickSave: PropTypes.func,
     onClickSaveAsCopy: PropTypes.func,
+    onClickCheckUpdate: PropTypes.func,
     onClickClearCache: PropTypes.func,
     onClickInstallDriver: PropTypes.func,
     onLogOut: PropTypes.func,
@@ -837,6 +936,7 @@ MenuBar.propTypes = {
     onSetUploadMode: PropTypes.func,
     onSetRealtimeConnection: PropTypes.func.isRequired,
     onSetRealtimeMode: PropTypes.func,
+    onSetUpdate: PropTypes.func.isRequired,
     onOpenConnectionModal: PropTypes.func,
     onOpenUploadProgress: PropTypes.func,
     peripheralName: PropTypes.string,
@@ -918,6 +1018,10 @@ const mapDispatchToProps = dispatch => ({
     onDisconnect: () => {
         dispatch(clearConnectionModalPeripheralName());
         dispatch(setRealtimeConnection(false));
+    },
+    onSetUpdate: message => {
+        dispatch(setUpdate(message));
+        dispatch(openUpdateModal());
     },
     onNoPeripheralIsConnected: () => showAlertWithTimeout(dispatch, 'connectAPeripheralFirst'),
     onWorkspaceIsEmpty: () => showAlertWithTimeout(dispatch, 'workspaceIsEmpty'),

@@ -1,6 +1,7 @@
-import ScratchBlocks from 'openblock-blocks';
-import 'openblock-blocks/arduino_compressed';
-import 'openblock-blocks/python_compressed';
+import ScratchBlocks from 'scratch-arduino-blocks';
+import 'scratch-arduino-blocks/arduino_compressed';
+import 'scratch-arduino-blocks/python_compressed';
+import iconv from 'iconv-lite';
 
 /**
  * Connect scratch blocks with the vm
@@ -342,6 +343,8 @@ export default function (vm) {
     ScratchBlocks.utils.is3dSupported = function () {
         return true;
     };
+
+    ScratchBlocks.iconv = iconv;
 
     return ScratchBlocks;
 }

@@ -1,11 +1,12 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
-import VM from 'openblock-vm';
+import VM from 'scratch-arduino-vm';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
+import analytics from '../lib/analytics';
 import {setDeviceData} from '../reducers/device-data';
 
 import {makeDeviceLibrary} from '../lib/libraries/devices/index.jsx';
@@ -24,21 +25,21 @@ const messages = defineMessages({
         description: 'Prompt for unoffical device url',
         id: 'gui.deviceLibrary.deviceUrl'
     },
+    robotTag: {
+        defaultMessage: 'Robots',
+        description: 'Robots tag to filter all robot devices.',
+        id: 'gui.deviceLibrary.robotTag'
+    },
     arduinoTag: {
         defaultMessage: 'Arduino',
         description: 'Arduino tag to filter all arduino devices.',
         id: 'gui.deviceLibrary.arduinoTag'
-    },
-    microPythonTag: {
-        defaultMessage: 'MicroPython',
-        description: 'Micro python tag to filter all micro python devices.',
-        id: 'gui.deviceLibrary.microPythonTag'
     }
 });
 
+const ROBOT_TAG = {tag: 'Robots', intlLabel: messages.robotTag};
 const ARDUINO_TAG = {tag: 'Arduino', intlLabel: messages.arduinoTag};
-const MICROPYTHON_TAG = {tag: 'MicroPython', intlLabel: messages.microPythonTag};
-const tagListPrefix = [ARDUINO_TAG, MICROPYTHON_TAG];
+const tagListPrefix = [ROBOT_TAG, ARDUINO_TAG];
 
 class DeviceLibrary extends React.PureComponent {
     constructor (props) {
@@ -47,13 +48,14 @@ class DeviceLibrary extends React.PureComponent {
             'handleItemSelect'
         ]);
     }
-    componentDidMount () {
-        this.props.vm.extensionManager.getDeviceList().then(data => {
-            if (data) {
-                this.props.onSetDeviceData(makeDeviceLibrary(data));
-            }
-        });
-    }
+    // Disable get device list from local host link
+    // componentDidMount () {
+    //     this.props.vm.extensionManager.getDeviceList().then(data => {
+    //         if (data) {
+    //             this.props.onSetDeviceData(makeDeviceLibrary(data));
+    //         }
+    //     });
+    // }
 
     handleItemSelect (item) {
         const id = item.deviceId;
@@ -67,13 +69,18 @@ class DeviceLibrary extends React.PureComponent {
             } else {
                 this.props.onDeviceChanged();
                 this.props.vm.extensionManager.loadDeviceURL(id, deviceType, pnpidList).then(() => {
-                    this.props.vm.extensionManager.getDeviceExtensionsList().then(() => {
-                        // TODO: Add a event for install device extension
-                        // the large extensions will take many times to load
-                        // A loading interface should be launched.
-                        this.props.vm.installDeviceExtensions(deviceExtensions);
-                    });
+                    // this.props.vm.extensionManager.getDeviceExtensionsList().then(() => {
+                    //     // TODO: Add a event for install device extension
+                    //     // the large extensions will take many times to load
+                    //     // A loading interface should be launched.
+                    //     this.props.vm.installDeviceExtensions(deviceExtensions);
+                    // });
                     this.props.onDeviceSelected(id);
+                    analytics.event({
+                        category: 'devices',
+                        action: 'select device',
+                        label: id
+                    });
                 });
             }
         }

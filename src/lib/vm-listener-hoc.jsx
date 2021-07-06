@@ -1,7 +1,7 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
-import VM from 'openblock-vm';
+import VM from 'scratch-arduino-vm';
 
 import {connect} from 'react-redux';
 
@@ -63,12 +63,12 @@ const vmListenerHOC = function (WrappedComponent) {
                 document.addEventListener('keyup', this.handleKeyUp);
             }
             this.props.vm.postIOData('userData', {username: this.props.username});
-            // Update device list
-            this.props.vm.extensionManager.getDeviceList().then(data => {
-                if (data) {
-                    this.props.onSetDeviceData(makeDeviceLibrary(data));
-                }
-            });
+            // Disable update device list from local host link
+            // this.props.vm.extensionManager.getDeviceList().then(data => {
+            //     if (data) {
+            //         this.props.onSetDeviceData(makeDeviceLibrary(data));
+            //     }
+            // });
         }
         componentDidUpdate (prevProps) {
             if (prevProps.username !== this.props.username) {
@@ -82,7 +82,6 @@ const vmListenerHOC = function (WrappedComponent) {
             }
         }
         componentWillUnmount () {
-            // TODO 在这里将 onShowExtensionAlert 的完整数据写入 而不在 redux alert中 检索设备id
             this.props.vm.removeListener('PERIPHERAL_CONNECTION_LOST_ERROR', this.handleDeviceAlert);
             this.props.vm.removeListener('PERIPHERAL_REALTIME_CONNECTION_LOST_ERROR',
                 this.handleDeviceRealtimeAlert);
@@ -159,6 +158,7 @@ const vmListenerHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 attachKeyboardEvents,
+                deviceData,
                 projectChanged,
                 shouldUpdateTargets,
                 shouldUpdateProjectChanged,

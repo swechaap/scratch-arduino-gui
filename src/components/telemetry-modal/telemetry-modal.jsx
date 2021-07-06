@@ -11,13 +11,13 @@ import styles from './telemetry-modal.css';
 const messages = defineMessages({
     label: {
         id: 'gui.telemetryOptIn.label',
-        defaultMessage: 'Report statistics to improve OpenBlock',
-        description: 'OpenBlock telemetry modal label - for accessibility'
+        defaultMessage: 'Report statistics to improve Scratch Arduino',
+        description: 'Scratch Arduino telemetry modal label - for accessibility'
     },
     bodyText1: {
-        defaultMessage: 'The OpenBlock Team is always looking to better understand how OpenBlock is used around the ' +
-            'world. To help support this effort, you can allow OpenBlock to automatically send usage information to ' +
-            'the OpenBlock Team.',
+        defaultMessage: 'The Scratch Arduino Team is always looking to better understand how Scratch Arduino is used around the ' +
+            'world. To help support this effort, you can allow Scratch Arduino to automatically send usage information to ' +
+            'the Scratch Arduino Team.',
         description: 'First paragraph of body text for telemetry opt-in modal',
         id: 'gui.telemetryOptIn.body1'
     },
@@ -30,7 +30,7 @@ const messages = defineMessages({
     },
     privacyPolicyLink: {
         defaultMessage: 'Privacy Policy',
-        description: 'Link to the OpenBlock privacy policy',
+        description: 'Link to the Scratch Arduino privacy policy',
         id: 'gui.telemetryOptIn.privacyPolicyLink'
     },
     noButton: {
@@ -44,7 +44,7 @@ const messages = defineMessages({
         id: 'gui.telemetryOptIn.buttonTooltipNo'
     },
     yesButton: {
-        defaultMessage: "Yes, I'd like to help improve OpenBlock",
+        defaultMessage: "Yes, I'd like to help improve Scratch Arduino",
         description: 'Text for telemetry modal opt-in button',
         id: 'gui.telemetryOptIn.buttonTextYes'
     },

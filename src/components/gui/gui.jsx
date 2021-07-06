@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import MediaQuery from 'react-responsive';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import tabStyles from 'react-tabs/style/react-tabs.css';
-import VM from 'openblock-vm';
+import VM from 'scratch-arduino-vm';
 import Renderer from 'scratch-render';
 
 import Blocks from '../../containers/blocks.jsx';
@@ -91,7 +91,6 @@ const GUIComponent = props => {
         enableCommunity,
         intl,
         isCreating,
-        isUpgrading,
         isFullScreen,
         isPlayerOnly,
         isRtl,
@@ -108,8 +107,10 @@ const GUIComponent = props => {
         onActivateCostumesTab,
         onActivateSoundsTab,
         onActivateTab,
+        onClickArduinoAgentLogo,
         onClickLogo,
-        onClickUpdate,
+        onClickCheckUpdate,
+        onClickUpgrade,
         onClickClearCache,
         onClickInstallDriver,
         onExtensionButtonClick,
@@ -190,9 +191,6 @@ const GUIComponent = props => {
                 {isCreating ? (
                     <Loader messageId="gui.loader.creating" />
                 ) : null}
-                {isUpgrading ? (
-                    <Loader messageId="gui.loader.upgrading" />
-                ) : null}
                 {isRendererSupported ? null : (
                     <WebGlModal isRtl={isRtl} />
                 )}
@@ -233,7 +231,7 @@ const GUIComponent = props => {
                 {updateModalVisible ? (
                     <UpdateModal
                         vm={vm}
-                        onClickUpdate={onClickUpdate}
+                        onClickUpgrade={onClickUpgrade}
                     />
                 ) : null}
                 <MenuBar
@@ -257,6 +255,7 @@ const GUIComponent = props => {
                     showComingSoon={showComingSoon}
                     onClickAbout={onClickAbout}
                     onClickAccountNav={onClickAccountNav}
+                    onClickArduinoAgentLogo={onClickArduinoAgentLogo}
                     onClickLogo={onClickLogo}
                     onCloseAccountNav={onCloseAccountNav}
                     onLogOut={onLogOut}
@@ -265,6 +264,7 @@ const GUIComponent = props => {
                     onSeeCommunity={onSeeCommunity}
                     onShare={onShare}
                     onToggleLoginOpen={onToggleLoginOpen}
+                    onClickCheckUpdate={onClickCheckUpdate}
                     onClickClearCache={onClickClearCache}
                     onClickInstallDriver={onClickInstallDriver}
                 />
@@ -365,11 +365,9 @@ const GUIComponent = props => {
                                     {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                                 </TabPanel>
                             </Tabs>
-                            {/*
-                                    backpackVisible ? (
-                                        <Backpack host={backpackHost} />
-                                    ) : null
-                                */}
+                            {/* backpackVisible ? (
+                                <Backpack host={backpackHost} />
+                            ) : null */}
                         </Box>
 
                         {/* stageAndTargetWrapper should use css to control show or hidden,
@@ -437,7 +435,6 @@ GUIComponent.propTypes = {
     enableCommunity: PropTypes.bool,
     intl: intlShape.isRequired,
     isCreating: PropTypes.bool,
-    isUpgrading: PropTypes.bool,
     isFullScreen: PropTypes.bool,
     isPlayerOnly: PropTypes.bool,
     isRtl: PropTypes.bool,
@@ -449,8 +446,10 @@ GUIComponent.propTypes = {
     onActivateTab: PropTypes.func,
     onClickAbout: PropTypes.func,
     onClickAccountNav: PropTypes.func,
+    onClickArduinoAgentLogo: PropTypes.func,
     onClickLogo: PropTypes.func,
-    onClickUpdate: PropTypes.func,
+    onClickCheckUpdate: PropTypes.func,
+    onClickUpgrade: PropTypes.func,
     onClickClearCache: PropTypes.func,
     onClickInstallDriver: PropTypes.func,
     onCloseAccountNav: PropTypes.func,
@@ -482,7 +481,7 @@ GUIComponent.defaultProps = {
     backpackHost: null,
     backpackVisible: false,
     basePath: './',
-    canChangeLanguage: true,
+    canChangeLanguage: false,
     canCreateNew: false,
     canEditTitle: false,
     canManageFiles: true,
@@ -493,7 +492,6 @@ GUIComponent.defaultProps = {
     canUseCloud: false,
     enableCommunity: false,
     isCreating: false,
-    isUpgrading: false,
     isShared: false,
     loading: false,
     showComingSoon: false,
