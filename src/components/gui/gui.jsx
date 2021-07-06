@@ -107,7 +107,6 @@ const GUIComponent = props => {
         onActivateCostumesTab,
         onActivateSoundsTab,
         onActivateTab,
-        onClickArduinoAgentLogo,
         onClickLogo,
         onClickCheckUpdate,
         onClickUpgrade,
@@ -255,7 +254,6 @@ const GUIComponent = props => {
                     showComingSoon={showComingSoon}
                     onClickAbout={onClickAbout}
                     onClickAccountNav={onClickAccountNav}
-                    onClickArduinoAgentLogo={onClickArduinoAgentLogo}
                     onClickLogo={onClickLogo}
                     onCloseAccountNav={onCloseAccountNav}
                     onLogOut={onLogOut}
@@ -446,7 +444,6 @@ GUIComponent.propTypes = {
     onActivateTab: PropTypes.func,
     onClickAbout: PropTypes.func,
     onClickAccountNav: PropTypes.func,
-    onClickArduinoAgentLogo: PropTypes.func,
     onClickLogo: PropTypes.func,
     onClickCheckUpdate: PropTypes.func,
     onClickUpgrade: PropTypes.func,

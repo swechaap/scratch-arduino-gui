@@ -7,8 +7,8 @@ import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import log from '../lib/log.js';
 
-const onClickArduinoAgentLogo = () => {
-    window.open('https://create.arduino.cc/getting-started/plugin/welcome', '_blank');
+const onClickScratchArduinoLinkLogo = () => {
+    window.open('https://create.arduino.cc/getting-started/plugin/welcome', '_blank');      // TODO: update link
 };
 
 const onClickLogo = () => {
@@ -103,7 +103,6 @@ export default appTarget => {
                 showComingSoon
                 backpackHost={backpackHost}
                 canSave={false}
-                onClickArduinoAgentLogo={onClickArduinoAgentLogo}
                 onClickLogo={onClickLogo}
             />,
         appTarget);
