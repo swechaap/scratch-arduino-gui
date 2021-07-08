@@ -89,8 +89,10 @@ import {openConnectionModal, openDeviceLibrary} from '../../reducers/modals';
 import {setRealtimeConnection, clearConnectionModalPeripheralName} from '../../reducers/connection-modal';
 import {setUpdate} from '../../reducers/update';
 
+import linkConnectedIcon from './icon--link-connected.svg';
+import linkDisconnectedIcon from './icon--link-disconnected.svg';
 import deviceIcon from './icon--device.svg';
-import unconnectedIcon from './icon--unconnected.svg';
+import disconnectedIcon from './icon--disconnected.svg';
 import connectedIcon from './icon--connected.svg';
 import fileIcon from './icon--file.svg';
 import screenshotIcon from './icon--screenshot.svg';
@@ -210,6 +212,7 @@ class MenuBar extends React.Component {
     }
     componentDidMount () {
         document.addEventListener('keydown', this.handleKeyPress);
+        // this.props.vm.on('LINK_STATUS', this.props.onDisconnect);
         this.props.vm.on('PERIPHERAL_DISCONNECTED', this.props.onDisconnect);
         this.props.vm.on('PROGRAM_MODE_UPDATE', this.handleProgramModeUpdate); 
     }
@@ -609,29 +612,132 @@ class MenuBar extends React.Component {
                             username={this.props.authorUsername}
                         />
                     ) : null)}
-                    <Divider className={classNames(styles.divider)} />  {/* Select Device Button */}
-                    <div
-                        className={classNames(styles.menuBarItem, styles.hoverable)}
-                        onMouseUp={this.handleSelectDeviceMouseUp}
-                    >
-                        <img
-                            className={styles.deviceIcon}
-                            src={deviceIcon}
-                        />
-                        {
-                            this.props.deviceName ? (
+                    <Divider className={classNames(styles.divider)} />  {/* Device management */}
+                    {this.props.peripheralName ? (
+                        <div className={classNames(styles.deviceIcon)}>    
+                            <Button
+                                iconClassName={classNames(styles.disableHover, styles.deviceIcon)}
+                                iconSrc={linkConnectedIcon}
+                                data-tip="tooltip"
+                                data-for="linkConnectedTip"
+                            />
+                            <ReactTooltip
+                                className={styles.successTooltip}
+                                id="linkConnectedTip"
+                                place="bottom"
+                                effect="solid"
+                            >
+                                <FormattedMessage
+                                    defaultMessage="Scratch Arduino Link is connected"
+                                    description="Tooltip for menubar Scratch Arduino Link connected icon"
+                                    id="gui.menuBar.linkConnectedTooltip"
+                                />
+                            </ReactTooltip>
+                        </div>
+                    ) : (
+                        <div className={classNames(styles.deviceIcon)}>
+                            <Button
+                                iconClassName={classNames(styles.deviceIcon)}
+                                iconSrc={linkDisconnectedIcon}
+                                data-tip="tooltip"
+                                data-for="linkDisconnectedTip"
+                                onClick={this.props.onClickLinkLogo}
+                            />
+                            <ReactTooltip
+                                className={styles.warningTooltip}
+                                id="linkDisconnectedTip"
+                                place="bottom"
+                                effect="solid"
+                            >
+                                <FormattedMessage
+                                    defaultMessage="Scratch Arduino Link is not installed or running!"
+                                    description="Tooltip for menubar Scratch Arduino Link disconnected icon"
+                                    id="gui.menuBar.linkDisconnectedTooltip"
+                                />
+                            </ReactTooltip>
+                        </div>                    
+                    )}
+                    <div className={classNames(styles.deviceIcon)}>
+                        <Button
+                            iconSrc={deviceIcon}
+                            data-tip="tooltip"
+                            data-for="selectDeviceTip"
+                            onClick={this.handleSelectDeviceMouseUp}
+                        >
+                            {this.props.deviceName ? (
                                 <div>
                                     {this.props.deviceName}
                                 </div>
                             ) : (
                                 <FormattedMessage
                                     defaultMessage="No device selected"
-                                    description="Text for menubar no device select button"
+                                    description="Text for menubar device select button"
                                     id="gui.menuBar.noDeviceSelected"
                                 />
-                            )}
-                    </div>
+                            )} 
+                        </Button>
+                        <ReactTooltip
+                            className={styles.successTooltip}
+                            id="selectDeviceTip"
+                            place="bottom"
+                            effect="solid"
+                        >
+                            <FormattedMessage
+                                defaultMessage="Select device"
+                                description="Text for menubar device select button tooltip"
+                                id="gui.menuBar.deviceSelectTooltip"
+                            />
+                        </ReactTooltip>
+                    </div> 
+                    {this.props.peripheralName ? (
+                        <div className={classNames(styles.deviceIcon)}>    
+                            <Button
+                                iconClassName={classNames(styles.disableHover, styles.deviceIcon)}
+                                iconSrc={connectedIcon}
+                                data-tip="tooltip"
+                                data-for="deviceConnectedTip"
+                            />
+                            <ReactTooltip
+                                className={styles.successTooltip}
+                                id="deviceConnectedTip"
+                                place="bottom"
+                                effect="solid"
+                            >
+                                <FormattedMessage
+                                    defaultMessage="Device is connected"
+                                    description="Device is connected"
+                                    id="gui.menuBar.deviceConnected"
+                                />
+                            </ReactTooltip>
+                        </div>
+                    ) : (
+                        <div className={classNames(styles.deviceIcon)}>
+                            <Button
+                                iconClassName={classNames(styles.deviceIcon)}
+                                iconSrc={disconnectedIcon}
+                                data-tip="tooltip"
+                                data-for="deviceDisconnectedTip"
+                                onClick={this.handleConnectionMouseUp}
+                            />
+                            <ReactTooltip
+                                className={styles.warningTooltip}
+                                id="deviceDisconnectedTip"
+                                place="bottom"
+                                effect="solid"
+                            >
+                                <FormattedMessage
+                                    defaultMessage="Device is disconnected!"
+                                    description="Device is disconnected"
+                                    id="gui.menuBar.deviceDisconnected"
+                                />
+                            </ReactTooltip>
+                        </div>                    
+                    )}
                     <Divider className={classNames(styles.divider)} />
+
+
+
+
                     <div className={classNames(styles.menuBarItem)}>    {/* Upload firmware Button */}
                         <Button
                             className={styles.uploadFirmwareButton}
@@ -641,7 +747,7 @@ class MenuBar extends React.Component {
                             data-for="uploadFirmwareTip"
                         />
                         <ReactTooltip
-                            className={styles.arduinoAgentTooltip}
+                            className={styles.linkTooltip}
                             id="uploadFirmwareTip"
                             place="bottom"
                             effect="solid"
@@ -807,6 +913,7 @@ MenuBar.propTypes = {
     onClickFile: PropTypes.func,
     onClickSetting: PropTypes.func,
     onClickLanguage: PropTypes.func,
+    onClickLinkLogo: PropTypes.func,
     onClickLogin: PropTypes.func,
     onClickLogo: PropTypes.func,
     onClickNew: PropTypes.func,
