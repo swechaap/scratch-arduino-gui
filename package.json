@@ -8,7 +8,7 @@
     "clean": "rimraf ./build && mkdirp build && rimraf ./dist && mkdirp dist",
     "deploy": "touch build/.nojekyll && gh-pages -t -d build -m \"Build for $(git log --pretty=format:%H -n1) [skip ci]\"",
     "prune": "./prune-gh-pages.sh",
-    "i18n:push": "tx-push-src openblock-editor interface translations/en.json",
+    "i18n:push": "tx-push-src scratch-arduino-editor interface translations/en.json",
     "i18n:src": "rimraf ./translations/messages/src && babel src > tmp.js && rimraf tmp.js && build-i18n-src ./translations/messages/src ./translations/",
     "start": "webpack-dev-server",
     "start-open": "webpack-dev-server --open --host 127.0.0.1",
@@ -21,10 +21,10 @@
   },
   "author": "Massachusetts Institute of Technology",
   "license": "BSD-3-Clause",
-  "homepage": "https://github.com/ottawastem/openblock-gui#readme",
+  "homepage": "https://github.com/ottawastem/scratch-arduino-gui#readme",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/ottawastem/openblock-gui.git"
+    "url": "git+ssh://git@github.com/ottawastem/scratch-arduino-gui.git"
   },
   "dependencies": {
     "@ramonak/react-progress-bar": "^3.1.0",

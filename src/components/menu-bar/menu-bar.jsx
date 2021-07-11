@@ -61,7 +61,8 @@ import {
     languageMenuOpen,
     openLoginMenu,
     closeLoginMenu,
-    loginMenuOpen
+    loginMenuOpen,
+    setLinkStatus
 } from '../../reducers/menus';
 import {setStageSize} from '../../reducers/stage-size';
 import {STAGE_SIZE_MODES} from '../../lib/layout-constants';
@@ -144,7 +145,6 @@ const MenuBarItemTooltip = ({
     );
 };
 
-
 MenuBarItemTooltip.propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -212,7 +212,8 @@ class MenuBar extends React.Component {
     }
     componentDidMount () {
         document.addEventListener('keydown', this.handleKeyPress);
-        // this.props.vm.on('LINK_STATUS', this.props.onDisconnect);
+        this.props.vm.on('LINK_CONNECTED', this.props.onLinkConnected);
+        this.props.vm.on('LINK_DISCONNECTED', this.props.onLinkDisconnected);
         this.props.vm.on('PERIPHERAL_DISCONNECTED', this.props.onDisconnect);
         this.props.vm.on('PROGRAM_MODE_UPDATE', this.handleProgramModeUpdate); 
     }
@@ -613,7 +614,7 @@ class MenuBar extends React.Component {
                         />
                     ) : null)}
                     <Divider className={classNames(styles.divider)} />  {/* Device management */}
-                    {this.props.peripheralName ? (
+                    {this.props.linkStatus ? (
                         <div className={classNames(styles.deviceIcon)}>    
                             <Button
                                 iconClassName={classNames(styles.disableHover, styles.deviceIcon)}
@@ -961,7 +962,10 @@ MenuBar.propTypes = {
     onSetStageLarge: PropTypes.func.isRequired,
     deviceId: PropTypes.string,
     deviceName: PropTypes.string,
-    onDeviceIsEmpty: PropTypes.func
+    onDeviceIsEmpty: PropTypes.func,
+    linkStatus: PropTypes.bool,
+    onLinkConnected: PropTypes.func.isRequired,
+    onLinkDisconnected: PropTypes.func.isRequired
 };
 
 MenuBar.defaultProps = {
@@ -996,7 +1000,8 @@ const mapStateToProps = (state, ownProps) => {
         vm: state.scratchGui.vm,
         peripheralName: state.scratchGui.connectionModal.peripheralName,
         deviceId: state.scratchGui.device.deviceId,
-        deviceName: state.scratchGui.device.deviceName
+        deviceName: state.scratchGui.device.deviceName,
+        linkStatus: state.scratchGui.menus.linkStatus
     };
 };
 
@@ -1041,7 +1046,13 @@ const mapDispatchToProps = dispatch => ({
     onWorkspaceIsEmpty: () => showAlertWithTimeout(dispatch, 'workspaceIsEmpty'),
     onWorkspaceIsNotEmpty: () => showAlertWithTimeout(dispatch, 'workspaceIsNotEmpty'),
     onOpenDeviceLibrary: () => dispatch(openDeviceLibrary()),
-    onDeviceIsEmpty: () => showAlertWithTimeout(dispatch, 'selectADeviceFirst')
+    onDeviceIsEmpty: () => showAlertWithTimeout(dispatch, 'selectADeviceFirst'),
+    onLinkConnected: () => {
+        dispatch(setLinkStatus(true));
+    },
+    onLinkDisconnected: () => {
+        dispatch(setLinkStatus(false));
+    }
 });
 
 export default compose(

@@ -59,7 +59,7 @@ const ModalComponent = props => (
                     {props.headerImage ? (
                         <img
                             className={styles.headerImage}
-                            // src={props.headerImage}
+                            src={props.headerImage}
                         />
                     ) : null}
                     {props.contentLabel}

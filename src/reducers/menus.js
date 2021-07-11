@@ -1,5 +1,6 @@
 const OPEN_MENU = 'scratch-gui/menus/OPEN_MENU';
 const CLOSE_MENU = 'scratch-gui/menus/CLOSE_MENU';
+const SET_LINK_STATUS = 'scratch-gui/menus/setLinkStatus';
 
 const MENU_ACCOUNT = 'accountMenu';
 const MENU_FILE = 'fileMenu';
@@ -9,7 +10,6 @@ const MENU_LOGIN = 'loginMenu';
 const MENU_SERIALPORT = 'serialportMenu';
 const MENU_SETTING = 'setting';
 
-
 const initialState = {
     [MENU_ACCOUNT]: false,
     [MENU_FILE]: false,
@@ -17,22 +17,27 @@ const initialState = {
     [MENU_LANGUAGE]: false,
     [MENU_LOGIN]: false,
     [MENU_SERIALPORT]: false,
-    [MENU_SETTING]: false
+    [MENU_SETTING]: false,
+    linkStatus: false
 };
 
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
-    case OPEN_MENU:
-        return Object.assign({}, state, {
-            [action.menu]: true
-        });
-    case CLOSE_MENU:
-        return Object.assign({}, state, {
-            [action.menu]: false
-        });
-    default:
-        return state;
+        case OPEN_MENU:
+            return Object.assign({}, state, {
+                [action.menu]: true
+            });
+        case CLOSE_MENU:
+            return Object.assign({}, state, {
+                [action.menu]: false
+            });
+        case SET_LINK_STATUS:
+            return Object.assign({}, state, {
+                linkStatus: action.status
+            });
+        default:
+            return state;
     }
 };
 const openMenu = menu => ({
@@ -65,6 +70,11 @@ const openSettingMenu = () => openMenu(MENU_SETTING);
 const closeSettingMenu = () => closeMenu(MENU_SETTING);
 const settingMenuOpen = state => state.scratchGui.menus[MENU_SETTING];
 
+const setLinkStatus = (linkStatus) => ({
+    type: SET_LINK_STATUS,
+    status: linkStatus
+});
+
 export {
     reducer as default,
     initialState as menuInitialState,
@@ -88,5 +98,6 @@ export {
     serialportMenuOpen,
     openSettingMenu,
     closeSettingMenu,
-    settingMenuOpen
+    settingMenuOpen,
+    setLinkStatus
 };

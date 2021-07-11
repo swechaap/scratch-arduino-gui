@@ -309,6 +309,8 @@ class Blocks extends React.Component {
         this.props.vm.addListener('PERIPHERAL_DISCONNECTED', this.handleStatusButtonUpdate);
         this.props.vm.addListener('CODE_NEED_UPDATE', this.handleCodeNeedUpdate);
         this.props.vm.addListener('TOOLBOX_UPLOAD_FINISH', this.handleToolboxUploadFinish);
+        this.props.vm.addListener('LINK_CONNECTED', this.handleStatusButtonUpdate);
+        this.props.vm.addListener('LINK_DISCONNECTED', this.handleStatusButtonUpdate);
     }
     detachVM () {
         this.props.vm.removeListener('SCRIPT_GLOW_ON', this.onScriptGlowOn);
@@ -327,6 +329,8 @@ class Blocks extends React.Component {
         this.props.vm.removeListener('PERIPHERAL_DISCONNECTED', this.handleStatusButtonUpdate);
         this.props.vm.removeListener('CODE_NEED_UPDATE', this.handleCodeNeedUpdate);
         this.props.vm.removeListener('TOOLBOX_UPLOAD_FINISH', this.handleToolboxUploadFinish);
+        this.props.vm.removeListener('LINK_CONNECTED', this.handleStatusButtonUpdate);
+        this.props.vm.removeListener('LINK_DISCONNECTED', this.handleStatusButtonUpdate);
     }
 
     updateToolboxBlockValue (id, value) {

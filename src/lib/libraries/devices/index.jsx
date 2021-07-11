@@ -48,7 +48,7 @@ const deviceData = [
     },
     {
         name: 'Otto Robot - Basic',
-        deviceId: 'arduinoNano',
+        deviceId: 'ottoBasic',
         manufactor: 'arduino.cc',
         leanMore: 'https://store.arduino.cc/usa/arduino-uno-rev3',
         type: 'arduino',
