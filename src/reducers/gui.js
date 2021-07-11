@@ -1,6 +1,5 @@
 import {applyMiddleware, compose, combineReducers} from 'redux';
 import alertsReducer, {alertsInitialState} from './alerts';
-// import arduinoAgentReducer, {arduinoAgentInitialState} from './arduino-agent';
 import assetDragReducer, {assetDragInitialState} from './asset-drag';
 import cardsReducer, {cardsInitialState} from './cards';
 import colorPickerReducer, {colorPickerInitialState} from './color-picker';
@@ -147,7 +146,6 @@ const initTelemetryModal = function (currentState) {
 
 const guiReducer = combineReducers({
     alerts: alertsReducer,
-    // arduinoAgent: arduinoAgentReducer,
     assetDrag: assetDragReducer,
     blockDrag: blockDragReducer,
     cards: cardsReducer,

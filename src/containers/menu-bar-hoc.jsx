@@ -7,7 +7,6 @@ const MenuBarHOC = function (WrappedComponent) {
     class MenuBarContainer extends React.PureComponent {
         constructor (props) {
             super(props);
-
             bindAll(this, [
                 'confirmReadyToReplaceProject',
                 'confirmClearCache',

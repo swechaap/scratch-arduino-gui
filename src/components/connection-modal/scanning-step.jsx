@@ -14,7 +14,7 @@ import styles from './connection-modal.css';
 
 const ScanningStep = props => (
     <Box className={styles.body}>
-        {props.isSerialport ? (
+        {/* {props.isSerialport ? (
             <Box className={classNames(styles.bodyHeadArea)}>
                 <div className={styles.listAll}>
                     <FormattedMessage
@@ -32,7 +32,7 @@ const ScanningStep = props => (
                     />
                 </div>
             </Box>
-        ) : null}
+        ) : null} */}
         <Box className={styles.activityArea}>
             {props.scanning ? (
                 props.peripheralList.length === 0 ? (

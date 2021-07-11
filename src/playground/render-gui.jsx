@@ -7,12 +7,12 @@ import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import log from '../lib/log.js';
 
-const onClickArduinoAgentLogo = () => {
-    window.open('https://create.arduino.cc/getting-started/plugin/welcome', '_blank');
+const onClickLinkLogo = () => {
+    window.open('https://github.com/OttawaSTEM/scratch-arduino-link/releases', '_blank');
 };
 
 const onClickLogo = () => {
-    window.location = 'https://ottawastem.com';
+    window.open('https://ottawastem.com', '_blank'); 
 };
 
 const onClickCheckUpdate = () => {
@@ -103,7 +103,7 @@ export default appTarget => {
                 showComingSoon
                 backpackHost={backpackHost}
                 canSave={false}
-                onClickArduinoAgentLogo={onClickArduinoAgentLogo}
+                onClickLinkLogo={onClickLinkLogo}
                 onClickLogo={onClickLogo}
             />,
         appTarget);
