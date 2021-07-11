@@ -344,6 +344,33 @@
     transform: rotate(-45deg) !important;
 }
 
+.select-device-tooltip {
+    background-color: $sound-primary !important;
+    border: 1px solid $ui-black-transparent !important;
+    border-radius: $form-radius !important;
+    box-shadow: 0 0 .5rem $ui-black-transparent !important;
+    padding: .75rem 1rem !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-size: 1rem !important;
+    line-height: 1.25rem !important;
+    z-index: $z-index-tooltip !important;
+}
+
+.select-device-tooltip:after {
+    content: "";
+    border-top: 1px solid $ui-black-transparent !important;
+    border-left: 0 !important;
+    border-bottom: 0 !important;
+    border-right: 1px solid $ui-black-transparent !important;
+    border-radius: $form-radius;
+    background-color: $sound-primary !important;
+    height: 1rem !important;
+    width: 1rem !important;
+    margin-left: -.5rem !important;
+    top: -.5rem !important;
+    transform: rotate(-45deg) !important;
+}
+
 .disable-hover {
     cursor: default !important;
 }

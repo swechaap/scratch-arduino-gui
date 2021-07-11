@@ -678,7 +678,7 @@ class MenuBar extends React.Component {
                             )} 
                         </Button>
                         <ReactTooltip
-                            className={styles.successTooltip}
+                            className={styles.selectDeviceTooltip}
                             id="selectDeviceTip"
                             place="bottom"
                             effect="solid"
