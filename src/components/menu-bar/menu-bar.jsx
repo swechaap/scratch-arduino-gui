@@ -736,7 +736,7 @@ class MenuBar extends React.Component {
                                 effect="solid"
                             >
                                 <FormattedMessage
-                                    defaultMessage="Device is disconnected!"
+                                    defaultMessage="Device is not connected!"
                                     description="Device is disconnected"
                                     id="gui.menuBar.deviceDisconnected"
                                 />
