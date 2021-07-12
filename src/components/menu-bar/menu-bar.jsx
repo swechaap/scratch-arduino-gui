@@ -784,10 +784,12 @@ class MenuBar extends React.Component {
                             onChange={this.handleProgramModeSwitchOnChange}
                             checked={!this.props.isRealtimeMode}
                             disabled={this.props.isToolboxUpdating || !this.props.isSupportSwitchMode}
-                            height={25}
-                            width={95}
+                            height={26}
+                            width={96}
+                            handleDiameter={22}
+                            borderRadius={3}
                             onColor={this.props.isToolboxUpdating ||
-                                !this.props.isSupportSwitchMode ? '#888888' : '#008800'}
+                                !this.props.isSupportSwitchMode ? '#888888' : '#007D7D'}
                             offColor={this.props.isToolboxUpdating ||
                                 !this.props.isSupportSwitchMode ? '#888888' : '#FF8C1A'}
                             uncheckedIcon={
