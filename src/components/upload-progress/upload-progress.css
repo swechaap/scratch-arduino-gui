@@ -2,7 +2,7 @@
 @import "../../css/units.css";
 
 .modal-content {
-    width: 600px;
+    width: 80%;
 }
 
 .body {
@@ -48,7 +48,7 @@
 }
 
 .terminal-warper{
-    height: 300px;
+    height: 500px;
     background-color: $motion-light-transparent;
     margin-bottom: 20px;
 }

@@ -1,3 +1,15 @@
+import unselectDeviceIcon from '../components/menu-bar/icon--device.svg';
+import ottoBasicIcon from '../lib/libraries/devices/ottoRobotBasic/ottorobotbasic-small.svg';
+import arduinoUnoIcon from '../lib/libraries/devices/arduinoUno/arduinoUno-small.svg';
+import arduinoNanoIcon from '../lib/libraries/devices/arduinoNano/arduinoNano-small.svg';
+
+const iconImages = {
+    'ottoBasic': ottoBasicIcon,
+    'arduinoUno': arduinoUnoIcon,
+    'arduinoNano': arduinoNanoIcon
+};
+
+
 const SET_ID = 'scratch-gui/device/setId';
 const CLEAR_ID = 'scratch-gui/device/clearId';
 const SET_NAME = 'scratch-gui/device/setName';
@@ -8,38 +20,40 @@ const CLEAR_TYPE = 'scratch-gui/device/clearType';
 const initialState = {
     deviceId: null,
     deviceName: null,
-    deviceType: null
+    deviceType: null,
+    deviceIcon: unselectDeviceIcon
 };
 
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
-    case SET_ID:
-        return Object.assign({}, state, {
-            deviceId: action.deviceId
-        });
-    case CLEAR_ID:
-        return Object.assign({}, state, {
-            deviceId: null
-        });
-    case SET_NAME:
-        return Object.assign({}, state, {
-            deviceName: action.deviceName
-        });
-    case CLEAR_NAME:
-        return Object.assign({}, state, {
-            deviceName: null
-        });
-    case SET_TYPE:
-        return Object.assign({}, state, {
-            deviceType: action.deviceType
-        });
-    case CLEAR_TYPE:
-        return Object.assign({}, state, {
-            deviceType: null
-        });
-    default:
-        return state;
+        case SET_ID:
+            return Object.assign({}, state, {
+                deviceId: action.deviceId,
+                deviceIcon: (action.deviceId) ? iconImages[action.deviceId] : unselectDeviceIcon
+            });
+        case CLEAR_ID:
+            return Object.assign({}, state, {
+                deviceId: null
+            });
+        case SET_NAME:
+            return Object.assign({}, state, {
+                deviceName: action.deviceName
+            });
+        case CLEAR_NAME:
+            return Object.assign({}, state, {
+                deviceName: null
+            });
+        case SET_TYPE:
+            return Object.assign({}, state, {
+                deviceType: action.deviceType
+            });
+        case CLEAR_TYPE:
+            return Object.assign({}, state, {
+                deviceType: null
+            });
+        default:
+            return state;
     }
 };
 

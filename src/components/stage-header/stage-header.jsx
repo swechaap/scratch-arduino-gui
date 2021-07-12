@@ -153,7 +153,7 @@ const StageHeaderComponent = function (props) {
             <Box className={styles.stageHeaderWrapper}>
                 <Box className={styles.stageMenuWrapper}>
                     <Controls vm={vm} />
-                    <Box
+                    {/* <Box
                         className={classNames(
                             styles.deviceRealtimeConnectionWrapper,
                             (realtimeConnection) ? null : styles.deviceRealtimeConnectionOff
@@ -164,7 +164,7 @@ const StageHeaderComponent = function (props) {
                             draggable={false}
                             src={signalIcon}
                         />
-                    </Box>
+                    </Box> */}
                     <div className={styles.stageSizeRow}>
                         {stageControls}
                         <div>
