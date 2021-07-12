@@ -345,7 +345,7 @@
 }
 
 .select-device-tooltip {
-    background-color: $sound-primary !important;
+    background-color: $motion-primary !important;
     border: 1px solid $ui-black-transparent !important;
     border-radius: $form-radius !important;
     box-shadow: 0 0 .5rem $ui-black-transparent !important;
@@ -363,24 +363,10 @@
     border-bottom: 0 !important;
     border-right: 1px solid $ui-black-transparent !important;
     border-radius: $form-radius;
-    background-color: $sound-primary !important;
+    background-color: $motion-primary !important;
     height: 1rem !important;
     width: 1rem !important;
     margin-left: -.5rem !important;
     top: -.5rem !important;
     transform: rotate(-45deg) !important;
 }
-
-.disable-hover {
-    cursor: default !important;
-}
-
-.device-icon {
-    padding-right: 0rem !important;
-    margin-right: 0rem !important;
-}
-
-/* .upload-firmware-button {
-    box-shadow: 0 0 0 1px $ui-black-transparent;
-    padding: 0.2rem 1rem;
-} */

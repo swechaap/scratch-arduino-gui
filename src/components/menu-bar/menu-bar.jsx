@@ -62,7 +62,7 @@ import {
     openLoginMenu,
     closeLoginMenu,
     loginMenuOpen,
-    setLinkStatus
+    setLinkStatus,
 } from '../../reducers/menus';
 import {setStageSize} from '../../reducers/stage-size';
 import {STAGE_SIZE_MODES} from '../../lib/layout-constants';
@@ -92,7 +92,6 @@ import {setUpdate} from '../../reducers/update';
 
 import linkConnectedIcon from './icon--link-connected.svg';
 import linkDisconnectedIcon from './icon--link-disconnected.svg';
-import deviceIcon from './icon--device.svg';
 import disconnectedIcon from './icon--disconnected.svg';
 import connectedIcon from './icon--connected.svg';
 import fileIcon from './icon--file.svg';
@@ -615,12 +614,14 @@ class MenuBar extends React.Component {
                     ) : null)}
                     <Divider className={classNames(styles.divider)} />  {/* Device management */}
                     {this.props.linkStatus ? (
-                        <div className={classNames(styles.deviceIcon)}>    
-                            <Button
-                                iconClassName={classNames(styles.disableHover, styles.deviceIcon)}
-                                iconSrc={linkConnectedIcon}
-                                data-tip="tooltip"
-                                data-for="linkConnectedTip"
+                        <div
+                            className={classNames(styles.menuBarItem, styles.hoverable)}
+                            data-tip="tooltip"
+                            data-for="linkConnectedTip"
+                        >
+                            <img
+                                className={styles.disableHover}
+                                src={linkConnectedIcon}
                             />
                             <ReactTooltip
                                 className={styles.successTooltip}
@@ -636,13 +637,15 @@ class MenuBar extends React.Component {
                             </ReactTooltip>
                         </div>
                     ) : (
-                        <div className={classNames(styles.deviceIcon)}>
-                            <Button
-                                iconClassName={classNames(styles.deviceIcon)}
-                                iconSrc={linkDisconnectedIcon}
-                                data-tip="tooltip"
-                                data-for="linkDisconnectedTip"
-                                onClick={this.props.onClickLinkLogo}
+                        <div
+                            className={classNames(styles.menuBarItem, styles.hoverable)}
+                            data-tip="tooltip"
+                            data-for="linkDisconnectedTip"
+                            onClick={this.props.onClickLinkLogo}
+                        >
+                            <img
+                                className={styles.disableHover}
+                                src={linkDisconnectedIcon}
                             />
                             <ReactTooltip
                                 className={styles.warningTooltip}
@@ -658,25 +661,27 @@ class MenuBar extends React.Component {
                             </ReactTooltip>
                         </div>                    
                     )}
-                    <div className={classNames(styles.deviceIcon)}>
-                        <Button
-                            iconSrc={deviceIcon}
-                            data-tip="tooltip"
-                            data-for="selectDeviceTip"
-                            onClick={this.handleSelectDeviceMouseUp}
-                        >
-                            {this.props.deviceName ? (
-                                <div>
-                                    {this.props.deviceName}
-                                </div>
-                            ) : (
-                                <FormattedMessage
-                                    defaultMessage="No device selected"
-                                    description="Text for menubar device select button"
-                                    id="gui.menuBar.noDeviceSelected"
-                                />
-                            )} 
-                        </Button>
+                    <div
+                        className={classNames(styles.menuBarItem, styles.hoverable)}
+                        data-tip="tooltip"
+                        data-for="selectDeviceTip"
+                        onClick={this.handleSelectDeviceMouseUp}
+                    >
+                        <img
+                            className={styles.helpIcon}
+                            src={this.props.deviceIcon}
+                        />
+                        {this.props.deviceName ? (
+                            <div>
+                                {this.props.deviceName}
+                            </div>
+                        ) : (
+                            <FormattedMessage
+                                defaultMessage="No device selected"
+                                description="Text for menubar device select button"
+                                id="gui.menuBar.noDeviceSelected"
+                            />
+                        )} 
                         <ReactTooltip
                             className={styles.selectDeviceTooltip}
                             id="selectDeviceTip"
@@ -689,14 +694,16 @@ class MenuBar extends React.Component {
                                 id="gui.menuBar.deviceSelectTooltip"
                             />
                         </ReactTooltip>
-                    </div> 
+                    </div>
                     {this.props.peripheralName ? (
-                        <div className={classNames(styles.deviceIcon)}>    
-                            <Button
-                                iconClassName={classNames(styles.disableHover, styles.deviceIcon)}
-                                iconSrc={connectedIcon}
-                                data-tip="tooltip"
-                                data-for="deviceConnectedTip"
+                        <div
+                            className={classNames(styles.menuBarItem, styles.hoverable)}
+                            data-tip="tooltip"
+                            data-for="deviceConnectedTip"
+                        >
+                            <img
+                                className={styles.disableHover}
+                                src={connectedIcon}
                             />
                             <ReactTooltip
                                 className={styles.successTooltip}
@@ -712,13 +719,15 @@ class MenuBar extends React.Component {
                             </ReactTooltip>
                         </div>
                     ) : (
-                        <div className={classNames(styles.deviceIcon)}>
-                            <Button
-                                iconClassName={classNames(styles.deviceIcon)}
-                                iconSrc={disconnectedIcon}
-                                data-tip="tooltip"
-                                data-for="deviceDisconnectedTip"
-                                onClick={this.handleConnectionMouseUp}
+                        <div
+                            className={classNames(styles.menuBarItem, styles.hoverable)}
+                            data-tip="tooltip"
+                            data-for="deviceDisconnectedTip"
+                            onClick={this.handleConnectionMouseUp}
+                        >
+                            <img
+                                className={styles.helpIcon}
+                                src={disconnectedIcon}
                             />
                             <ReactTooltip
                                 className={styles.warningTooltip}
@@ -732,34 +741,9 @@ class MenuBar extends React.Component {
                                     id="gui.menuBar.deviceDisconnected"
                                 />
                             </ReactTooltip>
-                        </div>                    
+                        </div>                  
                     )}
                     <Divider className={classNames(styles.divider)} />
-
-
-
-
-                    <div className={classNames(styles.menuBarItem)}>    {/* Upload firmware Button */}
-                        <Button
-                            className={styles.uploadFirmwareButton}
-                            iconClassName={styles.arduinoAgentButtonIcon}
-                            iconSrc={uploadFirmware}
-                            data-tip="tooltip"
-                            data-for="uploadFirmwareTip"
-                        />
-                        <ReactTooltip
-                            className={styles.linkTooltip}
-                            id="uploadFirmwareTip"
-                            place="bottom"
-                            effect="solid"
-                        >
-                            <FormattedMessage
-                                defaultMessage="Upload firmware"
-                                description="Upload firmware to device"
-                                id="gui.menuBar.uploadFirmware"
-                            />
-                        </ReactTooltip>
-                    </div>
                 </div>
 
                 <div className={styles.tailMenu}>
@@ -774,7 +758,7 @@ class MenuBar extends React.Component {
                             src={screenshotIcon}
                         />
                     </div>
-                    <Divider className={classNames(styles.divider)} />
+                    {/* <Divider className={classNames(styles.divider)} />
                     <div
                         className={classNames(styles.menuBarItem, this.props.isRealtimeMode &&
                             this.props.peripheralName ? styles.hoverable : styles.disabled)}
@@ -792,7 +776,7 @@ class MenuBar extends React.Component {
                             description="Button to download the realtime firmware"
                             id="gui.menuBar.downloadFirmware"
                         />
-                    </div>
+                    </div> */}
                     <Divider className={classNames(styles.divider)} />
                     <div className={classNames(styles.menuBarItem, styles.programModeGroup)}>
                         <Switch
@@ -801,7 +785,7 @@ class MenuBar extends React.Component {
                             checked={!this.props.isRealtimeMode}
                             disabled={this.props.isToolboxUpdating || !this.props.isSupportSwitchMode}
                             height={25}
-                            width={90}
+                            width={95}
                             onColor={this.props.isToolboxUpdating ||
                                 !this.props.isSupportSwitchMode ? '#888888' : '#008800'}
                             offColor={this.props.isToolboxUpdating ||
@@ -809,18 +793,18 @@ class MenuBar extends React.Component {
                             uncheckedIcon={
                                 <div className={styles.modeSwitchRealtime}>
                                     <FormattedMessage
-                                        defaultMessage="Realtime"
+                                        defaultMessage="Interactive"
                                         description="Button to switch to upload mode"
-                                        id="gui.menu-bar.modeSwitchRealtime"
+                                        id="gui.menu-bar.modeSwitchRealtimeInteractive"
                                     />
                                 </div>
                             }
                             checkedIcon={
                                 <div className={styles.modeSwitchUpload}>
                                     <FormattedMessage
-                                        defaultMessage="Upload"
+                                        defaultMessage="Program"
                                         description="Button to switch to realtime mode"
-                                        id="gui.menu-bar.modeSwitchRealtimeUpload"
+                                        id="gui.menu-bar.modeSwitchRealtimeProgram"
                                     />
                                 </div>
                             }
@@ -962,6 +946,7 @@ MenuBar.propTypes = {
     onSetStageLarge: PropTypes.func.isRequired,
     deviceId: PropTypes.string,
     deviceName: PropTypes.string,
+    deviceIcon: PropTypes.string,
     onDeviceIsEmpty: PropTypes.func,
     linkStatus: PropTypes.bool,
     onLinkConnected: PropTypes.func.isRequired,
@@ -1001,6 +986,7 @@ const mapStateToProps = (state, ownProps) => {
         peripheralName: state.scratchGui.connectionModal.peripheralName,
         deviceId: state.scratchGui.device.deviceId,
         deviceName: state.scratchGui.device.deviceName,
+        deviceIcon: state.scratchGui.device.deviceIcon,
         linkStatus: state.scratchGui.menus.linkStatus
     };
 };
