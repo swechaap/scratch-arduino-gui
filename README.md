@@ -6,8 +6,9 @@
 * **Create Mode** - Make your Block to build your own Arudino Robots actions
 * **Program Mode** - Use Scratch to program Arudino Robots or Arduino Boards, and run Arduino Robots or Arduino boards offline
 
-## Try Scratch Arduino Online
-Scratch Arduino Online: [https://scratch.ottawastem.com/](https://scratch.ottawastem.com/)
+## Using Scratch Arduino
+1. Download and install [Scratch Arduino Link](https://github.com/OttawaSTEM/scratch-arduino-link/releases/latest/)
+2. Scratch Arduino: [https://scratch.ottawastem.com/](https://scratch.ottawastem.com/)
 <img src="docs\screenshoot-1.png"/>
 
 ## Getting Start
