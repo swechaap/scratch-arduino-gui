@@ -84,7 +84,7 @@ class SBFileUploader extends React.Component {
     }
     getProjectTitleFromFilename (fileInputFilename) {
         if (!fileInputFilename) return '';
-        // only parse title with valid openblock project extensions
+        // only parse title with valid scratch arduino project extensions
         // (.sba)
         const matches = fileInputFilename.match(/^(.*)\.sba?$/);
         if (!matches) return '';
