@@ -8,8 +8,10 @@
 
 ## Using Scratch Arduino
 1. Download and install [Scratch Arduino Link](https://github.com/OttawaSTEM/scratch-arduino-link/releases/latest/)
-2. Scratch Arduino: [https://scratch.ottawastem.com/](https://scratch.ottawastem.com/)
-<img src="docs\screenshoot-1.png"/>
+2. Start the "Scratch Arudino Link" application  
+<img src="docs/scratch-arduino-link.png" style="width:200px;height:auto;"/>  
+3. Scratch Arduino: [https://scratch.ottawastem.com/](https://scratch.ottawastem.com/)
+<img src="docs/screenshoot-1.png"/>
 
 ## Getting Start
 Visit the wiki: [Scratch Arduino Wiki](https://github.com/OttawaSTEM/scratch-arduino-gui/wiki)
