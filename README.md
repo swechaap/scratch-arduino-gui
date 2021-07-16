@@ -1,27 +1,26 @@
-# scratch-arduino-gui
-
-![](https://img.shields.io/circleci/build/github/ottawastem/scratch-arduino-gui/develop) ![](https://img.shields.io/github/license/ottawastem/scratch-arduino-gui)  [![Gitter](https://badges.gitter.im/ottawastem/community.svg)](https://gitter.im/ottawastem/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
-**Scratch Arduino GUI is a set of React components that comprise the interface for creating and running Scratch Arduino projects**
+# Scratch Arduino
+[![](https://github.com/OttawaSTEM/scratch-arduino-gui/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/OttawaSTEM/scratch-arduino-gui/actions/workflows/release.yml)
+![](https://img.shields.io/github/license/ottawastem/scratch-arduino-gui)
+### Scratch Arduino is Scratch 3.0 with Arduino and Arduino Robot Extensions.
+* **Interactive Mode** - Connect Sprite with Arudino Robots or Arduino Boards, use Sprite to control Arduino Robots or Arduino Boards
+* **Create Mode** - Make your Block to build your own Arudino Robots actions
+* **Program Mode** - Use Scratch to program Arudino Robots or Arduino Boards, and run Arduino Robots or Arduino boards offline
 
 ## Try Scratch Arduino Online
-
-Scratch Arduino Online: [https://ottawastem.github.io/scratch-arduino-gui/develop/](https://ottawastem.github.io/scratch-arduino-gui/develop/)
-
-<img src="docs\screenshoot.png"/>
+Scratch Arduino Online: [https://scratch.ottawastem.com/](https://scratch.ottawastem.com/)
+<img src="docs\screenshoot-1.png"/>
 
 ## Getting Start
-
-Visit the wiki: [https://ottawastem.github.io/wiki/main](https://ottawastem.github.io/wiki/main)
-
-Visit the wiki on gitee (mirror): [https://ottawastem.gitee.io/wiki/main](https://ottawastem.gitee.io/wiki/main)
+Visit the wiki: [Scratch Arduino Wiki](https://github.com/OttawaSTEM/scratch-arduino-gui/wiki)
 
 ## Join chat
-
-- Gitter: [https://gitter.im/ottawastem/community](https://gitter.im/ottawastem/community?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
-
-- Chinese QQ group: 933484739
+- Github Discussions: [Scratch Arduino Discussions](https://github.com/OttawaSTEM/scratch-arduino-gui/discussions)
 
 ## Bug Report
-
 You can submit the bug log in issues of this project.
+
+# Attribution
+Thanks to all these great people it has been possible to make this project:
+* [Scratch](https://github.com/LLK/scratch-gui)
+* [OpenBlock](https://github.com/openblockcc)
+* [Otto DIY Robot](https://github.com/OttoDIY/OttoDIYLib)
