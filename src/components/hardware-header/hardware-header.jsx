@@ -56,9 +56,7 @@ const HardwareHeaderComponent = props => {
         >
             <div className={styles.uploadGroup}>
                 <div
-                    className={classNames(
-                        styles.uploadButton,
-                    )}
+                    className={classNames(styles.uploadButton)}
                     onClick={onUpload}
                 >
                     <img
