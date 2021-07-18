@@ -35,13 +35,6 @@ Thanks to all these great projects that have made this possible:
 
 # Donation
 We provide [Scratch Arduino](https://scratch.ottawastem.com) free of charge, and want to keep it that way! Please consider making a [donation](https://www.paypal.com/donate?business=X555FJZS5QCMA&no_recurring=0&item_name=Scratch+Arduino&currency_code=USD) to support our continued engineering, design, community, and resource development efforts. Donations of any size are appreciated. Thank you!  
-If you had fun with this project, or it helped you save time on Arduino programming, you can buy me a cup of coffee :)
-<form action="https://www.paypal.com/donate" method="post" target="_top">
-    <input type="hidden" name="business" value="X555FJZS5QCMA" />
-    <input type="hidden" name="no_recurring" value="0" />
-    <input type="hidden" name="item_name" value="Scratch Arduino" />
-    <input type="hidden" name="currency_code" value="USD" />
-    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-    <img alt="" border="0" src="https://www.paypal.com/en_CA/i/scr/pixel.gif" width="1" height="1" />
-</form>
+If you had fun with this project, or it helped you save time on Arduino programming, you can buy me a cup of coffee :)  
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate?business=X555FJZS5QCMA&no_recurring=0&item_name=Scratch+Arduino&currency_code=USD)  
 <img src="docs/paypal-donation.png" style="width:150px;height:auto;"/>
