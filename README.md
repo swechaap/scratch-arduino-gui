@@ -37,4 +37,4 @@ Thanks to all these great projects that have made this possible:
 We provide [Scratch Arduino](https://scratch.ottawastem.com) free of charge, and want to keep it that way! Please consider making a [donation](https://www.paypal.com/donate?business=X555FJZS5QCMA&no_recurring=0&item_name=Scratch+Arduino&currency_code=USD) to support our continued engineering, design, community, and resource development efforts. Donations of any size are appreciated. Thank you!  
 If you had fun with this project, or it helped you save time on Arduino programming, you can buy me a cup of coffee :)  
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate?business=X555FJZS5QCMA&no_recurring=0&item_name=Scratch+Arduino&currency_code=USD)  
-<img src="docs/paypal-donation.png" style="width:150px;height:auto;"/>
+<img src="docs/paypal-donation.png" width="150px" height="auto"/>
