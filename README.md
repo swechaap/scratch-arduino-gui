@@ -12,7 +12,7 @@ Arduino programming hasn't been easy, but using Scratch to program Arduino, it i
 1. Download and install [Scratch Arduino Link](https://github.com/OttawaSTEM/scratch-arduino-link/releases/latest/)
 
 2. Start the "Scratch Arudino Link" application  
-<img src="docs/scratch-arduino-link.png" width="200px" height="auto"/>  
+    <img src="docs/scratch-arduino-link.png" width="200px" height="auto"/>  
 
 3. Scratch Arduino: [https://scratch.ottawastem.com](https://scratch.ottawastem.com)  
     **Interactive Mode:**
