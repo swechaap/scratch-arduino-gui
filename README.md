@@ -13,9 +13,11 @@ Arduino programming hasn't been easy, but using Scratch to program Arduino, it i
 2. Start the "Scratch Arudino Link" application  
 <img src="docs/scratch-arduino-link.png" style="width:200px;height:auto;"/>  
 3. Scratch Arduino: [https://scratch.ottawastem.com/](https://scratch.ottawastem.com/)  
-* **Interactive Mode:**
+
+**Interactive Mode:**
 <img src="docs/screenshoot-interactive.png"/>
-* **Program Mode:**
+
+**Program Mode:**
 <img src="docs/screenshoot-program.png"/>
 
 ## Getting Started
