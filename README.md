@@ -16,10 +16,10 @@ Arduino programming hasn't been easy, but using Scratch to program Arduino, it i
 
 3. Scratch Arduino: [https://scratch.ottawastem.com](https://scratch.ottawastem.com)  
     **Interactive Mode:**
-<img src="docs/screenshoot-interactive.png"/>  
-
+    <img src="docs/screenshoot-interactive.png"/>  
+    
     **Program Mode:**
-<img src="docs/screenshoot-program.png"/>
+    <img src="docs/screenshoot-program.png"/>
 
 ## Getting Started
 Visit the wiki: [Scratch Arduino Wiki](https://github.com/OttawaSTEM/scratch-arduino-gui/wiki)
