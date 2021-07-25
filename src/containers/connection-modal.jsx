@@ -8,6 +8,7 @@ import extensionData from '../lib/libraries/extensions/index.jsx';
 import {connect} from 'react-redux';
 import {closeConnectionModal} from '../reducers/modals';
 import {setConnectionModalPeripheralName, setListAll} from '../reducers/connection-modal';
+import setArduinoNanoType from '../reducers/device';
 
 class ConnectionModal extends React.Component {
     constructor (props) {
@@ -19,14 +20,14 @@ class ConnectionModal extends React.Component {
             'handleConnecting',
             'handleDisconnect',
             'handleError',
-            'handleHelp'
+            'handleHelp',
+            'handleSelectArduinoNanoType'
         ]);
         this.state = {
-            extension: extensionData.find(ext => ext.extensionId === props.deviceId) ||
-                this.props.deviceData.find(ext => ext.deviceId === props.deviceId),
-            phase: props.vm.getPeripheralIsConnected(props.deviceId) ?
-                PHASES.connected : PHASES.scanning,
-            peripheralName: null
+            extension: extensionData.find(ext => ext.extensionId === props.deviceId) || this.props.deviceData.find(ext => ext.deviceId === props.deviceId),
+            phase: props.vm.getPeripheralIsConnected(props.deviceId) ? PHASES.connected : PHASES.scanning,
+            peripheralName: null,
+            arduinoNanoType: '0'      // 1: ATmega168, 2: ATmega328 (Old Bootloder), 3: ATmega328  
         };
     }
     componentDidMount () {
@@ -44,9 +45,9 @@ class ConnectionModal extends React.Component {
     }
     handleConnecting (peripheralId, peripheralName) {
         if (this.props.isRealtimeMode) {
-            this.props.vm.connectPeripheral(this.props.deviceId, peripheralId);
+            this.props.vm.connectPeripheral(this.props.deviceId, peripheralId, 0, this.state.arduinoNanoType);
         } else {
-            this.props.vm.connectPeripheral(this.props.deviceId, peripheralId, parseInt(this.props.baudrate, 10));
+            this.props.vm.connectPeripheral(this.props.deviceId, peripheralId, parseInt(this.props.baudrate, 10), this.state.arduinoNanoType);
         }
         this.setState({
             phase: PHASES.connecting,
@@ -113,6 +114,11 @@ class ConnectionModal extends React.Component {
             label: this.props.deviceId
         });
     }
+    handleSelectArduinoNanoType (selectedArduinoNanoType) {
+        this.setState({
+            arduinoNanoType: selectedArduinoNanoType
+        });
+    }
     render () {
         return (
             <ConnectionModalComponent
@@ -135,6 +141,9 @@ class ConnectionModal extends React.Component {
                 onDisconnect={this.handleDisconnect}
                 onHelp={this.handleHelp}
                 onScanning={this.handleScanning}
+                deviceType={this.props.deviceType}
+                arduinoNanoType={this.state.arduinoNanoType}
+                onSelectArduinoNanoType={this.handleSelectArduinoNanoType}
             />
         );
     }
@@ -143,21 +152,26 @@ class ConnectionModal extends React.Component {
 ConnectionModal.propTypes = {
     baudrate: PropTypes.string.isRequired,
     deviceId: PropTypes.string.isRequired,
+    deviceType: PropTypes.string.isRequired,
+    arduinoNanoType: PropTypes.string,
     deviceData: PropTypes.instanceOf(Array).isRequired,
     isRealtimeMode: PropTypes.bool,
     isListAll: PropTypes.bool,
     onCancel: PropTypes.func.isRequired,
     onConnected: PropTypes.func.isRequired,
     onClickListAll: PropTypes.func.isRequired,
-    vm: PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired,
+    onSelectArduinoNanoType: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
     baudrate: state.scratchGui.hardwareConsole.baudrate,
     deviceData: state.scratchGui.deviceData.deviceData,
     deviceId: state.scratchGui.device.deviceId,
+    deviceType: state.scratchGui.device.deviceType,
+    arduinoNanoType: state.scratchGui.device.arduinoNanoType,
     isRealtimeMode: state.scratchGui.programMode.isRealtimeMode,
-    isListAll: state.scratchGui.connectionModal.isListAll
+    isListAll: state.scratchGui.connectionModal.isListAll,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -169,7 +183,11 @@ const mapDispatchToProps = dispatch => ({
     },
     onClickListAll: state => {
         dispatch(setListAll(state));
-    }
+    },
+    onSelectArduinoNanoType: arduinoNanoType => {
+        // dispatch(setArduinoNanoType(selectedArduinoNanoType));
+        dispatch(setArduinoNanoType(arduinoNanoType));
+    },
 });
 
 export default connect(

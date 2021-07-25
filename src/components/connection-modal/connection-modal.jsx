@@ -40,6 +40,7 @@ const ConnectionModalComponent = props => (
             {props.phase === PHASES.error && <ErrorStep {...props} />}
             {props.phase === PHASES.unavailable && <UnavailableStep {...props} />}
         </Box>
+
     </Modal>
 );
 
@@ -56,7 +57,7 @@ ConnectionModalComponent.propTypes = {
 };
 
 ConnectionModalComponent.defaultProps = {
-    connectingMessage: 'Connecting'
+    connectingMessage: 'Connecting Device'
 };
 
 export {

@@ -758,25 +758,6 @@ class MenuBar extends React.Component {
                             src={screenshotIcon}
                         />
                     </div>
-                    {/* <Divider className={classNames(styles.divider)} />
-                    <div
-                        className={classNames(styles.menuBarItem, this.props.isRealtimeMode &&
-                            this.props.peripheralName ? styles.hoverable : styles.disabled)}
-                        onMouseUp={this.props.isRealtimeMode && this.props.peripheralName ?
-                            this.handleDownloadFirmware : null}
-                    >
-                        <img
-                            alt="DownloadFirmware"
-                            className={classNames(styles.downloadFirmwareLogo)}
-                            draggable={false}
-                            src={downloadFirmwareIcon}
-                        />
-                        <FormattedMessage
-                            defaultMessage="Download firmware"
-                            description="Button to download the realtime firmware"
-                            id="gui.menuBar.downloadFirmware"
-                        />
-                    </div> */}
                     <Divider className={classNames(styles.divider)} />
                     <div className={classNames(styles.menuBarItem, styles.programModeGroup)}>
                         <Switch
