@@ -51,7 +51,7 @@ const deviceData = [
         deviceId: 'ottoBasic',
         manufactor: 'arduino.cc',
         leanMore: 'https://store.arduino.cc/usa/arduino-uno-rev3',
-        type: 'arduino',
+        type: 'arduinoNano',
         iconURL: ottoRobotBasicIconURL,
         description: (
             <FormattedMessage
@@ -88,7 +88,7 @@ const deviceData = [
         deviceId: 'arduinoUno',
         manufactor: 'arduino.cc',
         leanMore: 'https://store.arduino.cc/usa/arduino-uno-rev3',
-        type: 'arduino',
+        type: 'arduinoUno',
         iconURL: arduinoUnoIconURL,
         description: (
             <FormattedMessage
@@ -125,7 +125,7 @@ const deviceData = [
         deviceId: 'arduinoNano',
         manufactor: 'arduino.cc',
         leanMore: 'https://store.arduino.cc/usa/arduino-nano',
-        type: 'arduino',
+        type: 'arduinoNano',
         iconURL: arduinoNanoIconURL,
         description: (
             <FormattedMessage

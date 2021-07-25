@@ -2,7 +2,7 @@
 @import "../../css/units.css";
 
 .modal-content {
-    width: 480px;
+    width: 580px;
 }
 
 .header {
@@ -427,6 +427,7 @@
 }
 
 .instructions {
+    font-weight: bold;
     text-align: center;
 }
 
