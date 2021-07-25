@@ -45,9 +45,9 @@ class ConnectionModal extends React.Component {
     }
     handleConnecting (peripheralId, peripheralName) {
         if (this.props.isRealtimeMode) {
-            this.props.vm.connectPeripheral(this.props.deviceId, peripheralId, 0, this.state.arduinoNanoType);
+            this.props.vm.connectPeripheral(this.props.deviceId, peripheralId);
         } else {
-            this.props.vm.connectPeripheral(this.props.deviceId, peripheralId, parseInt(this.props.baudrate, 10), this.state.arduinoNanoType);
+            this.props.vm.connectPeripheral(this.props.deviceId, peripheralId, parseInt(this.props.baudrate, 10));
         }
         this.setState({
             phase: PHASES.connecting,
