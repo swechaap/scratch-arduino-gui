@@ -482,7 +482,7 @@ class MenuBar extends React.Component {
                             onClick={this.props.onClickLogo}
                         />
                     </div>
-                    {(this.props.canChangeLanguage) && (<div
+                    {/* {(this.props.canChangeLanguage) && (<div
                         className={classNames(styles.menuBarItem, styles.hoverable, styles.languageMenu)}
                     >
                         <div>
@@ -496,7 +496,7 @@ class MenuBar extends React.Component {
                             />
                         </div>
                         <LanguageSelector label={this.props.intl.formatMessage(ariaMessages.language)} />
-                    </div>)}
+                    </div>)} */}
                     {(this.props.canManageFiles) && (
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {
