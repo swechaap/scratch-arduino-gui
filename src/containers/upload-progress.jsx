@@ -4,8 +4,7 @@ import bindAll from 'lodash.bindall';
 
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-import {injectIntl, intlShape} from 'react-intl';
-import {defineMessages} from 'react-intl';
+import {injectIntl, intlShape, defineMessages} from 'react-intl';
 
 import VM from 'scratch-arduino-vm';
 import analytics from '../lib/analytics';
@@ -27,8 +26,8 @@ const messages = defineMessages({
     }
 });
 
-// 40s
-const UPLOAD_TIMEOUT_TIME = 40 * 1000;
+// 60s
+const UPLOAD_TIMEOUT_TIME = 60 * 1000;
 
 class UploadProgress extends React.Component {
     constructor (props) {

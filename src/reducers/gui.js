@@ -40,7 +40,6 @@ const guiMiddleware = compose(applyMiddleware(throttle(300, {leading: true, trai
 
 const guiInitialState = {
     alerts: alertsInitialState,
-    // arduinoAgent: arduinoAgentInitialState,
     assetDrag: assetDragInitialState,
     blockDrag: blockDragInitialState,
     cards: cardsInitialState,

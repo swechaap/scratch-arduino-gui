@@ -40,7 +40,6 @@ const ConnectionModalComponent = props => (
             {props.phase === PHASES.error && <ErrorStep {...props} />}
             {props.phase === PHASES.unavailable && <UnavailableStep {...props} />}
         </Box>
-
     </Modal>
 );
 
