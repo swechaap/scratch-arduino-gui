@@ -1,10 +1,12 @@
 import unselectDeviceIcon from '../components/menu-bar/icon--device.svg';
 import ottoBasicIcon from '../lib/libraries/devices/ottoRobotBasic/ottorobotbasic-small.svg';
+import FastLEDIcon from '../lib/libraries/devices/FastLED/FastLED-small.svg';
 import arduinoUnoIcon from '../lib/libraries/devices/arduinoUno/arduinoUno-small.svg';
 import arduinoNanoIcon from '../lib/libraries/devices/arduinoNano/arduinoNano-small.svg';
 
 const iconImages = {
     'ottoBasic': ottoBasicIcon,
+    'FastLED': FastLEDIcon,
     'arduinoUno': arduinoUnoIcon,
     'arduinoNano': arduinoNanoIcon
 };

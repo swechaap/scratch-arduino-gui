@@ -8,24 +8,28 @@ import arduinoBaseToolBox from './baseToolbox/arduino';
 import unselectDeviceIconURL from './unselectDevice/unselectDevice.png';
 
 import ottoRobotBasicIconURL from './ottoRobotBasic/ottorobotbasic.png';
-import ottoRobotBasicConnectionIconURLL from './ottoRobotBasic/ottorobotbasic-illustration.svg';
+import ottoRobotBasicConnectionIconURL from './ottoRobotBasic/ottorobotbasic-illustration.svg';
 import ottoRobotBasicConnectionSmallIconURL from './ottoRobotBasic/ottorobotbasic-small.svg';
 
 import arduinoUnoIconURL from './arduinoUno/arduinoUno.png';
-import arduinoUnoConnectionIconURLL from './arduinoUno/arduinoUno-illustration.svg';
+import arduinoUnoConnectionIconURL from './arduinoUno/arduinoUno-illustration.svg';
 import arduinoUnoConnectionSmallIconURL from './arduinoUno/arduinoUno-small.svg';
 
 import arduinoNanoIconURL from './arduinoNano/arduinoNano.png';
-import arduinoNanoConnectionIconURLL from './arduinoNano/arduinoNano-illustration.svg';
+import arduinoNanoConnectionIconURL from './arduinoNano/arduinoNano-illustration.svg';
 import arduinoNanoConnectionSmallIconURL from './arduinoNano/arduinoNano-small.svg';
 
 import esp32IconURL from './esp32/esp32.png';
-import esp32ConnectionIconURLL from './esp32/esp32-illustration.svg';
+import esp32ConnectionIconURL from './esp32/esp32-illustration.svg';
 import esp32ConnectionSmallIconURL from './esp32/esp32-small.svg';
 
 import esp8266IconURL from './esp8266/esp8266.png';
 import esp8266ConnectionIconURL from './esp8266/esp8266-illustration.svg';
 import esp8266ConnectionSmallIconURL from './esp8266/esp8266-small.svg';
+
+import FastLEDIconURL from './FastLED/FastLED.png';
+import FastLEDConnectionIconURL from './FastLED/FastLED-illustration.svg';
+import FastLEDConnectionSmallIconURL from './FastLED/FastLED-small.svg';
 
 const deviceData = [
     /**
@@ -63,9 +67,9 @@ const deviceData = [
         iconURL: ottoRobotBasicIconURL,
         description: (
             <FormattedMessage
-                defaultMessage="A great board to get started with electronics and coding."
-                description="Description for the Arduino Uno device"
-                id="gui.device.arduinoUno.description"
+                defaultMessage="Otto Robot - Basic, get started with robot project."
+                description="Description for the Otto Robot - Basic"
+                id="gui.device.OttoRobotBasic.description"
             />
         ),
         featured: true,
@@ -76,7 +80,7 @@ const deviceData = [
         internetConnectionRequired: false,
         launchPeripheralConnectionFlow: true,
         useAutoScan: false,
-        connectionIconURL: ottoRobotBasicConnectionIconURLL,
+        connectionIconURL: ottoRobotBasicConnectionIconURL,
         connectionSmallIconURL: ottoRobotBasicConnectionSmallIconURL,
         connectingMessage: (
             <FormattedMessage
@@ -88,9 +92,47 @@ const deviceData = [
         baseToolBoxXml: arduinoBaseToolBox,
         programMode: ['realtime', 'upload'],
         programLanguage: ['block', 'c', 'cpp'],
-        tags: ['robots'],
+        tags: ['robot'],
         helpLink: 'https://store.arduino.cc/usa/arduino-uno-rev3'
     },
+    {
+        name: 'LED',
+        deviceId: 'FastLED',
+        manufactor: 'arduino.cc',
+        leanMore: 'https://store.arduino.cc/usa/arduino-nano',
+        type: 'arduino',
+        boardType: 'Nano',
+        iconURL: FastLEDIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="The LED Kit, build your LED projects."
+                description="Description for the LED device"
+                id="gui.device.FastLED.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        bluetoothRequired: false,
+        serialportRequired: true,
+        defaultBaudRate: '9600',
+        internetConnectionRequired: false,
+        launchPeripheralConnectionFlow: true,
+        useAutoScan: false,
+        connectionIconURL: FastLEDConnectionIconURL,
+        connectionSmallIconURL: FastLEDConnectionSmallIconURL,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their arduino."
+                id="gui.device.arduino.connectingMessage"
+            />
+        ),
+        baseToolBoxXml: arduinoBaseToolBox,
+        programMode: ['realtime', 'upload'],
+        programLanguage: ['block', 'c', 'cpp'],
+        tags: ['kit'],
+        helpLink: 'https://store.arduino.cc/usa/arduino-nano'
+    },    
     {
         name: 'Arduino Uno',
         deviceId: 'arduinoUno',
@@ -113,7 +155,7 @@ const deviceData = [
         internetConnectionRequired: false,
         launchPeripheralConnectionFlow: true,
         useAutoScan: false,
-        connectionIconURL: arduinoUnoConnectionIconURLL,
+        connectionIconURL: arduinoUnoConnectionIconURL,
         connectionSmallIconURL: arduinoUnoConnectionSmallIconURL,
         connectingMessage: (
             <FormattedMessage
@@ -151,7 +193,7 @@ const deviceData = [
         internetConnectionRequired: false,
         launchPeripheralConnectionFlow: true,
         useAutoScan: false,
-        connectionIconURL: arduinoNanoConnectionIconURLL,
+        connectionIconURL: arduinoNanoConnectionIconURL,
         connectionSmallIconURL: arduinoNanoConnectionSmallIconURL,
         connectingMessage: (
             <FormattedMessage
@@ -188,7 +230,7 @@ const deviceData = [
         internetConnectionRequired: false,
         launchPeripheralConnectionFlow: true,
         useAutoScan: false,
-        connectionIconURL: esp32ConnectionIconURLL,
+        connectionIconURL: esp32ConnectionIconURL,
         connectionSmallIconURL: esp32ConnectionSmallIconURL,
         connectingMessage: (
             <FormattedMessage
@@ -239,7 +281,7 @@ const deviceData = [
         programLanguage: ['block', 'python'],
         tags: ['arduino'],
         helpLink: 'https://arduino-esp8266.readthedocs.io/en/3.0.0/index.html'
-    }    
+    } 
 ];
 
 /**

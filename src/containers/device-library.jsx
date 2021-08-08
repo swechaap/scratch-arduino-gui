@@ -26,9 +26,14 @@ const messages = defineMessages({
         id: 'gui.deviceLibrary.deviceUrl'
     },
     robotTag: {
-        defaultMessage: 'Robots',
-        description: 'Robots tag to filter all robot devices.',
+        defaultMessage: 'Robot',
+        description: 'Robot tag to filter all robot devices.',
         id: 'gui.deviceLibrary.robotTag'
+    },
+    kitTag: {
+        defaultMessage: 'Kit',
+        description: 'Kit tag to filter all robot devices.',
+        id: 'gui.deviceLibrary.kitTag'
     },
     arduinoTag: {
         defaultMessage: 'Arduino',
@@ -37,9 +42,10 @@ const messages = defineMessages({
     }
 });
 
-const ROBOT_TAG = {tag: 'Robots', intlLabel: messages.robotTag};
+const ROBOT_TAG = {tag: 'Robot', intlLabel: messages.robotTag};
+const KIT_TAG = {tag: 'Kit', intlLabel: messages.kitTag};
 const ARDUINO_TAG = {tag: 'Arduino', intlLabel: messages.arduinoTag};
-const tagListPrefix = [ROBOT_TAG, ARDUINO_TAG];
+const tagListPrefix = [ROBOT_TAG, KIT_TAG, ARDUINO_TAG];
 
 class DeviceLibrary extends React.PureComponent {
     constructor (props) {
