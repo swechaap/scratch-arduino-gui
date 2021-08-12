@@ -800,7 +800,13 @@ class MenuBar extends React.Component {
                     <Divider className={classNames(styles.divider)} />
                 </div>
 
-                <div className={styles.tailMenu}>
+                <div className={styles.accountInfoGroup}>
+                    <SaveStatus />
+                    <div className={styles.menuBarItem}>
+                        {this.props.canSave && (
+                            <SaveStatus />
+                        )}
+                    </div>                    
                     <div
                         className={classNames(styles.menuBarItem, styles.hoverable)}
                         onMouseUp={this.handleScreenshot}
@@ -890,61 +896,27 @@ class MenuBar extends React.Component {
                         </div>
                     ) : null}
 
-                    {/* show the proper UI in the account menu, given whether the user is
-                    logged in, and whether a session is available to log in with */}
-                    <div className={styles.menuBarItem}>
-                        {this.props.canSave && (
-                            <SaveStatus />
-                        )}
-                    </div>
-                    {(this.props.sessionExists && this.props.username) ? (
+                    {/* show the proper UI in the account menu, given whether the user is logged in, and whether a session is available to log in with */}
+                    {(this.props.sessionExists && this.props.username)  ? (
                         // ************ user is logged in ************
                         <React.Fragment>
-                            <a href="https://ottawastem.com/myprojects">
-                                <div
+                                <AccountNav
                                     className={classNames(
                                         styles.menuBarItem,
                                         styles.hoverable,
-                                        styles.mystuffButton
+                                        {[styles.active]: this.props.accountMenuOpen}
                                     )}
-                                >
-                                    <img
-                                        className={styles.mystuffIcon}
-                                        src={mystuffIcon}
-                                    />
-                                </div>
-                            </a>
-                            <AccountNav
-                                className={classNames(
-                                    styles.menuBarItem,
-                                    styles.hoverable,
-                                    {[styles.active]: this.props.accountMenuOpen}
-                                )}
-                                isOpen={this.props.accountMenuOpen}
-                                isRtl={this.props.isRtl}
-                                menuBarMenuClassName={classNames(styles.menuBarMenu)}
-                                onClick={this.props.onClickAccount}
-                                onClose={this.props.onRequestCloseAccount}
-                                onLogOut={this.props.onLogOut}
-                            />
-                        </React.Fragment>
-                    ) : (
-                        // ********* user not logged in **************
-                        <React.Fragment>
-                            <div
-                                className={classNames(
-                                    styles.menuBarItem,
-                                    styles.hoverable
-                                )}
-                                key="join"
-                                onMouseUp={this.props.onOpenRegistration}
-                            >
-                                <FormattedMessage
-                                    defaultMessage="Sign up"
-                                    description="Link for creating a Scratch account"
-                                    id="gui.menuBar.joinScratch"
+                                    isOpen={this.props.accountMenuOpen}
+                                    isRtl={this.props.isRtl}
+                                    menuBarMenuClassName={classNames(styles.menuBarMenu)}
+                                    onClick={this.props.onClickAccount}
+                                    onClose={this.props.onRequestCloseAccount}
+                                    onLogOut={this.props.onLogOut}
                                 />
-                            </div>
+                            </React.Fragment>
+                    ) : (
+                        // ********* user not logged in, but a session exists so they can choose to log in ********
+                        <React.Fragment>
                             <div
                                 className={classNames(
                                     styles.menuBarItem,
@@ -962,7 +934,7 @@ class MenuBar extends React.Component {
                                     className={classNames(styles.menuBarMenu)}
                                     isOpen={this.props.loginMenuOpen}
                                     isRtl={this.props.isRtl}
-                                    // renderLogin={this.props.renderLogin}
+                                    renderLogin={this.props.renderLogin}
                                     onClose={this.props.onRequestCloseLogin}
                                 />
                             </div>

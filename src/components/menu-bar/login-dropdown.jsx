@@ -6,11 +6,10 @@ eventually be consolidated.
 
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import {defineMessages} from 'react-intl';
 
 import MenuBarMenu from './menu-bar-menu.jsx';
-
 import styles from './login-dropdown.css';
 
 // these are here as a hack to get them translated, so that equivalent messages will be translated
@@ -31,10 +30,10 @@ const LoginDropdownMessages = defineMessages({ // eslint-disable-line no-unused-
         description: 'Button text for user to sign in',
         id: 'general.signIn'
     },
-    needhelp: {
-        defaultMessage: 'Need Help?',
-        description: 'Button text for user to indicate that they need help',
-        id: 'login.needHelp'
+    signup: {
+        defaultMessage: 'Sign up',
+        description: 'Button text for user to sign up',
+        id: 'general.signUp'
     },
     validationRequired: {
         defaultMessage: 'This field is required',
@@ -49,91 +48,79 @@ const LoginDropdown = ({
     isOpen,
     isRtl,
     onClose,
-    renderLogin
-}) => (
-    <MenuBarMenu
-        className={className}
-        open={isOpen}
-        // note: the Rtl styles are switched here, because this menu is justified
-        // opposite all the others
-        place={isRtl ? 'right' : 'left'}
-        onRequestClose={onClose}
-    >
-        <div
-            className={classNames(
-                styles.login
-            )}
+    onClickSignin,
+}) => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    return (
+        <MenuBarMenu
+            className={className}
+            open={isOpen}
+            // note: the Rtl styles are switched here, because this menu is justified opposite all the others
+            place={isRtl ? 'right' : 'left'}
+            onRequestClose={onClose}
         >
-            {/* {renderLogin({
-                onClose: onClose
-            })} */}
-            {/* <Form onSubmit={this.handleSubmit}>
-                <label
-                    htmlFor="username"
-                    key="usernameLabel"
+            <form>
+                <div
+                    className={classNames(styles.login)}
                 >
-                    <FormattedMessage id="general.username" />
-                </label>
-                <Input
-                    required
-                    key="usernameInput"
-                    maxLength="30"
-                    name="username"
-                    type="text"
-                />
-                <label
-                    htmlFor="password"
-                    key="passwordLabel"
+                    <div>
+                        <label>{LoginDropdownMessages.username.defaultMessage}</label>
+                        <br></br>
+                        <input
+                            autoFocus
+                            required
+                            className={classNames(styles.inputItem)}
+                            tabIndex='0'
+                            type='text'
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                    </div>
+                    <br></br>
+                    <br></br>
+                    <div>
+                        <label>{LoginDropdownMessages.password.defaultMessage}</label>
+                        <br></br>
+                        <input
+                            required
+                            className={classNames(styles.inputItem)}
+                            tabIndex='0'
+                            type='text'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                </div>
+                <div 
+                    className={classNames(styles.signGroup)}
                 >
-                    <FormattedMessage id="general.password" />
-                </label>
-                <Input
-                    required
-                    key="passwordInput"
-                    name="password"
-                    type="password"
-                />
-                <FlexRow className="submit-row">
-                    {this.state.waiting ? [
-                        <Button
-                            className="submit-button white"
-                            disabled="disabled"
-                            key="submitButton"
-                            type="submit"
+                    <div
+                        className={classNames(styles.signinButton)}
+                        onClick={onClickSignin}
+                        tabIndex='0'
                         >
-                            <Spinner
-                                className="spinner"
-                                color="blue"
-                            />
-                        </Button>
-                    ] : [
-                        <Button
-                            className="submit-button white"
-                            key="submitButton"
-                            type="submit"
-                        >
-                            <FormattedMessage id="general.signIn" />
-                        </Button>
-                    ]}
-                    <a
-                        href="/accounts/password_reset/"
-                        key="passwordResetLink"
+                        {LoginDropdownMessages.signin.defaultMessage}
+                    </div> 
+                    <div
+                        className={classNames(styles.signupButton)}
+                        onClick={event =>  window.location.href='https://ottawastem.com/accounts/signup/'}
+                        tabIndex='0'
                     >
-                        <FormattedMessage id="login.needHelp" />
-                    </a>
-                </FlexRow>
-                {error}
-            </Form> */}
-        </div>
-    </MenuBarMenu>
-);
+                        {LoginDropdownMessages.signup.defaultMessage}
+                    </div> 
+                </div>
+            </form>
+        </MenuBarMenu>
+    );
+};
 
 LoginDropdown.propTypes = {
     className: PropTypes.string,
     isOpen: PropTypes.bool,
     isRtl: PropTypes.bool,
-    onClose: PropTypes.func,
-    renderLogin: PropTypes.func
+    onClose: PropTypes.func
 };
 
 export default LoginDropdown;
