@@ -231,7 +231,7 @@ module.exports = [
             plugins: base.plugins.concat([
                 new CopyWebpackPlugin([{
                     from: 'node_modules/scratch-arduino-blocks/media',
-                    to: 'static/media'
+                    to: 'static/blocks-media'
                 }]),
                 new CopyWebpackPlugin([{
                     from: 'extension-worker.{js,js.map}',

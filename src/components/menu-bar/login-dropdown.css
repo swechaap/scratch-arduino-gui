@@ -58,13 +58,27 @@
 
 .signup-button:hover {
     display: flex;
-    align-items: center;
     float: right;
-    margin-left: 4rem;
+    align-items: center;
+    /* margin-left: 4rem; */
     width: 4rem;
     height: 2rem;
     color: $ui-white;
     background-color: $motion-tertiary;
     cursor: pointer;
     padding-left: 0.7rem;
+}
+
+.sign-validation {
+    margin: auto;
+    padding: 0.5rem;
+    width: 12rem;
+    white-space: break-spaces;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: $ui-white;
+    border-width: 0px;
+    background-color: $error-primary;
+    
 }

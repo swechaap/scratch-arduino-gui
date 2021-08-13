@@ -35,10 +35,10 @@ const LoginDropdownMessages = defineMessages({ // eslint-disable-line no-unused-
         description: 'Button text for user to sign up',
         id: 'general.signUp'
     },
-    validationRequired: {
-        defaultMessage: 'This field is required',
+    signinValidationRequired: {
+        defaultMessage: 'This username and password field are required!',
         description: 'Message to tell user they must enter text in a form field',
-        id: 'form.validationRequired'
+        id: 'form.validationUsernamePasswordRequired'
     }
 });
 
@@ -47,11 +47,19 @@ const LoginDropdown = ({
     className,
     isOpen,
     isRtl,
-    onClose,
-    onClickSignin,
+    onClose
 }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [signValidation, setValidation] = useState(false);
+
+    const handleLoginSubmit = (e) => {
+        e.preventDefault();
+        if (!username && !password) {
+            setValidation(true);
+        }
+        console.log(username, password,'login!');
+    }
 
     return (
         <MenuBarMenu
@@ -61,7 +69,7 @@ const LoginDropdown = ({
             place={isRtl ? 'right' : 'left'}
             onRequestClose={onClose}
         >
-            <form>
+            <form onSubmit={handleLoginSubmit}>
                 <div
                     className={classNames(styles.login)}
                 >
@@ -93,12 +101,22 @@ const LoginDropdown = ({
                         />
                     </div>
                 </div>
+
+                {signValidation ? (
+                    <div
+                        className={classNames(styles.signValidation)}
+                    >
+                        {LoginDropdownMessages.signinValidationRequired.defaultMessage}
+                    </div>
+                ) : null
+                }
+
                 <div 
                     className={classNames(styles.signGroup)}
                 >
                     <div
                         className={classNames(styles.signinButton)}
-                        onClick={onClickSignin}
+                        onClick={handleLoginSubmit}
                         tabIndex='0'
                         >
                         {LoginDropdownMessages.signin.defaultMessage}
