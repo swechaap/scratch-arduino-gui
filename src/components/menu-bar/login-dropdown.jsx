@@ -6,11 +6,10 @@ eventually be consolidated.
 
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import {defineMessages} from 'react-intl';
 
 import MenuBarMenu from './menu-bar-menu.jsx';
-
 import styles from './login-dropdown.css';
 
 // these are here as a hack to get them translated, so that equivalent messages will be translated
@@ -31,15 +30,15 @@ const LoginDropdownMessages = defineMessages({ // eslint-disable-line no-unused-
         description: 'Button text for user to sign in',
         id: 'general.signIn'
     },
-    needhelp: {
-        defaultMessage: 'Need Help?',
-        description: 'Button text for user to indicate that they need help',
-        id: 'login.needHelp'
+    signup: {
+        defaultMessage: 'Sign up',
+        description: 'Button text for user to sign up',
+        id: 'general.signUp'
     },
-    validationRequired: {
-        defaultMessage: 'This field is required',
+    signinValidationRequired: {
+        defaultMessage: 'This username and password field are required!',
         description: 'Message to tell user they must enter text in a form field',
-        id: 'form.validationRequired'
+        id: 'form.validationUsernamePasswordRequired'
     }
 });
 
@@ -48,35 +47,98 @@ const LoginDropdown = ({
     className,
     isOpen,
     isRtl,
-    onClose,
-    renderLogin
-}) => (
-    <MenuBarMenu
-        className={className}
-        open={isOpen}
-        // note: the Rtl styles are switched here, because this menu is justified
-        // opposite all the others
-        place={isRtl ? 'right' : 'left'}
-        onRequestClose={onClose}
-    >
-        <div
-            className={classNames(
-                styles.login
-            )}
+    onClose
+}) => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [signValidation, setValidation] = useState(false);
+
+    const handleLoginSubmit = (e) => {
+        e.preventDefault();
+        if (!username && !password) {
+            setValidation(true);
+        }
+        console.log(username, password,'login!');
+    }
+
+    return (
+        <MenuBarMenu
+            className={className}
+            open={isOpen}
+            // note: the Rtl styles are switched here, because this menu is justified opposite all the others
+            place={isRtl ? 'right' : 'left'}
+            onRequestClose={onClose}
         >
-            {renderLogin({
-                onClose: onClose
-            })}
-        </div>
-    </MenuBarMenu>
-);
+            <form onSubmit={handleLoginSubmit}>
+                <div
+                    className={classNames(styles.login)}
+                >
+                    <div>
+                        <label>{LoginDropdownMessages.username.defaultMessage}</label>
+                        <br></br>
+                        <input
+                            autoFocus
+                            required
+                            className={classNames(styles.inputItem)}
+                            tabIndex='0'
+                            type='text'
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                    </div>
+                    <br></br>
+                    <br></br>
+                    <div>
+                        <label>{LoginDropdownMessages.password.defaultMessage}</label>
+                        <br></br>
+                        <input
+                            required
+                            className={classNames(styles.inputItem)}
+                            tabIndex='0'
+                            type='text'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                </div>
+
+                {signValidation ? (
+                    <div
+                        className={classNames(styles.signValidation)}
+                    >
+                        {LoginDropdownMessages.signinValidationRequired.defaultMessage}
+                    </div>
+                ) : null
+                }
+
+                <div 
+                    className={classNames(styles.signGroup)}
+                >
+                    <div
+                        className={classNames(styles.signinButton)}
+                        onClick={handleLoginSubmit}
+                        tabIndex='0'
+                        >
+                        {LoginDropdownMessages.signin.defaultMessage}
+                    </div> 
+                    <div
+                        className={classNames(styles.signupButton)}
+                        onClick={event =>  window.location.href='https://ottawastem.com/accounts/signup/'}
+                        tabIndex='0'
+                    >
+                        {LoginDropdownMessages.signup.defaultMessage}
+                    </div> 
+                </div>
+            </form>
+        </MenuBarMenu>
+    );
+};
 
 LoginDropdown.propTypes = {
     className: PropTypes.string,
     isOpen: PropTypes.bool,
     isRtl: PropTypes.bool,
-    onClose: PropTypes.func,
-    renderLogin: PropTypes.func
+    onClose: PropTypes.func
 };
 
 export default LoginDropdown;

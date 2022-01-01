@@ -1,8 +1,7 @@
 import {addLocaleData} from 'react-intl';
 
-import {localeData} from 'scratch-arduino-l10n';
+import {localeData, isRtl} from 'scratch-arduino-l10n';
 import editorMessages from 'scratch-arduino-l10n/locales/editor-msgs';
-import {isRtl} from 'scratch-arduino-l10n';
 
 addLocaleData(localeData);
 
@@ -22,14 +21,16 @@ const reducer = function (state, action) {
     case SELECT_LOCALE:
         return Object.assign({}, state, {
             isRtl: isRtl(action.locale),
-            locale: action.locale,
+            // locale: action.locale,
+            locale: 'en',
             messagesByLocale: state.messagesByLocale,
             messages: state.messagesByLocale[action.locale]
         });
     case UPDATE_LOCALES:
         return Object.assign({}, state, {
             isRtl: state.isRtl,
-            locale: state.locale,
+            // locale: state.locale,
+            locale: 'en',
             messagesByLocale: action.messagesByLocale,
             messages: action.messagesByLocale[state.locale]
         });

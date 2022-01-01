@@ -216,6 +216,18 @@ export default function (vm) {
 
     ScratchBlocks.Blocks.sensing_of.init = function () {
         const blockId = this.id;
+        const blockType = this.type;
+
+        // Get the sensing_of block from vm.
+        let defaultSensingOfBlock;
+        const blocks = vm.runtime.flyoutBlocks._blocks;
+        Object.keys(blocks).forEach(id => {
+            const block = blocks[id];
+            if (id === blockType || (block && block.opcode === blockType)) {
+                defaultSensingOfBlock = block;
+            }
+        });
+
         // Function that fills in menu for the first input in the sensing block.
         // Called every time it opens since it depends on the values in the other block input.
         const menuFn = function () {

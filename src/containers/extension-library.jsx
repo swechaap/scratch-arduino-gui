@@ -153,7 +153,11 @@ class ExtensionLibrary extends React.PureComponent {
                 .map(extension => ({
                     rawURL: extension.iconURL || extensionIcon,
                     ...extension
-                }));
+                }))
+                .sort((a, b) => {
+                    if ((b.isLoaded !== true) && (a.isLoaded === true)) return -1;
+                    return 1;
+                });
         }
 
         return (

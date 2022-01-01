@@ -19,16 +19,13 @@ import styles from './account-nav.css';
 
 const AccountNavComponent = ({
     className,
-    classroomId,
-    isEducator,
     isOpen,
     isRtl,
-    isStudent,
     menuBarMenuClassName,
     onClick,
     onClose,
     onLogOut,
-    profileUrl,
+    // profileUrl,
     thumbnailUrl,
     username
 }) => (
@@ -59,48 +56,23 @@ const AccountNavComponent = ({
         <MenuBarMenu
             className={menuBarMenuClassName}
             open={isOpen}
-            // note: the Rtl styles are switched here, because this menu is justified
-            // opposite all the others
+            // note: the Rtl styles are switched here, because this menu is justified opposite all the others
             place={isRtl ? 'right' : 'left'}
             onRequestClose={onClose}
         >
-            <MenuItemContainer href={profileUrl}>
+            {/* <MenuItemContainer href={profileUrl}> */}
+            <MenuItemContainer href='https://ottawastem.com/accounts/profile/me/'>
                 <FormattedMessage
-                    defaultMessage="Profile"
+                    defaultMessage="My Profile"
                     description="Text to link to my user profile, in the account navigation menu"
-                    id="gui.accountMenu.profile"
+                    id="gui.accountMenu.myProfile"
                 />
             </MenuItemContainer>
-            <MenuItemContainer href="/mystuff/">
+            <MenuItemContainer href='https://ottawastem.com/scratch/myprojects'>
                 <FormattedMessage
-                    defaultMessage="My Stuff"
+                    defaultMessage="My Projects"
                     description="Text to link to list of my projects, in the account navigation menu"
-                    id="gui.accountMenu.myStuff"
-                />
-            </MenuItemContainer>
-            {isEducator ? (
-                <MenuItemContainer href="/educators/classes/">
-                    <FormattedMessage
-                        defaultMessage="My Classes"
-                        description="Text to link to my classes (if I am a teacher), in the account navigation menu"
-                        id="gui.accountMenu.myClasses"
-                    />
-                </MenuItemContainer>
-            ) : null}
-            {isStudent ? (
-                <MenuItemContainer href={`/classes/${classroomId}/`}>
-                    <FormattedMessage
-                        defaultMessage="My Class"
-                        description="Text to link to my class (if I am a student), in the account navigation menu"
-                        id="gui.accountMenu.myClass"
-                    />
-                </MenuItemContainer>
-            ) : null}
-            <MenuItemContainer href="/accounts/settings/">
-                <FormattedMessage
-                    defaultMessage="Account settings"
-                    description="Text to link to my account settings, in the account navigation menu"
-                    id="gui.accountMenu.accountSettings"
+                    id="gui.accountMenu.myProjects"
                 />
             </MenuItemContainer>
             <MenuSection>
