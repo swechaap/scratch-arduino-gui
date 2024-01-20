@@ -179,7 +179,7 @@ const deviceData = [
     // Nokia 5110
     {
         name: 'Nokia 5110 LCD',
-        deviceId: 'Nokia5110',
+        deviceId: 'nokia5110',
         manufactor: 'arduino.cc',
         leanMore: 'https://www.arduino.cc/reference/en/libraries/nokia-5110-lcd-library/',
         type: 'arduino',
@@ -214,7 +214,8 @@ const deviceData = [
         programLanguage: ['block', 'c', 'cpp'],
         tags: ['kit'],
         helpLink: 'https://store.arduino.cc/usa/arduino-nano'
-    },    // Otto Robot - Basic
+    },
+    // Otto Robot - Basic
     {
         name: 'Otto Robot - Basic',
         deviceId: 'ottoBasic',
