@@ -287,7 +287,7 @@ const deviceData = [
         baseToolBoxXml: arduinoBaseToolBox,
         programMode: ['upload'],
         programLanguage: ['block', 'python'],
-        tags: ['arduino'],
+        tags: ['esp'],
         helpLink: 'https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/hw-reference/esp32/get-started-devkitc.html'
     },
     // ESP8266 - Not finished
@@ -325,7 +325,7 @@ const deviceData = [
         baseToolBoxXml: arduinoBaseToolBox,
         programMode: ['upload'],
         programLanguage: ['block', 'python'],
-        tags: ['arduino'],
+        tags: ['esp'],
         helpLink: 'https://arduino-esp8266.readthedocs.io/en/3.0.0/index.html'
     }
 ];

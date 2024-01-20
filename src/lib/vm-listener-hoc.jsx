@@ -3,19 +3,19 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import VM from 'scratch-arduino-vm';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {updateTargets} from '../reducers/targets';
-import {updateBlockDrag} from '../reducers/block-drag';
-import {updateMonitors} from '../reducers/monitors';
-import {setProjectChanged, setProjectUnchanged} from '../reducers/project-changed';
-import {setRunningState, setTurboState, setStartedState} from '../reducers/vm-status';
-import {showDeviceAlert, showDeviceRealtimeAlert, clearDeviceRealtimeAlert} from '../reducers/alerts';
-import {setRealtimeConnection} from '../reducers/connection-modal';
-import {updateMicIndicator} from '../reducers/mic-indicator';
-import {setDeviceData} from '../reducers/device-data';
+import { updateTargets } from '../reducers/targets';
+import { updateBlockDrag } from '../reducers/block-drag';
+import { updateMonitors } from '../reducers/monitors';
+import { setProjectChanged, setProjectUnchanged } from '../reducers/project-changed';
+import { setRunningState, setTurboState, setStartedState } from '../reducers/vm-status';
+import { showDeviceAlert, showDeviceRealtimeAlert, clearDeviceRealtimeAlert } from '../reducers/alerts';
+import { setRealtimeConnection } from '../reducers/connection-modal';
+import { updateMicIndicator } from '../reducers/mic-indicator';
+import { setDeviceData } from '../reducers/device-data';
 
-import {makeDeviceLibrary} from '../lib/libraries/devices/index.jsx';
+// import {makeDeviceLibrary} from '../lib/libraries/devices/index.jsx';
 
 /*
  * Higher Order Component to manage events emitted by the VM
@@ -24,7 +24,7 @@ import {makeDeviceLibrary} from '../lib/libraries/devices/index.jsx';
  */
 const vmListenerHOC = function (WrappedComponent) {
     class VMListener extends React.Component {
-        constructor (props) {
+        constructor(props) {
             super(props);
             bindAll(this, [
                 'handleKeyDown',
@@ -57,12 +57,12 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('MIC_LISTENING', this.props.onMicListeningUpdate);
 
         }
-        componentDidMount () {
+        componentDidMount() {
             if (this.props.attachKeyboardEvents) {
                 document.addEventListener('keydown', this.handleKeyDown);
                 document.addEventListener('keyup', this.handleKeyUp);
             }
-            this.props.vm.postIOData('userData', {username: this.props.username});
+            this.props.vm.postIOData('userData', { username: this.props.username });
             // Disable update device list from local host link
             // this.props.vm.extensionManager.getDeviceList().then(data => {
             //     if (data) {
@@ -70,9 +70,9 @@ const vmListenerHOC = function (WrappedComponent) {
             //     }
             // });
         }
-        componentDidUpdate (prevProps) {
+        componentDidUpdate(prevProps) {
             if (prevProps.username !== this.props.username) {
-                this.props.vm.postIOData('userData', {username: this.props.username});
+                this.props.vm.postIOData('userData', { username: this.props.username });
             }
 
             // Re-request a targets update when the shouldUpdateTargets state changes to true
@@ -81,7 +81,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 this.props.vm.emitTargetsUpdate(false /* Emit the event, but do not trigger project change */);
             }
         }
-        componentWillUnmount () {
+        componentWillUnmount() {
             this.props.vm.removeListener('PERIPHERAL_CONNECTION_LOST_ERROR', this.handleDeviceAlert);
             this.props.vm.removeListener('PERIPHERAL_REALTIME_CONNECTION_LOST_ERROR',
                 this.handleDeviceRealtimeAlert);
@@ -92,17 +92,17 @@ const vmListenerHOC = function (WrappedComponent) {
                 document.removeEventListener('keyup', this.handleKeyUp);
             }
         }
-        handleProjectChanged () {
+        handleProjectChanged() {
             if (this.props.shouldUpdateProjectChanged && !this.props.projectChanged) {
                 this.props.onProjectChanged();
             }
         }
-        handleTargetsUpdate (data) {
+        handleTargetsUpdate(data) {
             if (this.props.shouldUpdateTargets) {
                 this.props.onTargetsUpdate(data);
             }
         }
-        handleKeyDown (e) {
+        handleKeyDown(e) {
             // Don't capture keys intended for Blockly inputs.
             if (e.target !== document && e.target !== document.body) return;
 
@@ -118,7 +118,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 e.preventDefault();
             }
         }
-        handleKeyUp (e) {
+        handleKeyUp(e) {
             // Always capture up events,
             // even those that have switched to other targets.
             const key = (!e.key || e.key === 'Dead') ? e.keyCode : e.key;
@@ -132,13 +132,13 @@ const vmListenerHOC = function (WrappedComponent) {
                 e.preventDefault();
             }
         }
-        handleDeviceAlert (data) {
+        handleDeviceAlert(data) {
             const device = this.props.deviceData.find(dev => dev.deviceId === data.deviceId);
             if (device) {
                 this.props.onShowDeviceAlert(device);
             }
         }
-        handleDeviceRealtimeAlert (data) {
+        handleDeviceRealtimeAlert(data) {
             const device = this.props.deviceData.find(dev => dev.deviceId === data.deviceId);
             device.message = data.message;
             if (device) {
@@ -146,7 +146,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 this.props.onSetRealtimeConnection(false);
             }
         }
-        handleDeviceRealtimeSuccess (data) {
+        handleDeviceRealtimeSuccess(data) {
             const device = this.props.deviceData.find(dev => dev.deviceId === data.deviceId);
             device.message = data.message;
             if (device) {
@@ -154,7 +154,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 this.props.onSetRealtimeConnection(true);
             }
         }
-        render () {
+        render() {
             const {
                 /* eslint-disable no-unused-vars */
                 attachKeyboardEvents,
