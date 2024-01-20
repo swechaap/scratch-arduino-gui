@@ -1,15 +1,11 @@
 import React from 'react';
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import defaultsDeep from 'lodash.defaultsdeep';
 import log from '../../log';
 
 import arduinoBaseToolBox from './baseToolbox/arduino';
 
 import unselectDeviceIconURL from './unselectDevice/unselectDevice.png';
-
-import ottoRobotBasicIconURL from './ottoRobotBasic/ottorobotbasic.png';
-import ottoRobotBasicConnectionIconURL from './ottoRobotBasic/ottorobotbasic-illustration.svg';
-import ottoRobotBasicConnectionSmallIconURL from './ottoRobotBasic/ottorobotbasic-small.svg';
 
 import arduinoUnoIconURL from './arduinoUno/arduinoUno.png';
 import arduinoUnoConnectionIconURL from './arduinoUno/arduinoUno-illustration.svg';
@@ -19,6 +15,18 @@ import arduinoNanoIconURL from './arduinoNano/arduinoNano.png';
 import arduinoNanoConnectionIconURL from './arduinoNano/arduinoNano-illustration.svg';
 import arduinoNanoConnectionSmallIconURL from './arduinoNano/arduinoNano-small.svg';
 
+import FastLEDIconURL from './FastLED/FastLED.png';
+import FastLEDConnectionIconURL from './FastLED/FastLED-illustration.svg';
+import FastLEDConnectionSmallIconURL from './FastLED/FastLED-small.svg';
+
+import Nokia5110IconURL from './Nokia5110/Nokia5110.png';
+import Nokia5110ConnectionIconURL from './Nokia5110/Nokia5110-illustration.svg';
+import Nokia5110ConnectionSmallIconURL from './Nokia5110/Nokia5110-small.svg';
+
+import ottoRobotBasicIconURL from './ottoRobotBasic/ottorobotbasic.png';
+import ottoRobotBasicConnectionIconURL from './ottoRobotBasic/ottorobotbasic-illustration.svg';
+import ottoRobotBasicConnectionSmallIconURL from './ottoRobotBasic/ottorobotbasic-small.svg';
+
 import esp32IconURL from './esp32/esp32.png';
 import esp32ConnectionIconURL from './esp32/esp32-illustration.svg';
 import esp32ConnectionSmallIconURL from './esp32/esp32-small.svg';
@@ -27,14 +35,8 @@ import esp8266IconURL from './esp8266/esp8266.png';
 import esp8266ConnectionIconURL from './esp8266/esp8266-illustration.svg';
 import esp8266ConnectionSmallIconURL from './esp8266/esp8266-small.svg';
 
-import FastLEDIconURL from './FastLED/FastLED.png';
-import FastLEDConnectionIconURL from './FastLED/FastLED-illustration.svg';
-import FastLEDConnectionSmallIconURL from './FastLED/FastLED-small.svg';
-
 const deviceData = [
-    /**
-     * Unselect the deivce back to pure scratch mode
-     */
+    // Unselect the deivce back to pure scratch mode
     {
         name: (
             <FormattedMessage
@@ -58,81 +60,7 @@ const deviceData = [
         programLanguage: ['block'],
         tags: ['realtime']
     },
-    {
-        name: 'Otto Robot - Basic',
-        deviceId: 'ottoBasic',
-        manufactor: 'arduino.cc',
-        leanMore: 'https://store.arduino.cc/usa/arduino-uno-rev3',
-        type: 'arduino',
-        iconURL: ottoRobotBasicIconURL,
-        description: (
-            <FormattedMessage
-                defaultMessage="Otto Robot - Basic, get started with robot project."
-                description="Description for the Otto Robot - Basic"
-                id="gui.device.OttoRobotBasic.description"
-            />
-        ),
-        featured: true,
-        disabled: false,
-        bluetoothRequired: false,
-        serialportRequired: true,
-        defaultBaudRate: '9600',
-        internetConnectionRequired: false,
-        launchPeripheralConnectionFlow: true,
-        useAutoScan: false,
-        connectionIconURL: ottoRobotBasicConnectionIconURL,
-        connectionSmallIconURL: ottoRobotBasicConnectionSmallIconURL,
-        connectingMessage: (
-            <FormattedMessage
-                defaultMessage="Connecting"
-                description="Message to help people connect to their arduino."
-                id="gui.device.arduino.connectingMessage"
-            />
-        ),
-        baseToolBoxXml: arduinoBaseToolBox,
-        programMode: ['realtime', 'upload'],
-        programLanguage: ['block', 'c', 'cpp'],
-        tags: ['robot'],
-        helpLink: 'https://store.arduino.cc/usa/arduino-uno-rev3'
-    },
-    {
-        name: 'LED',
-        deviceId: 'FastLED',
-        manufactor: 'arduino.cc',
-        leanMore: 'https://store.arduino.cc/usa/arduino-nano',
-        type: 'arduino',
-        boardType: 'Nano',
-        iconURL: FastLEDIconURL,
-        description: (
-            <FormattedMessage
-                defaultMessage="The LED Kit, build your LED projects."
-                description="Description for the LED device"
-                id="gui.device.FastLED.description"
-            />
-        ),
-        featured: true,
-        disabled: false,
-        bluetoothRequired: false,
-        serialportRequired: true,
-        defaultBaudRate: '9600',
-        internetConnectionRequired: false,
-        launchPeripheralConnectionFlow: true,
-        useAutoScan: false,
-        connectionIconURL: FastLEDConnectionIconURL,
-        connectionSmallIconURL: FastLEDConnectionSmallIconURL,
-        connectingMessage: (
-            <FormattedMessage
-                defaultMessage="Connecting"
-                description="Message to help people connect to their arduino."
-                id="gui.device.arduino.connectingMessage"
-            />
-        ),
-        baseToolBoxXml: arduinoBaseToolBox,
-        programMode: ['realtime', 'upload'],
-        programLanguage: ['block', 'c', 'cpp'],
-        tags: ['kit'],
-        helpLink: 'https://store.arduino.cc/usa/arduino-nano'
-    },    
+    // Arduino Uno
     {
         name: 'Arduino Uno',
         deviceId: 'arduinoUno',
@@ -170,6 +98,7 @@ const deviceData = [
         tags: ['arduino'],
         helpLink: 'https://store.arduino.cc/usa/arduino-uno-rev3'
     },
+    // Arduino Nano
     {
         name: 'Arduino Nano',
         deviceId: 'arduinoNano',
@@ -208,6 +137,122 @@ const deviceData = [
         tags: ['arduino'],
         helpLink: 'https://store.arduino.cc/usa/arduino-nano'
     },
+    // FastLED
+    {
+        name: 'LED',
+        deviceId: 'FastLED',
+        manufactor: 'arduino.cc',
+        leanMore: 'https://store.arduino.cc/usa/arduino-nano',
+        type: 'arduino',
+        boardType: 'Nano',
+        iconURL: FastLEDIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="The LED Kit, build your LED projects."
+                description="Description for the LED device"
+                id="gui.device.FastLED.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        bluetoothRequired: false,
+        serialportRequired: true,
+        defaultBaudRate: '9600',
+        internetConnectionRequired: false,
+        launchPeripheralConnectionFlow: true,
+        useAutoScan: false,
+        connectionIconURL: FastLEDConnectionIconURL,
+        connectionSmallIconURL: FastLEDConnectionSmallIconURL,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their arduino."
+                id="gui.device.arduino.connectingMessage"
+            />
+        ),
+        baseToolBoxXml: arduinoBaseToolBox,
+        programMode: ['realtime', 'upload'],
+        programLanguage: ['block', 'c', 'cpp'],
+        tags: ['kit'],
+        helpLink: 'https://store.arduino.cc/usa/arduino-nano'
+    },
+    // Nokia 5110
+    {
+        name: 'Nokia 5110 LCD',
+        deviceId: 'Nokia5110',
+        manufactor: 'arduino.cc',
+        leanMore: 'https://www.arduino.cc/reference/en/libraries/nokia-5110-lcd-library/',
+        type: 'arduino',
+        boardType: 'Uno',
+        iconURL: Nokia5110IconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="The Nokia 5110 LCD Kit, build your game console projects."
+                description="Nokia 5110 LCD Display with 84x48 pixels."
+                id="gui.device.Nokia5110.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        bluetoothRequired: false,
+        serialportRequired: true,
+        defaultBaudRate: '9600',
+        internetConnectionRequired: false,
+        launchPeripheralConnectionFlow: true,
+        useAutoScan: false,
+        connectionIconURL: Nokia5110ConnectionIconURL,
+        connectionSmallIconURL: Nokia5110ConnectionSmallIconURL,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their arduino."
+                id="gui.device.arduino.connectingMessage"
+            />
+        ),
+        baseToolBoxXml: arduinoBaseToolBox,
+        programMode: ['realtime', 'upload'],
+        programLanguage: ['block', 'c', 'cpp'],
+        tags: ['kit'],
+        helpLink: 'https://store.arduino.cc/usa/arduino-nano'
+    },    // Otto Robot - Basic
+    {
+        name: 'Otto Robot - Basic',
+        deviceId: 'ottoBasic',
+        manufactor: 'arduino.cc',
+        leanMore: 'https://store.arduino.cc/usa/arduino-uno-rev3',
+        type: 'arduino',
+        iconURL: ottoRobotBasicIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="Otto Robot - Basic, get started with robot project."
+                description="Description for the Otto Robot - Basic"
+                id="gui.device.OttoRobotBasic.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        bluetoothRequired: false,
+        serialportRequired: true,
+        defaultBaudRate: '9600',
+        internetConnectionRequired: false,
+        launchPeripheralConnectionFlow: true,
+        useAutoScan: false,
+        connectionIconURL: ottoRobotBasicConnectionIconURL,
+        connectionSmallIconURL: ottoRobotBasicConnectionSmallIconURL,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their arduino."
+                id="gui.device.arduino.connectingMessage"
+            />
+        ),
+        baseToolBoxXml: arduinoBaseToolBox,
+        programMode: ['realtime', 'upload'],
+        programLanguage: ['block', 'c', 'cpp'],
+        tags: ['robot'],
+        helpLink: 'https://store.arduino.cc/usa/arduino-uno-rev3'
+    },
+    // ESP32 - Not finished
     {
         name: 'ESP32',
         deviceId: 'arduinoEsp32',
@@ -245,6 +290,7 @@ const deviceData = [
         tags: ['arduino'],
         helpLink: 'https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/hw-reference/esp32/get-started-devkitc.html'
     },
+    // ESP8266 - Not finished
     {
         name: 'ESP8266',
         deviceId: 'arduinoEsp8266',
@@ -281,7 +327,7 @@ const deviceData = [
         programLanguage: ['block', 'python'],
         tags: ['arduino'],
         helpLink: 'https://arduino-esp8266.readthedocs.io/en/3.0.0/index.html'
-    } 
+    }
 ];
 
 /**
@@ -290,7 +336,7 @@ const deviceData = [
  * @return {string} deviceId - the real device id.
  */
 const analysisRealDeviceId = deviceId => {
-    if (deviceId){
+    if (deviceId) {
         // if the id contain '_' use the string afer the '_'.
         if (deviceId.indexOf('_') !== -1) {
             deviceId = deviceId.split('_')[1];
@@ -309,7 +355,7 @@ const analysisRealDeviceId = deviceId => {
 const makeDeviceLibrary = data => {
     const fullData = data
         .map(dev => {
-        // Check if this is a build-in device.
+            // Check if this is a build-in device.
             const matchedDevice = deviceData.find(item => dev.deviceId === item.deviceId);
             if (matchedDevice) {
                 return matchedDevice;
@@ -320,7 +366,7 @@ const makeDeviceLibrary = data => {
             if (realDeviceId) {
                 const parentDevice = deviceData.find(item => realDeviceId === item.deviceId);
                 if (parentDevice) {
-                    return defaultsDeep({}, dev, {hide: false}, parentDevice);
+                    return defaultsDeep({}, dev, { hide: false }, parentDevice);
                 }
             }
             log.warn('Cannot find this device or it\'s parent device :', dev.deviceId);
