@@ -19,9 +19,9 @@ import FastLEDIconURL from './FastLED/FastLED.png';
 import FastLEDConnectionIconURL from './FastLED/FastLED-illustration.svg';
 import FastLEDConnectionSmallIconURL from './FastLED/FastLED-small.svg';
 
-import Nokia5110IconURL from './Nokia5110/Nokia5110.png';
-import Nokia5110ConnectionIconURL from './Nokia5110/Nokia5110-illustration.svg';
-import Nokia5110ConnectionSmallIconURL from './Nokia5110/Nokia5110-small.svg';
+import Nokia5110IconURL from './nokia5110/nokia5110.png';
+import Nokia5110ConnectionIconURL from './nokia5110/nokia5110-illustration.svg';
+import Nokia5110ConnectionSmallIconURL from './nokia5110/nokia5110-small.svg';
 
 import ottoRobotIconURL from './ottoRobot/ottoRobot.png';
 import ottoRobotConnectionIconURL from './ottoRobot/ottoRobot-illustration.svg';
@@ -189,7 +189,7 @@ const deviceData = [
             <FormattedMessage
                 defaultMessage="The Nokia 5110 LCD Kit, build your game console projects."
                 description="Nokia 5110 LCD Display with 84x48 pixels."
-                id="gui.device.Nokia5110.description"
+                id="gui.device.nokia5110.description"
             />
         ),
         featured: true,
