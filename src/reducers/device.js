@@ -1,7 +1,7 @@
 import unselectDeviceIcon from '../components/menu-bar/icon--device.svg';
 import arduinoUnoIcon from '../lib/libraries/devices/arduinoUno/arduinoUno-small.svg';
 import arduinoNanoIcon from '../lib/libraries/devices/arduinoNano/arduinoNano-small.svg';
-import FastLEDIcon from '../lib/libraries/devices/FastLED/FastLED-small.svg';
+import fastLEDIcon from '../lib/libraries/devices/fastLED/fastLED-small.svg';
 import nokia5110Icon from '../lib/libraries/devices/nokia5110/nokia5110-small.svg';
 import ottoRobotIcon from '../lib/libraries/devices/ottoRobot/ottoRobot-small.svg';
 import esp32Icon from '../lib/libraries/devices/esp32/esp32-small.svg';
@@ -10,7 +10,7 @@ import esp8266Icon from '../lib/libraries/devices/esp8266/esp8266-small.svg';
 const iconImages = {
     'arduinoUno': arduinoUnoIcon,
     'arduinoNano': arduinoNanoIcon,
-    'FastLED': FastLEDIcon,
+    'fastLED': fastLEDIcon,
     'nokia5110': nokia5110Icon,
     'ottoRobot': ottoRobotIcon,
     'arduinoEsp32': esp32Icon,
