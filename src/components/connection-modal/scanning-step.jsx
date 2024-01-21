@@ -1,4 +1,4 @@
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
@@ -52,15 +52,15 @@ const ScanningStep = props => (
                 ) : (
                     <div className={styles.peripheralTilePane}>
                         {props.peripheralList.map(peripheral =>
-                            (<PeripheralTile
-                                connectionSmallIconURL={props.connectionSmallIconURL}
-                                key={peripheral.peripheralId}
-                                name={peripheral.name}
-                                peripheralId={peripheral.peripheralId}
-                                rssi={peripheral.rssi}
-                                isSerialport={props.isSerialport}
-                                onConnecting={props.onConnecting}
-                            />)
+                        (<PeripheralTile
+                            connectionSmallIconURL={props.connectionSmallIconURL}
+                            key={peripheral.peripheralId}
+                            name={peripheral.name}
+                            peripheralId={peripheral.peripheralId}
+                            rssi={peripheral.rssi}
+                            isSerialport={props.isSerialport}
+                            onConnecting={props.onConnecting}
+                        />)
                         )}
                     </div>
                 )
