@@ -15,9 +15,9 @@ import arduinoNanoIconURL from './arduinoNano/arduinoNano.png';
 import arduinoNanoConnectionIconURL from './arduinoNano/arduinoNano-illustration.svg';
 import arduinoNanoConnectionSmallIconURL from './arduinoNano/arduinoNano-small.svg';
 
-import fastLEDIconURL from './fastLED/fastLED.png';
-import fastLEDConnectionIconURL from './fastLED/fastLED-illustration.svg';
-import fastLEDConnectionSmallIconURL from './fastLED/fastLED-small.svg';
+import FastLEDIconURL from './FastLED/FastLED.png';
+import FastLEDConnectionIconURL from './FastLED/FastLED-illustration.svg';
+import FastLEDConnectionSmallIconURL from './FastLED/FastLED-small.svg';
 
 import nokia5110IconURL from './nokia5110/nokia5110.png';
 import nokia5110ConnectionIconURL from './nokia5110/nokia5110-illustration.svg';
@@ -145,7 +145,7 @@ const deviceData = [
         leanMore: 'https://store.arduino.cc/usa/arduino-nano',
         type: 'arduino',
         boardType: 'Nano',
-        iconURL: fastLEDIconURL,
+        iconURL: FastLEDIconURL,
         description: (
             <FormattedMessage
                 defaultMessage="The LED Kit, build your LED projects."
@@ -161,8 +161,8 @@ const deviceData = [
         internetConnectionRequired: false,
         launchPeripheralConnectionFlow: true,
         useAutoScan: false,
-        connectionIconURL: fastLEDConnectionIconURL,
-        connectionSmallIconURL: fastLEDConnectionSmallIconURL,
+        connectionIconURL: FastLEDConnectionIconURL,
+        connectionSmallIconURL: FastLEDConnectionSmallIconURL,
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting"
