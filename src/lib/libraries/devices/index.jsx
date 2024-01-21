@@ -23,9 +23,9 @@ import Nokia5110IconURL from './Nokia5110/Nokia5110.png';
 import Nokia5110ConnectionIconURL from './Nokia5110/Nokia5110-illustration.svg';
 import Nokia5110ConnectionSmallIconURL from './Nokia5110/Nokia5110-small.svg';
 
-import ottoRobotBasicIconURL from './ottoRobotBasic/ottorobotbasic.png';
-import ottoRobotBasicConnectionIconURL from './ottoRobotBasic/ottorobotbasic-illustration.svg';
-import ottoRobotBasicConnectionSmallIconURL from './ottoRobotBasic/ottorobotbasic-small.svg';
+import ottoRobotIconURL from './ottoRobot/ottoRobot.png';
+import ottoRobotConnectionIconURL from './ottoRobot/ottoRobot-illustration.svg';
+import ottoRobotConnectionSmallIconURL from './ottoRobot/ottoRobot-small.svg';
 
 import esp32IconURL from './esp32/esp32.png';
 import esp32ConnectionIconURL from './esp32/esp32-illustration.svg';
@@ -215,19 +215,19 @@ const deviceData = [
         tags: ['kit'],
         helpLink: 'https://store.arduino.cc/usa/arduino-nano'
     },
-    // Otto Robot - Basic
+    // Otto Robot
     {
-        name: 'Otto Robot - Basic',
-        deviceId: 'ottoBasic',
+        name: 'Otto Robot',
+        deviceId: 'ottoRobot',
         manufactor: 'arduino.cc',
         leanMore: 'https://store.arduino.cc/usa/arduino-uno-rev3',
         type: 'arduino',
-        iconURL: ottoRobotBasicIconURL,
+        iconURL: ottoRobotIconURL,
         description: (
             <FormattedMessage
-                defaultMessage="Otto Robot - Basic, get started with robot project."
-                description="Description for the Otto Robot - Basic"
-                id="gui.device.OttoRobotBasic.description"
+                defaultMessage="Otto Robot, get started with robot project."
+                description="Description for the Otto Robot"
+                id="gui.device.OttoRobot.description"
             />
         ),
         featured: true,
@@ -238,8 +238,8 @@ const deviceData = [
         internetConnectionRequired: false,
         launchPeripheralConnectionFlow: true,
         useAutoScan: false,
-        connectionIconURL: ottoRobotBasicConnectionIconURL,
-        connectionSmallIconURL: ottoRobotBasicConnectionSmallIconURL,
+        connectionIconURL: ottoRobotConnectionIconURL,
+        connectionSmallIconURL: ottoRobotConnectionSmallIconURL,
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting"
