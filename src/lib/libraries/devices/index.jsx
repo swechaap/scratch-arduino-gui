@@ -15,13 +15,13 @@ import arduinoNanoIconURL from './arduinoNano/arduinoNano.png';
 import arduinoNanoConnectionIconURL from './arduinoNano/arduinoNano-illustration.svg';
 import arduinoNanoConnectionSmallIconURL from './arduinoNano/arduinoNano-small.svg';
 
-import FastLEDIconURL from './FastLED/FastLED.png';
-import FastLEDConnectionIconURL from './FastLED/FastLED-illustration.svg';
-import FastLEDConnectionSmallIconURL from './FastLED/FastLED-small.svg';
+import fastLEDIconURL from './fastLED/fastLED.png';
+import fastLEDConnectionIconURL from './fastLED/fastLED-illustration.svg';
+import fastLEDConnectionSmallIconURL from './fastLED/fastLED-small.svg';
 
-import Nokia5110IconURL from './nokia5110/nokia5110.png';
-import Nokia5110ConnectionIconURL from './nokia5110/nokia5110-illustration.svg';
-import Nokia5110ConnectionSmallIconURL from './nokia5110/nokia5110-small.svg';
+import nokia5110IconURL from './nokia5110/nokia5110.png';
+import nokia5110ConnectionIconURL from './nokia5110/nokia5110-illustration.svg';
+import nokia5110ConnectionSmallIconURL from './nokia5110/nokia5110-small.svg';
 
 import ottoRobotIconURL from './ottoRobot/ottoRobot.png';
 import ottoRobotConnectionIconURL from './ottoRobot/ottoRobot-illustration.svg';
@@ -145,12 +145,12 @@ const deviceData = [
         leanMore: 'https://store.arduino.cc/usa/arduino-nano',
         type: 'arduino',
         boardType: 'Nano',
-        iconURL: FastLEDIconURL,
+        iconURL: fastLEDIconURL,
         description: (
             <FormattedMessage
                 defaultMessage="The LED Kit, build your LED projects."
                 description="Description for the LED device"
-                id="gui.device.FastLED.description"
+                id="gui.device.fastled.description"
             />
         ),
         featured: true,
@@ -161,8 +161,8 @@ const deviceData = [
         internetConnectionRequired: false,
         launchPeripheralConnectionFlow: true,
         useAutoScan: false,
-        connectionIconURL: FastLEDConnectionIconURL,
-        connectionSmallIconURL: FastLEDConnectionSmallIconURL,
+        connectionIconURL: fastLEDConnectionIconURL,
+        connectionSmallIconURL: fastLEDConnectionSmallIconURL,
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting"
@@ -184,7 +184,7 @@ const deviceData = [
         leanMore: 'https://www.arduino.cc/reference/en/libraries/nokia-5110-lcd-library/',
         type: 'arduino',
         boardType: 'Uno',
-        iconURL: Nokia5110IconURL,
+        iconURL: nokia5110IconURL,
         description: (
             <FormattedMessage
                 defaultMessage="The Nokia 5110 LCD Kit, build your game console projects."
@@ -200,8 +200,8 @@ const deviceData = [
         internetConnectionRequired: false,
         launchPeripheralConnectionFlow: true,
         useAutoScan: false,
-        connectionIconURL: Nokia5110ConnectionIconURL,
-        connectionSmallIconURL: Nokia5110ConnectionSmallIconURL,
+        connectionIconURL: nokia5110ConnectionIconURL,
+        connectionSmallIconURL: nokia5110ConnectionSmallIconURL,
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting"
