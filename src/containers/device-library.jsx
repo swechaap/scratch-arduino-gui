@@ -2,14 +2,14 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import VM from 'scratch-arduino-vm';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
-import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { defineMessages, injectIntl, intlShape } from 'react-intl';
 
 import analytics from '../lib/analytics';
-import {setDeviceData} from '../reducers/device-data';
+import { setDeviceData } from '../reducers/device-data';
 
-import {makeDeviceLibrary} from '../lib/libraries/devices/index.jsx';
+// import { makeDeviceLibrary } from '../lib/libraries/devices/index.jsx';
 
 import LibraryComponent from '../components/library/library.jsx';
 import deviceIcon from '../components/action-menu/icon--sprite.svg';
@@ -25,30 +25,36 @@ const messages = defineMessages({
         description: 'Prompt for unoffical device url',
         id: 'gui.deviceLibrary.deviceUrl'
     },
+    arduinoTag: {
+        defaultMessage: 'Arduino',
+        description: 'Arduino tag to filter all arduino devices.',
+        id: 'gui.deviceLibrary.arduinoTag'
+    },
+    kitTag: {
+        defaultMessage: 'Kit',
+        description: 'Kit tag to filter all kit devices.',
+        id: 'gui.deviceLibrary.kitTag'
+    },
     robotTag: {
         defaultMessage: 'Robot',
         description: 'Robot tag to filter all robot devices.',
         id: 'gui.deviceLibrary.robotTag'
     },
-    kitTag: {
-        defaultMessage: 'Kit',
-        description: 'Kit tag to filter all robot devices.',
-        id: 'gui.deviceLibrary.kitTag'
+    espTag: {
+        defaultMessage: 'ESP',
+        description: 'ESP tag to filter all ESP32, ESP8266 devices.',
+        id: 'gui.deviceLibrary.espTag'
     },
-    arduinoTag: {
-        defaultMessage: 'Arduino',
-        description: 'Arduino tag to filter all arduino devices.',
-        id: 'gui.deviceLibrary.arduinoTag'
-    }
 });
 
-const ROBOT_TAG = {tag: 'Robot', intlLabel: messages.robotTag};
-const KIT_TAG = {tag: 'Kit', intlLabel: messages.kitTag};
-const ARDUINO_TAG = {tag: 'Arduino', intlLabel: messages.arduinoTag};
-const tagListPrefix = [ROBOT_TAG, KIT_TAG, ARDUINO_TAG];
+const ARDUINO_TAG = { tag: 'Arduino', intlLabel: messages.arduinoTag };
+const KIT_TAG = { tag: 'Kit', intlLabel: messages.kitTag };
+const ROBOT_TAG = { tag: 'Robot', intlLabel: messages.robotTag };
+const ESP_TAG = { tag: 'ESP', intlLabel: messages.espTag };
+const tagListPrefix = [ARDUINO_TAG, KIT_TAG, ROBOT_TAG, ESP_TAG];
 
 class DeviceLibrary extends React.PureComponent {
-    constructor (props) {
+    constructor(props) {
         super(props);
         bindAll(this, [
             'handleItemSelect'
@@ -63,7 +69,7 @@ class DeviceLibrary extends React.PureComponent {
     //     });
     // }
 
-    handleItemSelect (item) {
+    handleItemSelect(item) {
         const id = item.deviceId;
         const deviceType = item.type;
         const pnpidList = item.pnpidList;
@@ -92,7 +98,7 @@ class DeviceLibrary extends React.PureComponent {
         }
     }
 
-    render () {
+    render() {
         const deviceLibraryThumbnailData = this.props.deviceData.map(device => ({
             rawURL: device.iconURL || deviceIcon,
             ...device

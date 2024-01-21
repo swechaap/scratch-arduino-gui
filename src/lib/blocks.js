@@ -3,13 +3,15 @@ import 'scratch-arduino-blocks/arduino_compressed';
 import 'scratch-arduino-blocks/python_compressed';
 import iconv from 'iconv-lite';
 
+// import blockModify from './modify/code_block'
+// blockModify(ScratchBlocks);
+
 /**
  * Connect scratch blocks with the vm
  * @param {VirtualMachine} vm - The scratch vm
  * @return {ScratchBlocks} ScratchBlocks connected with the vm
  */
 export default function (vm) {
-
     const jsonForMenuBlock = function (name, menuOptionsFn, colors, start) {
         return {
             message0: '%1',
@@ -49,7 +51,6 @@ export default function (vm) {
             extensions: ['shape_hat']
         };
     };
-
 
     const jsonForSensingMenus = function (menuOptionsFn) {
         return {
@@ -102,8 +103,8 @@ export default function (vm) {
         if (vm.runtime.targets[0] && vm.runtime.targets[0].getCostumes().length > 0) {
             return vm.runtime.targets[0].getCostumes().map(costume => [costume.name, costume.name])
                 .concat([[next, 'next backdrop'],
-                    [previous, 'previous backdrop'],
-                    [random, 'random backdrop']]);
+                [previous, 'previous backdrop'],
+                [random, 'random backdrop']]);
         }
         return [['', '']];
     };
