@@ -21,6 +21,10 @@ jobs:
       matrix:
         node-version: [14.x]
 
+    permissions:
+      pages: write
+      id-token: write
+
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
