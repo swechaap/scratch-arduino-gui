@@ -19,6 +19,7 @@ on:
 #   contents: write
 
 permissions:
+  pages: write
   id-token: write
 
 jobs:
