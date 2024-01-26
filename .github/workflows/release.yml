@@ -15,9 +15,6 @@ on:
         release_scratch_arduino_l10n,
       ]
 
-permissions:
-  contents: write
-
 jobs:
   release:
     strategy:
@@ -40,8 +37,7 @@ jobs:
           npm run build
 
       - name: Deploy to GitHub Pages 🚀
-        uses: peaceiris/actions-gh-pages@v3
+        uses: actions/deploy-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build
           keep_files: true
