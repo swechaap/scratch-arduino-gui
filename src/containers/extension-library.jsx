@@ -5,9 +5,9 @@ import VM from 'scratch-arduino-vm';
 
 import analytics from '../lib/analytics';
 
-import {compose} from 'redux';
-import {connect} from 'react-redux';
-import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { defineMessages, injectIntl, intlShape } from 'react-intl';
 
 import extensionLibraryContent from '../lib/libraries/extensions/index.jsx';
 
@@ -57,16 +57,16 @@ const messages = defineMessages({
     }
 });
 
-const SHIELD_TAG = {tag: 'shield', intlLabel: messages.shieldTag};
-const ACTUATOR_TAG = {tag: 'actuator', intlLabel: messages.actuatorTag};
-const SENSOR_TAG = {tag: 'sensor', intlLabel: messages.sensorTag};
-const DISPLAY_TAG = {tag: 'display', intlLabel: messages.displayTag};
-const COMMUNICATION_TAG = {tag: 'communication', intlLabel: messages.communicationTag};
-const OTHER_TAG = {tag: 'other', intlLabel: messages.otherTag};
+const SHIELD_TAG = { tag: 'shield', intlLabel: messages.shieldTag };
+const ACTUATOR_TAG = { tag: 'actuator', intlLabel: messages.actuatorTag };
+const SENSOR_TAG = { tag: 'sensor', intlLabel: messages.sensorTag };
+const DISPLAY_TAG = { tag: 'display', intlLabel: messages.displayTag };
+const COMMUNICATION_TAG = { tag: 'communication', intlLabel: messages.communicationTag };
+const OTHER_TAG = { tag: 'other', intlLabel: messages.otherTag };
 const tagListPrefix = [SHIELD_TAG, ACTUATOR_TAG, SENSOR_TAG, DISPLAY_TAG, COMMUNICATION_TAG, OTHER_TAG];
 
 class ExtensionLibrary extends React.PureComponent {
-    constructor (props) {
+    constructor(props) {
         super(props);
         bindAll(this, [
             // 'updateDeviceExtensions',
@@ -93,7 +93,7 @@ class ExtensionLibrary extends React.PureComponent {
     //         });
     // }
 
-    handleItemSelect (item) {
+    handleItemSelect(item) {
         const id = item.extensionId;
 
         if (this.props.isRealtimeMode) {
@@ -137,7 +137,8 @@ class ExtensionLibrary extends React.PureComponent {
             // }
         }
     }
-    render () {
+
+    render() {
         let extensionLibraryThumbnailData = [];
         const device = this.props.deviceData.find(dev => dev.deviceId === this.props.deviceId);
 
