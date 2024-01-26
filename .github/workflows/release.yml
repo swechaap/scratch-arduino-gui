@@ -41,9 +41,6 @@ jobs:
           name: build
           path: build
 
-      - name: Deploy to GitHub Pages 🚀
-        uses: actions/deploy-pages@v4
-
       # - name: Deploy to GitHub Pages 🚀
       #   uses: peaceiris/actions-gh-pages@v3
       #   with:
