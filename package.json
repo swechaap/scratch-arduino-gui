@@ -1,6 +1,6 @@
 {
     "name": "scratch-arduino-gui",
-    "version": "0.1.16",
+    "version": "0.1.17",
     "description": "GraphicaL User Interface for creating and running Scratch Arduino projects",
     "main": "./desktop/main.js",
     "scripts": {
