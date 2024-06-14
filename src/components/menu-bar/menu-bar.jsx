@@ -26,7 +26,7 @@ import AuthorInfo from './author-info.jsx';
 import AccountNav from '../../containers/account-nav.jsx'; // eslint-disable-line no-unused-vars
 import LoginDropdown from './login-dropdown.jsx'; // eslint-disable-line no-unused-vars
 import SB3Downloader from '../../containers/sb3-downloader.jsx';
-import DeletionRestorer from '../../containers/deletion-restorer.jsx'; 
+import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 import {isScratchDesktop} from '../../lib/isScratchDesktop';
@@ -51,7 +51,7 @@ import {
 import {
     openAboutMenu,
     closeAboutMenu,
-    aboutMenuOpen,    
+    aboutMenuOpen,
     openAccountMenu,
     closeAccountMenu,
     accountMenuOpen,
@@ -192,6 +192,7 @@ AboutButton.propTypes = {
 };
 
 class MenuBar extends React.Component {
+
     constructor (props) {
         super(props);
         bindAll(this, [
@@ -221,13 +222,13 @@ class MenuBar extends React.Component {
         this.props.vm.on('LINK_CONNECTED', this.props.onLinkConnected);
         this.props.vm.on('LINK_DISCONNECTED', this.props.onLinkDisconnected);
         this.props.vm.on('PERIPHERAL_DISCONNECTED', this.props.onDisconnect);
-        this.props.vm.on('PROGRAM_MODE_UPDATE', this.handleProgramModeUpdate); 
+        this.props.vm.on('PROGRAM_MODE_UPDATE', this.handleProgramModeUpdate);
     }
     componentWillUnmount () {
         document.removeEventListener('keydown', this.handleKeyPress);
         this.props.vm.removeListener('PERIPHERAL_DISCONNECTED', this.props.onDisconnect);
         this.props.vm.removeListener('PROGRAM_MODE_UPDATE', this.handleProgramModeUpdate);
-    }    
+    }
     handleClickNew () {
         // if the project is dirty, and user owns the project, we will autosave.
         // but if they are not logged in and can't save, user should consider
@@ -397,6 +398,8 @@ class MenuBar extends React.Component {
             });
         }
     }
+
+
     handleCheckUpdate () {
         this.props.onSetUpdate({phase: 'checking'});
         this.props.onClickCheckUpdate();
@@ -458,7 +461,7 @@ class MenuBar extends React.Component {
             callback();
             this.props.onRequestCloseAbout();
         };
-    }    
+    }
     render () {
         const saveNowMessage = (
             <FormattedMessage
@@ -535,13 +538,13 @@ class MenuBar extends React.Component {
                 <div className={styles.mainMenu}>
                     <div className={classNames(styles.menuBarItem)}>
                         <img
-                            alt="Ottawa STEM Club"
+                            alt="Swecha Organization"
                             className={classNames(styles.scratchLogo, {
                                 [styles.clickable]: typeof this.props.onClickLogo !== 'undefined'
                             })}
                             draggable={false}
                             src={this.props.logo}
-                            onClick={this.props.onClickLogo}
+
                         />
                     </div>
                     {/* {(this.props.canChangeLanguage) && (<div
@@ -613,7 +616,7 @@ class MenuBar extends React.Component {
                                         onClick={this.props.onStartSelectingFileUpload}
                                     >
                                         {this.props.intl.formatMessage(sharedMessages.loadFromComputerTitle)}
-                                    </MenuItem>                                    
+                                    </MenuItem>
                                     <SB3Downloader>{(className, downloadProjectCallback) => (
                                         <MenuItem
                                             className={className}
@@ -665,7 +668,7 @@ class MenuBar extends React.Component {
                     ) : null)}
                     <div className={classNames(styles.menuBarItem)}>
                         {this.props.canRemix ? remixButton : []}
-                    </div>                    
+                    </div>
                     <Divider className={classNames(styles.divider)} />  {/* Device management */}
                     {this.props.linkStatus ? (
                         <div
@@ -713,7 +716,7 @@ class MenuBar extends React.Component {
                                     id="gui.menuBar.linkDisconnectedTooltip"
                                 />
                             </ReactTooltip>
-                        </div>                    
+                        </div>
                     )}
                     <div
                         className={classNames(styles.menuBarItem, styles.hoverable)}
@@ -735,7 +738,7 @@ class MenuBar extends React.Component {
                                 description="Text for menubar device select button"
                                 id="gui.menuBar.noDeviceSelected"
                             />
-                        )} 
+                        )}
                         <ReactTooltip
                             className={styles.selectDeviceTooltip}
                             id="selectDeviceTip"
@@ -795,7 +798,7 @@ class MenuBar extends React.Component {
                                     id="gui.menuBar.deviceDisconnected"
                                 />
                             </ReactTooltip>
-                        </div>                  
+                        </div>
                     )}
                     <Divider className={classNames(styles.divider)} />
                 </div>
@@ -806,7 +809,7 @@ class MenuBar extends React.Component {
                         {this.props.canSave && (
                             <SaveStatus />
                         )}
-                    </div>                    
+                    </div>
                     <div
                         className={classNames(styles.menuBarItem, styles.hoverable)}
                         onMouseUp={this.handleScreenshot}
@@ -1108,7 +1111,7 @@ const mapDispatchToProps = dispatch => ({
     onClickLogin: () => dispatch(openLoginMenu()),
     onRequestCloseLogin: () => dispatch(closeLoginMenu()),
     onRequestOpenAbout: () => dispatch(openAboutMenu()),
-    onRequestCloseAbout: () => dispatch(closeAboutMenu()),    
+    onRequestCloseAbout: () => dispatch(closeAboutMenu()),
     onClickNew: needSave => dispatch(requestNewProject(needSave)),
     onClickRemix: () => dispatch(remixProject()),
     onClickSave: () => dispatch(manualUpdateProject()),
