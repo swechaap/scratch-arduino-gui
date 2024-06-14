@@ -21,23 +21,16 @@ Arduino programming hasn't been easy, but using Scratch to program Arduino, it i
     **Program Mode:**
     <img src="docs/screenshoot-program.png"/>
 
-## Getting Started
-Visit the wiki: [Scratch Arduino Wiki](https://github.com/OttawaSTEM/scratch-arduino-gui/wiki)
 
-## Join Chat
-- Github Discussions: [Scratch Arduino Discussions](https://github.com/OttawaSTEM/scratch-arduino-gui/discussions)
+## Starting the Server
+To start the Scratch Arduino server locally, follow these steps:
 
-## Bug Report
-You can submit the bug log in issues of this project.
+1. Clone or download the Scratch Arduino repository from GitHub to your local machine.
+2. Navigate to the root directory of the project in your terminal/command prompt.
+3. Install the necessary dependencies by running `npm install` if you haven't already done so Note: use node version 14 only.
+4. Start the server by running the command `npm start`.
+5. Once the server is running, you should see output indicating that the server is listening on a specific port, usually port 3000 by default.
+6. Open your web browser and navigate to the URL where the Scratch Arduino server is hosted, typically `http://0.0.0.0:8601/`.
+7. You should now be able to use Scratch Arduino in both interactive and program modes.
 
-# Attribution
-Thanks to all these great projects that have made this possible:
-* [Scratch](https://github.com/LLK/scratch-gui)
-* [OpenBlock](https://github.com/openblockcc)
-* [Otto DIY Robot](https://github.com/OttoDIY/OttoDIYLib)
-
-# Donation
-We provide [Scratch Arduino](https://scratch.ottawastem.com) free of charge, and want to keep it that way! Please consider making a [donation](https://www.paypal.com/donate?business=X555FJZS5QCMA&no_recurring=0&item_name=Scratch+Arduino&currency_code=USD) to support our continued engineering, design, community, and resource development efforts. Donations of any size are appreciated. Thank you!  
-If you had fun with this project, or it helped you save time on Arduino programming, you can buy me a cup of coffee :)  
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate?business=X555FJZS5QCMA&no_recurring=0&item_name=Scratch+Arduino&currency_code=USD)  
-<img src="docs/paypal-donation.png" width="150px" height="auto"/>
+These steps assume you have Node.js and npm installed on your machine. If not, you'll need to install them before proceeding. Additionally, make sure to follow any specific instructions or prerequisites mentioned in the project's documentation.
