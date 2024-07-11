@@ -12,8 +12,7 @@ This repository contains the Scratch Arduino server setup and usage instructions
 
 
 3. Access Scratch Arduino: [http://65.108.155.62:8601/](http://65.108.155.62:8601/)
-    **Interactive Mode:**
-   ![alt text](image.png)
+
 
 
 
