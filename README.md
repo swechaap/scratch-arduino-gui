@@ -1,43 +1,110 @@
-# Scratch Arduino
-[![](https://github.com/OttawaSTEM/scratch-arduino-gui/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/OttawaSTEM/scratch-arduino-gui/actions/workflows/release.yml)
-![](https://img.shields.io/github/license/ottawastem/scratch-arduino-gui)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?business=X555FJZS5QCMA&no_recurring=0&item_name=Scratch+Arduino&currency_code=USD)
+# Scratch Arduino Setup
 
-### Scratch Arduino is Scratch 3.0 with Arduino and Arduino Robot Extensions.
-Arduino programming hasn't been easy, but using Scratch to program Arduino, it is more fun and simple than ever before!
-* **Interactive Mode** - Connect sprites with Arudino Robots or Arduino Boards, and use them to interact with Arduino Robots or Arduino Boards
-* **Program Mode** - Use Scratch to program Arudino Robots or Arduino Boards, and run them offline
+This repository contains the Scratch Arduino server setup and usage instructions.
 
-## Using Scratch Arduino
-1. Download and install [Scratch Arduino Link](https://github.com/OttawaSTEM/scratch-arduino-link/releases/latest/)
+## Requirements
 
-2. Start the "Scratch Arudino Link" application  
-    <img src="docs/scratch-arduino-link.png" width="200px" height="auto"/>  
+### Using Scratch Arduino
 
-3. Scratch Arduino: [https://scratch.ottawastem.com](https://scratch.ottawastem.com)  
+1. Download and install [Scratch Arduino Link](https://github.com/ChaitanyaSeesala/scratch-arduino-link/releases).By downloading form the assests.
+
+2. Install and start the "Scratch Arduino Link" application
+
+
+3. Access Scratch Arduino: [http://65.108.155.62:8601/](http://65.108.155.62:8601/)
     **Interactive Mode:**
-    <img src="docs/screenshoot-interactive.png"/>  
-    
-    **Program Mode:**
-    <img src="docs/screenshoot-program.png"/>
+   ![alt text](image.png)
 
-## Getting Started
-Visit the wiki: [Scratch Arduino Wiki](https://github.com/OttawaSTEM/scratch-arduino-gui/wiki)
 
-## Join Chat
-- Github Discussions: [Scratch Arduino Discussions](https://github.com/OttawaSTEM/scratch-arduino-gui/discussions)
 
-## Bug Report
-You can submit the bug log in issues of this project.
+## Installing NVM
 
-# Attribution
-Thanks to all these great projects that have made this possible:
-* [Scratch](https://github.com/LLK/scratch-gui)
-* [OpenBlock](https://github.com/openblockcc)
-* [Otto DIY Robot](https://github.com/OttoDIY/OttoDIYLib)
+### Windows
 
-# Donation
-We provide [Scratch Arduino](https://scratch.ottawastem.com) free of charge, and want to keep it that way! Please consider making a [donation](https://www.paypal.com/donate?business=X555FJZS5QCMA&no_recurring=0&item_name=Scratch+Arduino&currency_code=USD) to support our continued engineering, design, community, and resource development efforts. Donations of any size are appreciated. Thank you!  
-If you had fun with this project, or it helped you save time on Arduino programming, you can buy me a cup of coffee :)  
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate?business=X555FJZS5QCMA&no_recurring=0&item_name=Scratch+Arduino&currency_code=USD)  
-<img src="docs/paypal-donation.png" width="150px" height="auto"/>
+To install NVM on Windows, follow these steps:
+
+1. **Download NVM for Windows:**
+   - Go to the [NVM for Windows GitHub releases page](https://github.com/coreybutler/nvm-windows/releases).
+   - Download the latest version of the `nvm-setup.zip` file.
+
+2. **Install NVM:**
+   - Extract the downloaded zip file.
+   - Run the `nvm-setup.exe` file to start the installation process.
+   - Follow the installation instructions. You can use the default settings.
+
+3. **Configure NVM:**
+   - Open Command Prompt or PowerShell as an administrator.
+   - Verify the installation by running:
+     ```sh
+     nvm version
+     ```
+
+4. **Install Node.js using NVM:**
+   - Install Node.js version 14 by running:
+     ```sh
+     nvm install 14
+     ```
+   - Use Node.js version 14:
+     ```sh
+     nvm use 14
+     ```
+   - Verify the Node.js installation:
+     ```sh
+     node -v
+     npm -v
+     ```
+
+### Linux
+
+To install NVM on Linux, follow these steps:
+
+1. **Install NVM:**
+   - Open a terminal and run the following command to download and install NVM:
+     ```sh
+     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+     ```
+   - This will download and run the NVM installation script. It might take a few minutes to complete.
+
+2. **Configure NVM:**
+   - After the installation script completes, you'll need to add NVM to your shell profile. Add the following lines to your `~/.bashrc`, `~/.zshrc`, or `~/.profile` file, depending on your shell:
+     ```sh
+     export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+     ```
+   - To apply the changes, run:
+     ```sh
+     source ~/.bashrc
+     ```
+
+3. **Install Node.js using NVM:**
+   - Install Node.js version 14 by running:
+     ```sh
+     nvm install 14
+     ```
+   - Use Node.js version 14:
+     ```sh
+     nvm use 14
+     ```
+   - Verify the Node.js installation:
+     ```sh
+     node -v
+     npm -v
+     ```
+
+
+### Starting the Server
+
+To start the Scratch Arduino server locally, follow these steps:
+
+1. Clone or download the Scratch Arduino repository from GitHub to your local machine.
+2. Navigate to the root directory of the project in your terminal/command prompt.
+3. Install the necessary dependencies by running `npm install` if you haven't already done so. Note: use Node.js version 14 only.
+4. Start the server by running the command `npm start`.
+5. Once the server is running, you should see output indicating that the server is listening on a specific port, usually port 3000 by default.
+6. Open your web browser and navigate to the URL where the Scratch Arduino server is hosted, typically `http://0.0.0.0:8601/`.
+7. You should now be able to use Scratch Arduino in both interactive and program modes.
+
+These steps assume you have Node.js and npm installed on your machine. If not, you'll need to install them before proceeding. Additionally, make sure to follow any specific instructions or prerequisites mentioned in the project's documentation.
+
+
+
